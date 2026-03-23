@@ -2506,6 +2506,184 @@ input, textarea, select { font-family: inherit; }
 /* ========================================
    VIEW E: AGENT DETAIL
    ======================================== */
+
+/* Agents Overview */
+.agents-overview {
+  padding: 32px;
+  min-height: 100vh;
+}
+.agents-overview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+.agents-overview-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+}
+.agents-overview-new-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+  background: var(--purple-600);
+  transition: var(--transition);
+}
+.agents-overview-new-btn:hover {
+  background: var(--purple-700);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+.agents-overview-new-btn svg { width: 16px; height: 16px; }
+.staffing-agents-theme .agents-overview-new-btn {
+  background: var(--blue-600);
+}
+.staffing-agents-theme .agents-overview-new-btn:hover {
+  background: #1d4ed8;
+}
+
+.agents-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+/* Agent Overview Card */
+.agent-overview-card {
+  background: var(--white);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  animation: fadeInUp 0.3s ease both;
+}
+.agent-overview-card:nth-child(1) { animation-delay: 0.05s; }
+.agent-overview-card:nth-child(2) { animation-delay: 0.1s; }
+.agent-overview-card:nth-child(3) { animation-delay: 0.15s; }
+.agent-overview-card:hover {
+  border-color: var(--purple-300);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.staffing-agents-theme .agent-overview-card:hover {
+  border-color: var(--blue-300);
+}
+
+.agent-ov-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.agent-ov-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.agent-ov-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green-500);
+  animation: pulse 2s ease-in-out infinite;
+}
+.agent-ov-pulse.paused { background: var(--gray-400); animation: none; }
+.agent-ov-status-text {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--green-600);
+  background: var(--green-50);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+.agent-ov-status-text.paused {
+  color: var(--gray-500);
+  background: var(--gray-100);
+}
+.agent-ov-name {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.agent-ov-meta {
+  font-size: 12px;
+  color: var(--gray-500);
+}
+
+/* Mini flow — horizontal steps */
+.agent-ov-flow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  background: var(--gray-50);
+  border-radius: var(--radius-md);
+}
+.agent-ov-flow-step {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--gray-600);
+  white-space: nowrap;
+}
+.agent-ov-flow-step.everday {
+  color: var(--purple-700);
+  font-weight: 600;
+}
+.staffing-agents-theme .agent-ov-flow-step.everday {
+  color: var(--blue-700);
+}
+.agent-ov-flow-step-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.agent-ov-flow-step-icon svg { width: 11px; height: 11px; }
+.agent-ov-flow-step-icon.trigger { background: #FEF3C7; color: #92400E; }
+.agent-ov-flow-step-icon.everday { background: var(--purple-100); color: var(--purple-600); }
+.staffing-agents-theme .agent-ov-flow-step-icon.everday { background: var(--blue-100); color: var(--blue-600); }
+.agent-ov-flow-step-icon.dest { background: var(--green-100); color: var(--green-600); }
+.agent-ov-flow-arrow {
+  color: var(--gray-300);
+  margin: 0 4px;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+/* Stats row */
+.agent-ov-stats {
+  display: flex;
+  gap: 24px;
+}
+.agent-ov-stat-value {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--purple-600);
+}
+.staffing-agents-theme .agent-ov-stat-value { color: var(--blue-600); }
+.agent-ov-stat-label {
+  font-size: 11px;
+  color: var(--gray-400);
+  margin-top: 1px;
+}
+
 .agent-detail {
   min-height: 100vh;
 }
@@ -4737,6 +4915,20 @@ input, textarea, select { font-family: inherit; }
     </div>
 
     <!-- VIEW E: AGENT DETAIL -->
+    <!-- VIEW: AGENTS OVERVIEW -->
+    <div id="view-agents-overview" class="view">
+      <div class="agents-overview">
+        <div class="agents-overview-header">
+          <h2 class="agents-overview-title" id="agents-overview-title">Your agents</h2>
+          <button class="agents-overview-new-btn" id="agents-new-btn" onclick="openAgentModal()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            New agent
+          </button>
+        </div>
+        <div class="agents-overview-grid" id="agents-overview-grid"></div>
+      </div>
+    </div>
+
     <div id="view-agent-detail" class="view">
       <div class="agent-detail">
         <div class="agent-detail-header">
@@ -5768,7 +5960,7 @@ function renderSidebar() {
 
   // Active agents
   if (activeAgents.length > 0) {
-    html += '<div class="sidebar-group-label" style="display:flex;align-items:center;justify-content:space-between"><span>Your agents</span><button class="sidebar-add-agent-btn" onclick="openAgentModal();event.stopPropagation()" title="Create new agent">+</button></div>';
+    html += '<div class="sidebar-group-label" style="display:flex;align-items:center;justify-content:space-between"><span style="cursor:pointer" onclick="showAgentsOverview();event.stopPropagation()">Your agents</span><button class="sidebar-add-agent-btn" onclick="openAgentModal();event.stopPropagation()" title="Create new agent">+</button></div>';
     activeAgents.forEach(a => {
       const typeLabel = (a.type || 'screening').toUpperCase();
       const typeClass = a.type || 'screening';
@@ -6236,6 +6428,115 @@ function toggleMatchContext() {
 function openAgentModal() {
   document.getElementById('agent-modal').classList.add('open');
   document.getElementById('agent-nudge').classList.remove('show');
+}
+
+function showAgentsOverview() {
+  showView('agents-overview');
+  renderAgentsOverview();
+}
+
+function renderAgentsOverview() {
+  const grid = document.getElementById('agents-overview-grid');
+  const container = document.querySelector('.agents-overview');
+  const titleEl = document.getElementById('agents-overview-title');
+  const newBtn = document.getElementById('agents-new-btn');
+
+  // Theme
+  if (currentMode === 'staffing') {
+    container.classList.add('staffing-agents-theme');
+    if (titleEl) titleEl.textContent = 'Your staffing agents';
+  } else {
+    container.classList.remove('staffing-agents-theme');
+    if (titleEl) titleEl.textContent = 'Your screening agents';
+  }
+
+  const modeAgents = activeAgents.filter(a => a.type === currentMode);
+
+  // Add mock additional agents for richness
+  let allAgents = [...modeAgents];
+  if (currentMode === 'screening') {
+    allAgents.push(
+      { id:'agent-s2', role:'SE Germany', source:'Greenhouse', frequency:'Daily', lastRun:'5h ago', type:'screening', paused: false },
+      { id:'agent-s3', role:'AE Belgium', source:'Lever', frequency:'Weekly', lastRun:'2 days ago', type:'screening', paused: true }
+    );
+  } else {
+    allAgents.push(
+      { id:'agent-st2', role:'AI Chatbot MVP', source:'Notion', frequency:'On change', lastRun:'6h ago', type:'staffing', paused: false },
+      { id:'agent-st3', role:'CRM Integration', source:'Google Drive', frequency:'Weekly', lastRun:'1 day ago', type:'staffing', paused: true }
+    );
+  }
+
+  let html = '';
+  allAgents.forEach(agent => {
+    const isScreening = agent.type === 'screening';
+    const isPaused = agent.paused;
+    const statusClass = isPaused ? 'paused' : '';
+
+    // Flow steps differ per mode
+    let flowHtml;
+    if (isScreening) {
+      flowHtml = `
+        <div class="agent-ov-flow-step"><div class="agent-ov-flow-step-icon trigger"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div> New candidate</div>
+        <div class="agent-ov-flow-arrow">&rarr;</div>
+        <div class="agent-ov-flow-step everday"><div class="agent-ov-flow-step-icon everday"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4m-10-10h4m12 0h4"/></svg></div> Enrich</div>
+        <div class="agent-ov-flow-arrow">&rarr;</div>
+        <div class="agent-ov-flow-step everday"><div class="agent-ov-flow-step-icon everday"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div> Skills</div>
+        <div class="agent-ov-flow-arrow">&rarr;</div>
+        <div class="agent-ov-flow-step everday"><div class="agent-ov-flow-step-icon everday"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div> Match & rank</div>
+        <div class="agent-ov-flow-arrow">&rarr;</div>
+        <div class="agent-ov-flow-step"><div class="agent-ov-flow-step-icon dest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div> Spreadsheet</div>
+      `;
+    } else {
+      flowHtml = `
+        <div class="agent-ov-flow-step"><div class="agent-ov-flow-step-icon trigger"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div> Availability change</div>
+        <div class="agent-ov-flow-arrow">&rarr;</div>
+        <div class="agent-ov-flow-step everday"><div class="agent-ov-flow-step-icon everday"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4m-10-10h4m12 0h4"/></svg></div> Enrich</div>
+        <div class="agent-ov-flow-arrow">&rarr;</div>
+        <div class="agent-ov-flow-step everday"><div class="agent-ov-flow-step-icon everday"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div> Skills</div>
+        <div class="agent-ov-flow-arrow">&rarr;</div>
+        <div class="agent-ov-flow-step everday"><div class="agent-ov-flow-step-icon everday"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div> Match to project</div>
+        <div class="agent-ov-flow-arrow">&rarr;</div>
+        <div class="agent-ov-flow-step"><div class="agent-ov-flow-step-icon dest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div> Notion + Slack</div>
+      `;
+    }
+
+    // Stats per agent
+    let statsHtml;
+    if (isScreening) {
+      const stats = { screened: agent.id === 'agent-1' ? 22 : agent.id === 'agent-s2' ? 15 : 8, matches: agent.id === 'agent-1' ? 7 : agent.id === 'agent-s2' ? 4 : 2, saved: agent.id === 'agent-1' ? '~6h' : agent.id === 'agent-s2' ? '~4h' : '~2h' };
+      statsHtml = `
+        <div><div class="agent-ov-stat-value">${stats.screened}</div><div class="agent-ov-stat-label">Screened</div></div>
+        <div><div class="agent-ov-stat-value">${stats.matches}</div><div class="agent-ov-stat-label">Strong matches</div></div>
+        <div><div class="agent-ov-stat-value">${stats.saved}</div><div class="agent-ov-stat-label">Time saved</div></div>
+      `;
+    } else {
+      const stats = { scanned: agent.id === 'agent-2' ? 8 : agent.id === 'agent-st2' ? 6 : 12, rec: agent.id === 'agent-2' ? 4 : agent.id === 'agent-st2' ? 3 : 4, gaps: agent.id === 'agent-2' ? 2 : agent.id === 'agent-st2' ? 1 : 3 };
+      statsHtml = `
+        <div><div class="agent-ov-stat-value">${stats.scanned}</div><div class="agent-ov-stat-label">Scanned</div></div>
+        <div><div class="agent-ov-stat-value">${stats.rec}</div><div class="agent-ov-stat-label">Recommended</div></div>
+        <div><div class="agent-ov-stat-value">${stats.gaps}</div><div class="agent-ov-stat-label">Gaps found</div></div>
+      `;
+    }
+
+    html += `
+      <div class="agent-overview-card" onclick="showView('agent-detail')">
+        <div class="agent-ov-top">
+          <div>
+            <div class="agent-ov-name">${agent.role}</div>
+            <div class="agent-ov-meta">${agent.source} &middot; ${agent.frequency} &middot; Last run: ${agent.lastRun}</div>
+          </div>
+          <div class="agent-ov-status">
+            <div class="agent-ov-pulse ${statusClass}"></div>
+            <div class="agent-ov-status-text ${statusClass}">${isPaused ? 'Paused' : 'Active'}</div>
+          </div>
+        </div>
+        <div class="agent-ov-flow">${flowHtml}</div>
+        <div class="agent-ov-stats">${statsHtml}</div>
+      </div>
+    `;
+  });
+
+  grid.innerHTML = html;
 }
 
 function closeAgentModal() {
@@ -6912,7 +7213,7 @@ function renderSidebarMerged() {
 
   // Active agents
   if (activeAgents.length > 0) {
-    html += '<div class="sidebar-group-label" style="display:flex;align-items:center;justify-content:space-between"><span>Your agents</span><button class="sidebar-add-agent-btn" onclick="openAgentModal();event.stopPropagation()" title="Create new agent">+</button></div>';
+    html += '<div class="sidebar-group-label" style="display:flex;align-items:center;justify-content:space-between"><span style="cursor:pointer" onclick="showAgentsOverview();event.stopPropagation()">Your agents</span><button class="sidebar-add-agent-btn" onclick="openAgentModal();event.stopPropagation()" title="Create new agent">+</button></div>';
     activeAgents.forEach(a => {
       const typeLabel = (a.type || 'screening').toUpperCase();
       const typeClass = a.type || 'screening';
@@ -7066,22 +7367,23 @@ function renderSidebarForMode() {
   const timeline = document.getElementById('sidebar-timeline');
   let html = '';
 
-  // Agents for current mode
+  // Agents summary card for current mode
   const modeAgents = activeAgents.filter(a => a.type === currentMode);
-  if (modeAgents.length > 0) {
-    html += '<div class="sidebar-group-label" style="display:flex;align-items:center;justify-content:space-between"><span>Your agents</span><button class="sidebar-add-agent-btn" onclick="openAgentModal();event.stopPropagation()" title="Create new agent">+</button></div>';
-    modeAgents.forEach(a => {
-      const typeClass = a.type === 'screening' ? 'screening' : 'staffing';
-      html += `<div class="sidebar-agent-card" onclick="showView('agent-detail')">
-        <div class="sidebar-agent-card-header">
-          <div class="sidebar-agent-pulse"></div>
-          <div class="sidebar-agent-card-type ${typeClass}">${a.type === 'screening' ? 'Screening' : 'Staffing'}</div>
-        </div>
-        <div class="sidebar-agent-card-title">${a.role}</div>
-        <div class="sidebar-agent-card-meta">${a.source} &middot; ${a.frequency} &middot; Last: ${a.lastRun}</div>
-      </div>`;
-    });
-  }
+  const extraAgentCount = currentMode === 'screening' ? 2 : 2; // mock extras
+  const totalAgents = modeAgents.length + extraAgentCount;
+  const activeCount = modeAgents.length + 1; // 1 extra active mock
+  const lastRun = modeAgents.length > 0 ? modeAgents[0].lastRun : 'never';
+  const modeLabel = currentMode === 'screening' ? 'Screening' : 'Staffing';
+  const typeClass = currentMode === 'screening' ? 'screening' : 'staffing';
+
+  html += `<div class="sidebar-agent-card" onclick="showAgentsOverview()" style="cursor:pointer">
+    <div class="sidebar-agent-card-header">
+      <div class="sidebar-agent-pulse"></div>
+      <div class="sidebar-agent-card-type ${typeClass}">${modeLabel} agents</div>
+    </div>
+    <div class="sidebar-agent-card-title">${activeCount} active &middot; ${totalAgents} total</div>
+    <div class="sidebar-agent-card-meta">Last run: ${lastRun}</div>
+  </div>`;
 
   // Runs for current mode
   let runs;
