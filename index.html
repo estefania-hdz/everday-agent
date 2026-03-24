@@ -362,6 +362,268 @@ body {
   50% { transform: scale(1.5); opacity: 0.6; }
 }
 
+/* ========== MICRO-ANIMATIONS & VISUAL PERSONALITY ========== */
+
+/* Breathing pulse for active agent dots */
+@keyframes breathe {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+  50% { transform: scale(1.2); box-shadow: 0 0 8px 3px rgba(34, 197, 94, 0.2); }
+}
+.agent-group__pulse {
+  animation: breathe 2.5s ease-in-out infinite !important;
+}
+
+/* Shimmer effect for active agent rows in sidebar */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.agent-group__header:hover {
+  background: linear-gradient(90deg, transparent 0%, rgba(124,58,237,0.03) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s ease infinite;
+}
+
+/* Action needed cards — subtle pulsing left border */
+@keyframes urgentPulse {
+  0%, 100% { border-left-color: var(--purple-500); }
+  50% { border-left-color: var(--purple-300); }
+}
+.feed-card--action {
+  border-left: 3px solid var(--purple-500);
+  animation: urgentPulse 2s ease-in-out infinite;
+}
+
+/* Alert cards — red pulse */
+@keyframes alertPulse {
+  0%, 100% { border-left-color: #ef4444; }
+  50% { border-left-color: #fca5a5; }
+}
+.feed-card--alert {
+  border-left: 3px solid #ef4444;
+  animation: alertPulse 2s ease-in-out infinite;
+}
+
+/* Feed card hover — lift effect */
+.feed-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px -5px rgba(0,0,0,0.08), 0 4px 10px -3px rgba(0,0,0,0.04);
+}
+
+/* Glass cards hover — subtle glow */
+.glass--hover:hover {
+  box-shadow: 0 8px 32px -8px rgba(124,58,237,0.12), 0 4px 12px -4px rgba(0,0,0,0.06);
+  transform: translateY(-1px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Button hover — scale up subtly */
+.results-action-btn:hover, .automation-banner__btn:hover {
+  transform: scale(1.02);
+  transition: all 0.2s ease;
+}
+
+/* Staggered entrance for feed cards */
+.feed-card:nth-child(1) { animation-delay: 0.05s; }
+.feed-card:nth-child(2) { animation-delay: 0.1s; }
+.feed-card:nth-child(3) { animation-delay: 0.15s; }
+.feed-card:nth-child(4) { animation-delay: 0.2s; }
+.feed-card:nth-child(5) { animation-delay: 0.25s; }
+.feed-card:nth-child(6) { animation-delay: 0.3s; }
+
+/* Greeting area — animated subtle gradient */
+.feed-header {
+  position: relative;
+}
+.feed-header::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -40px;
+  right: -40px;
+  height: 120px;
+  background: linear-gradient(135deg, rgba(124,58,237,0.04) 0%, rgba(168,85,247,0.02) 50%, transparent 100%);
+  border-radius: 0 0 40px 40px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Task cards in agent detail — hover glow */
+.agent-task-card:hover {
+  border-color: var(--purple-200);
+  box-shadow: 0 4px 16px -4px rgba(124,58,237,0.1);
+  transform: translateY(-1px);
+}
+
+/* Sidebar nav items — smooth hover */
+.nav-item {
+  transition: all 0.2s ease !important;
+}
+.nav-item:hover {
+  background: rgba(124,58,237,0.05) !important;
+  transform: translateX(2px);
+}
+
+/* Data section items hover */
+.data-nav-item:hover {
+  background: rgba(124,58,237,0.04);
+  transform: translateX(2px);
+  transition: all 0.2s ease;
+}
+
+/* Agent flow steps — entrance animation */
+.agent-flow-step {
+  opacity: 0;
+  transform: translateX(-10px);
+  animation: flowStepIn 0.4s ease both;
+}
+@keyframes flowStepIn {
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* CTA buttons — subtle shadow on hover */
+.cta-btn:hover, [class*="btn--primary"]:hover {
+  box-shadow: 0 6px 20px -4px rgba(124,58,237,0.3);
+}
+
+/* Smooth page transitions */
+.view {
+  animation: viewFadeIn 0.25s ease;
+}
+@keyframes viewFadeIn {
+  from { opacity: 0.7; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Stats numbers — count up feel */
+.stat-number {
+  transition: all 0.3s ease;
+}
+.stat-number:hover {
+  transform: scale(1.05);
+  color: var(--purple-700);
+}
+
+/* Conversational flow bubbles — smooth appearance */
+.convo-bubble {
+  transition: all 0.3s ease;
+}
+.convo-bubble:hover {
+  box-shadow: 0 4px 16px -4px rgba(0,0,0,0.08);
+}
+
+/* ========== TOAST NOTIFICATIONS ========== */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 10px;
+  pointer-events: none;
+}
+.toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: var(--white);
+  border-radius: 14px;
+  box-shadow: 0 12px 40px -8px rgba(0,0,0,0.15), 0 4px 12px -2px rgba(0,0,0,0.08);
+  border-left: 3px solid var(--purple);
+  min-width: 320px;
+  max-width: 420px;
+  animation: toastIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.toast:hover { transform: translateX(-4px); }
+.toast--blue { border-left-color: var(--blue); }
+.toast--green { border-left-color: #22c55e; }
+.toast__icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--purple-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.toast__icon--blue { background: rgba(59,130,246,0.1); }
+.toast__icon--green { background: rgba(34,197,94,0.1); }
+.toast__icon svg { width: 16px; height: 16px; }
+.toast__content { flex: 1; }
+.toast__title {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--gray-800);
+  margin-bottom: 2px;
+}
+.toast__body {
+  font-size: 12px;
+  color: var(--gray-500);
+  line-height: 1.4;
+}
+.toast__close {
+  background: none;
+  border: none;
+  color: var(--gray-400);
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px;
+  line-height: 1;
+}
+.toast__close:hover { color: var(--gray-600); }
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(60px) scale(0.95); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+@keyframes toastOut {
+  from { opacity: 1; transform: translateX(0) scale(1); }
+  to { opacity: 0; transform: translateX(60px) scale(0.95); }
+}
+
+/* Notification badge on sidebar agent items */
+.agent-badge-count {
+  background: var(--purple);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  animation: badgePop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.agent-badge-count--blue { background: var(--blue); }
+@keyframes badgePop {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+/* Agent processing spinner in sidebar */
+@keyframes agentSpin {
+  to { transform: rotate(360deg); }
+}
+.agent-processing {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--purple-200);
+  border-top-color: var(--purple);
+  border-radius: 50%;
+  animation: agentSpin 0.8s linear infinite;
+}
+.agent-processing--blue {
+  border-color: rgba(59,130,246,0.2);
+  border-top-color: var(--blue);
+}
+
 /* ========== MAIN CONTENT ========== */
 .main {
   margin-left: var(--sidebar-width);
@@ -370,7 +632,162 @@ body {
   padding: 32px 40px;
 }
 
-/* ========== VIEW: HOME ========== */
+/* ========== VIEW: HOME — LIVE FEED ========== */
+.feed-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+.feed-header__greeting {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--gray-900);
+}
+.feed-header__sub {
+  font-size: 14px;
+  color: var(--gray-400);
+  margin-top: 4px;
+}
+.btn-new-task {
+  padding: 10px 24px;
+  border-radius: 12px;
+  border: none;
+  background: var(--purple);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+}
+.btn-new-task:hover {
+  background: var(--purple-700);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(124,58,237,0.3);
+}
+
+.feed-section {
+  margin-bottom: 32px;
+}
+.feed-section__label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray-400);
+  margin-bottom: 12px;
+}
+.feed-pulse {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+.feed-pulse--red { background: var(--red, #EF4444); }
+.feed-pulse--green { background: var(--green); }
+
+.feed-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 24px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+  animation: feedSlideIn 0.4s ease both;
+}
+/* Static feed cards in home get animation, dynamic ones in agent detail don't */
+#view-home .feed-card { opacity: 0; }
+#agent-detail-content .feed-card { opacity: 1 !important; }
+@keyframes feedSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.feed-card:hover {
+  border-color: var(--gray-300);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+.feed-card--action {
+  border-left: 3px solid var(--purple);
+}
+.feed-card--alert {
+  border-left: 3px solid var(--red, #EF4444);
+}
+.feed-card__left { flex: 1; }
+.feed-card__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+  margin-left: 24px;
+}
+.feed-card__agent-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 99px;
+  margin-bottom: 6px;
+}
+.feed-card__agent-badge--purple { background: var(--purple-100, #F3E8FF); color: var(--purple); }
+.feed-card__agent-badge--blue { background: var(--blue-light, #DBEAFE); color: var(--blue); }
+.feed-card__agent-badge--green { background: #D1FAE5; color: var(--green); }
+.feed-card__agent-badge--red { background: #FEE2E2; color: var(--red, #EF4444); }
+
+.feed-card__title {
+  font-size: 14px;
+  color: var(--gray-800);
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+.feed-card__body {
+  font-size: 13px;
+  color: var(--gray-500);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.feed-card__stats {
+  display: flex;
+  gap: 16px;
+}
+.feed-stat {
+  font-size: 12px;
+  color: var(--gray-400);
+}
+.feed-stat strong {
+  color: var(--gray-700);
+  font-weight: 600;
+}
+.feed-card__btn {
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s var(--ease);
+  white-space: nowrap;
+}
+.feed-card__btn--purple { background: var(--purple); color: white; }
+.feed-card__btn--purple:hover { background: var(--purple-700); }
+.feed-card__btn--blue { background: var(--blue); color: white; }
+.feed-card__btn--blue:hover { opacity: 0.9; }
+.feed-card__btn--outline {
+  background: transparent;
+  border: 1px solid var(--gray-200);
+  color: var(--gray-600);
+}
+.feed-card__btn--outline:hover { border-color: var(--gray-400); color: var(--gray-800); }
+.feed-card__time {
+  font-size: 11px;
+  color: var(--gray-400);
+}
+
+/* Keep old home header styles as fallback */
 .home-header {
   display: flex;
   justify-content: space-between;
@@ -641,7 +1058,106 @@ body {
   font-weight: 600;
 }
 
-/* ========== VIEW: NEW TASK ========== */
+/* ========== VIEW: NEW TASK (Conversational) ========== */
+.task-flow {
+  max-width: 720px;
+  margin: 0 auto;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.task-flow__step {
+  opacity: 0;
+  animation: feedSlideIn 0.4s ease both;
+}
+
+.agent-pick-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.agent-pick {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: all 0.25s var(--ease);
+  border: 1.5px solid transparent;
+}
+.agent-pick:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+.agent-pick.selected--screening {
+  border-color: var(--purple);
+  box-shadow: 0 0 0 3px rgba(124,58,237,0.1);
+}
+.agent-pick.selected--staffing {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+}
+.agent-pick__icon {
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.agent-pick__name {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gray-800);
+}
+.agent-pick__meta {
+  font-size: 12px;
+  color: var(--gray-500);
+  margin-top: 2px;
+}
+
+.freestyle-input-inline {
+  width: 100%;
+  max-width: 480px;
+  padding: 10px 16px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 12px;
+  font-size: 14px;
+  font-family: var(--font-body);
+  color: var(--gray-700);
+  background: var(--gray-50, #F9FAFB);
+  outline: none;
+  transition: all 0.2s var(--ease);
+}
+.freestyle-input-inline:focus {
+  border-color: var(--purple);
+  box-shadow: 0 0 0 3px rgba(124,58,237,0.08);
+  background: white;
+}
+
+.source-btn-mini {
+  display: inline-block;
+  padding: 6px 14px;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+  background: white;
+}
+.source-btn-mini:hover {
+  border-color: var(--gray-400);
+  color: var(--gray-800);
+  background: var(--gray-50, #F9FAFB);
+}
+
+/* Old styles kept for compatibility */
 .new-task-view {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -2179,6 +2695,132 @@ body {
   margin-top: 2px;
 }
 
+/* ========== AGENT FLOW (animated, in settings) ========== */
+.agent-flow-live {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.agent-flow-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1.5px solid var(--gray-200);
+  background: white;
+  position: relative;
+  opacity: 0;
+  animation: feedSlideIn 0.4s ease both;
+  transition: all 0.25s var(--ease);
+}
+.agent-flow-step:hover {
+  border-color: var(--gray-300);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+}
+.agent-flow-step--core {
+  border-color: rgba(124,58,237,0.3);
+  background: linear-gradient(135deg, rgba(124,58,237,0.03), rgba(124,58,237,0.06));
+}
+.agent-flow-step--core:hover {
+  box-shadow: 0 4px 20px rgba(124,58,237,0.1);
+}
+.agent-flow-step--everday {
+  border-color: rgba(124,58,237,0.15);
+}
+
+.agent-flow-step__icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: var(--gray-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--gray-500);
+}
+.agent-flow-step__icon--purple {
+  background: var(--purple-100, #F3E8FF);
+  color: var(--purple);
+}
+
+.agent-flow-step__info { flex: 1; }
+.agent-flow-step__name {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--gray-800);
+  margin-bottom: 2px;
+}
+.agent-flow-step__desc {
+  font-size: 12px;
+  color: var(--gray-500);
+  line-height: 1.4;
+}
+
+.agent-flow-step__badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: var(--purple-100, #F3E8FF);
+  color: var(--purple);
+  white-space: nowrap;
+  align-self: center;
+}
+.agent-flow-step__badge--core {
+  background: var(--purple);
+  color: white;
+  animation: corePulse 3s ease-in-out infinite;
+}
+@keyframes corePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(124,58,237,0.2); }
+  50% { box-shadow: 0 0 0 6px rgba(124,58,237,0); }
+}
+
+/* Animated connector */
+.agent-flow-connector {
+  display: flex;
+  justify-content: center;
+  height: 28px;
+  position: relative;
+}
+.agent-flow-connector__line {
+  width: 2px;
+  height: 100%;
+  background: var(--gray-200);
+  position: relative;
+  overflow: visible;
+}
+.agent-flow-connector__line--purple {
+  background: var(--purple-200, #DDD6FE);
+}
+.agent-flow-connector__dot {
+  position: absolute;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--gray-400);
+  left: -1.5px;
+  animation: dotFlow 2s ease-in-out infinite;
+}
+.agent-flow-connector__dot--purple {
+  background: var(--purple);
+  box-shadow: 0 0 6px rgba(124,58,237,0.4);
+  width: 6px; height: 6px;
+  left: -2px;
+}
+@keyframes dotFlow {
+  0% { top: -4px; opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { top: calc(100% - 2px); opacity: 0; }
+}
+/* Stagger connectors */
+.agent-flow-connector:nth-of-type(2) .agent-flow-connector__dot { animation-delay: 0s; }
+.agent-flow-connector:nth-of-type(4) .agent-flow-connector__dot { animation-delay: 0.4s; }
+.agent-flow-connector:nth-of-type(6) .agent-flow-connector__dot { animation-delay: 0.8s; }
+.agent-flow-connector:nth-of-type(8) .agent-flow-connector__dot { animation-delay: 1.2s; }
+
 /* ========== VIEW: AGENTS OVERVIEW ========== */
 .agents-overview-header {
   display: flex;
@@ -2775,166 +3417,136 @@ body {
 
   <!-- ===== HOME VIEW ===== -->
   <div id="view-home">
-    <div class="home-header">
-      <div class="home-header__greeting">Good afternoon, Patrick</div>
-      <div class="home-header__date">Monday, March 24, 2026</div>
+    <!-- Live feed - your agents working for you -->
+    <div class="feed-header">
+      <div>
+        <div class="feed-header__greeting">Hey Patrick, here's what I've been up to</div>
+        <div class="feed-header__sub">Your agents processed 47 candidates and found 3 strong matches while you were away</div>
+      </div>
+      <button class="btn-new-task" onclick="switchView('new-task')">+ New task</button>
     </div>
 
-    <!-- Agent status cards -->
-    <div class="agent-status-row">
-      <!-- Screening -->
-      <div class="glass status-card glass--hover" onclick="switchView('agents-overview')">
-        <div class="status-card__header">
-          <div class="status-card__title">Screening agent</div>
-          <div class="status-card__status">
-            <span class="status-card__status-dot"></span> Active — 2 tasks running
-          </div>
-        </div>
-        <div class="status-card__big-stat status-card__big-stat--purple">234</div>
-        <div class="status-card__substat">38 strong matches · ~18h saved</div>
-        <div class="status-card__lastrun">Last run: 2h ago</div>
-      </div>
+    <!-- Action required - top priority -->
+    <div class="feed-section">
+      <div class="feed-section__label"><span class="feed-pulse feed-pulse--red"></span> Action needed</div>
 
-      <!-- Staffing -->
-      <div class="glass status-card glass--hover" onclick="switchView('agents-overview')">
-        <div class="status-card__header">
-          <div class="status-card__title">Staffing agent</div>
-          <div class="status-card__status">
-            <span class="status-card__status-dot"></span> Active — 1 task running
-          </div>
+      <div class="glass feed-card feed-card--action" onclick="switchView('screening-results', 'ae-france')" style="animation-delay: 0.05s">
+        <div class="feed-card__left">
+          <div class="feed-card__agent-badge feed-card__agent-badge--purple">Screening</div>
+          <div class="feed-card__title"><strong>3 strong matches</strong> ready for your review</div>
+          <div class="feed-card__body">AE France — Emilio Turco (98%), Lucia Moreau (95%), Marc Dubois (93%) matched against DevRev's skill taxonomy</div>
         </div>
-        <div class="status-card__big-stat status-card__big-stat--blue">24</div>
-        <div class="status-card__substat">12 matched · 5 gaps found</div>
-        <div class="status-card__lastrun">Last run: yesterday</div>
-      </div>
-
-      <!-- Intelligence health -->
-      <div class="glass status-card glass--hover" onclick="switchView('intelligence')">
-        <div class="status-card__header">
-          <div class="status-card__title">Intelligence health</div>
-        </div>
-        <div class="intel-quality-bar">
-          <div class="intel-quality-bar__fill" style="width: 78%"></div>
-        </div>
-        <div class="intel-stats">
-          <div class="intel-stat">
-            <span class="intel-stat__label">Data quality</span>
-            <span class="intel-stat__value">78%</span>
-          </div>
-          <div class="intel-stat">
-            <span class="intel-stat__label">Skills in taxonomy</span>
-            <span class="intel-stat__value">156</span>
-          </div>
-          <div class="intel-stat">
-            <span class="intel-stat__label">Sources connected</span>
-            <span class="intel-stat__value">12</span>
-          </div>
-        </div>
-        <div class="status-card__lastrun">Last sync: 2h ago</div>
-      </div>
-    </div>
-
-    <!-- Two column: Activity + Alerts -->
-    <div class="home-two-col">
-      <div class="glass activity-card">
-        <div class="card-title">Recent activity</div>
-        <div class="activity-list">
-          <div class="activity-item">
-            <span class="activity-item__dot activity-item__dot--green"></span>
-            <div class="activity-item__content"><strong>AE France screener</strong> found 1 strong match — Emilio Turco (98%)</div>
-            <span class="activity-item__time">2h ago</span>
-          </div>
-          <div class="activity-item">
-            <span class="activity-item__dot activity-item__dot--green"></span>
-            <div class="activity-item__content"><strong>SE Germany</strong> completed screening — 32 candidates, 8 strong</div>
-            <span class="activity-item__time">3 days ago</span>
-          </div>
-          <div class="activity-item">
-            <span class="activity-item__dot activity-item__dot--yellow"></span>
-            <div class="activity-item__content"><strong>Platform Migration</strong> — 2 skill gaps still uncovered (Terraform, Kubernetes)</div>
-            <span class="activity-item__time">yesterday</span>
-          </div>
-          <div class="activity-item">
-            <span class="activity-item__dot activity-item__dot--purple"></span>
-            <div class="activity-item__content"><strong>DevRev skill taxonomy</strong> updated — 4 new skills detected from LinkedIn sync</div>
-            <span class="activity-item__time">5h ago</span>
-          </div>
-          <div class="activity-item">
-            <span class="activity-item__dot activity-item__dot--blue"></span>
-            <div class="activity-item__content"><strong>AI Chatbot MVP</strong> staffing paused — waiting for project brief update</div>
-            <span class="activity-item__time">2 days ago</span>
-          </div>
+        <div class="feed-card__right">
+          <button class="feed-card__btn feed-card__btn--purple">Review candidates</button>
+          <span class="feed-card__time">2h ago</span>
         </div>
       </div>
 
-      <div class="glass alerts-card">
-        <div class="card-title">Alerts</div>
-        <div class="alerts-list">
-          <div class="alert-item alert-item--red">
-            <div class="alert-item__content">AE Belgium screener paused — Lever connection expired</div>
-            <button class="alert-item__action">Reconnect</button>
-          </div>
-          <div class="alert-item alert-item--yellow">
-            <div class="alert-item__content">Platform Migration needs attention — 2 critical gaps unfilled</div>
-            <button class="alert-item__action" onclick="switchView('staffing-results')">View</button>
-          </div>
-          <div class="alert-item alert-item--green">
-            <div class="alert-item__content">New strong match: Emilio Turco (98%) for AE France</div>
-            <button class="alert-item__action" onclick="switchView('screening-results', 'ae-france')">Review</button>
-          </div>
+      <div class="glass feed-card feed-card--action" onclick="switchView('staffing-results')" style="animation-delay: 0.1s">
+        <div class="feed-card__left">
+          <div class="feed-card__agent-badge feed-card__agent-badge--blue">Staffing</div>
+          <div class="feed-card__title"><strong>2 critical gaps</strong> in Platform Migration</div>
+          <div class="feed-card__body">Terraform and Kubernetes roles still uncovered. Sarah K. became available — she covers Terraform (87% match)</div>
+        </div>
+        <div class="feed-card__right">
+          <button class="feed-card__btn feed-card__btn--blue">View team</button>
+          <span class="feed-card__time">yesterday</span>
+        </div>
+      </div>
+
+      <div class="glass feed-card feed-card--alert" style="animation-delay: 0.15s">
+        <div class="feed-card__left">
+          <div class="feed-card__agent-badge feed-card__agent-badge--red">Alert</div>
+          <div class="feed-card__title">AE Belgium screener paused — Lever connection expired</div>
+        </div>
+        <div class="feed-card__right">
+          <button class="feed-card__btn feed-card__btn--outline">Reconnect</button>
         </div>
       </div>
     </div>
 
-    <!-- Quick insights -->
-    <div class="glass insights-row" style="padding: 24px;">
-      <div class="card-title">Quick insights</div>
-      <div class="insights-grid">
-        <div class="insight-mini">Top candidate this week: <strong>Emilio Turco</strong> — 98% match for AE France</div>
-        <div class="insight-mini">Most requested skill: <strong>B2B Sales</strong> — appears in 89% of screenings</div>
-        <div class="insight-mini">Avg screening time: <strong>4.5 hours saved</strong> per batch</div>
+    <!-- What your agents did -->
+    <div class="feed-section">
+      <div class="feed-section__label"><span class="feed-pulse feed-pulse--green"></span> Completed</div>
+
+      <div class="glass feed-card" style="animation-delay: 0.2s">
+        <div class="feed-card__left">
+          <div class="feed-card__agent-badge feed-card__agent-badge--purple">Screening</div>
+          <div class="feed-card__title">SE Germany screening complete</div>
+          <div class="feed-card__body">Screened 32 candidates from Greenhouse. Found <strong>8 strong matches</strong>. Results pushed to your spreadsheet.</div>
+          <div class="feed-card__stats">
+            <span class="feed-stat"><strong>32</strong> screened</span>
+            <span class="feed-stat"><strong>8</strong> strong</span>
+            <span class="feed-stat"><strong>~3h</strong> saved</span>
+          </div>
+        </div>
+        <div class="feed-card__right">
+          <button class="feed-card__btn feed-card__btn--outline" onclick="switchView('screening-results')">View results</button>
+          <span class="feed-card__time">3 days ago</span>
+        </div>
+      </div>
+
+      <div class="glass feed-card" style="animation-delay: 0.25s">
+        <div class="feed-card__left">
+          <div class="feed-card__agent-badge feed-card__agent-badge--green">Intelligence</div>
+          <div class="feed-card__title">Skill taxonomy updated automatically</div>
+          <div class="feed-card__body">Detected <strong>4 new skills</strong> from LinkedIn company sync. Added to DevRev's taxonomy (now 156 skills).</div>
+        </div>
+        <div class="feed-card__right">
+          <button class="feed-card__btn feed-card__btn--outline" onclick="switchView('skills')">View skills</button>
+          <span class="feed-card__time">5h ago</span>
+        </div>
+      </div>
+
+      <div class="glass feed-card" style="animation-delay: 0.3s">
+        <div class="feed-card__left">
+          <div class="feed-card__agent-badge feed-card__agent-badge--purple">Screening</div>
+          <div class="feed-card__title">AE Belgium screening complete</div>
+          <div class="feed-card__body">Screened 15 candidates. Found <strong>5 strong matches</strong>. Pushed to Lever.</div>
+        </div>
+        <div class="feed-card__right">
+          <button class="feed-card__btn feed-card__btn--outline">View results</button>
+          <span class="feed-card__time">4 days ago</span>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- ===== NEW TASK VIEW ===== -->
+  <!-- ===== NEW TASK VIEW (unified conversational flow) ===== -->
   <div id="view-new-task" class="hidden">
-    <div class="new-task-view">
-      <div class="new-task-left">
-        <div class="new-task-title">What do you need?</div>
-        <div class="new-task-subtitle">Choose an agent or describe your task</div>
-
-        <div class="agent-select-cards">
-          <div class="glass agent-select-card agent-select-card--screening glass--hover" onclick="selectAgent('screening')">
-            <div class="agent-select-card__icon agent-select-card__icon--purple"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
-            <div class="agent-select-card__body">
-              <div class="agent-select-card__name">Screening agent</div>
-              <div class="agent-select-card__desc">Screen candidates against role requirements</div>
-              <div class="agent-select-card__meta">Using DevRev's skill taxonomy · 156 skills · Greenhouse connected</div>
+    <div class="task-flow" id="task-flow-container">
+      <!-- Step 1: What do you need? -->
+      <div class="task-flow__step" id="task-step-1">
+        <div class="glass convo-bubble" style="max-width: 680px;">
+          <p style="font-size:15px;margin-bottom:16px">Hey Patrick, what do you need help with?</p>
+          <div class="agent-pick-row">
+            <div class="glass agent-pick agent-pick--screening glass--hover" onclick="pickAgent('screening')">
+              <div class="agent-pick__icon" style="background: var(--purple-100, #F3E8FF); color: var(--purple);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              </div>
+              <div>
+                <div class="agent-pick__name">Screen candidates</div>
+                <div class="agent-pick__meta">Find the best matches for a role</div>
+              </div>
+            </div>
+            <div class="glass agent-pick agent-pick--staffing glass--hover" onclick="pickAgent('staffing')">
+              <div class="agent-pick__icon" style="background: var(--blue-light, #DBEAFE); color: var(--blue);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+              </div>
+              <div>
+                <div class="agent-pick__name">Staff a project</div>
+                <div class="agent-pick__meta">Build the right team from your org</div>
+              </div>
             </div>
           </div>
-
-          <div class="glass agent-select-card agent-select-card--staffing glass--hover" onclick="selectAgent('staffing')">
-            <div class="agent-select-card__icon agent-select-card__icon--blue"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
-            <div class="agent-select-card__body">
-              <div class="agent-select-card__name">Staffing agent</div>
-              <div class="agent-select-card__desc">Find the best team for your project</div>
-              <div class="agent-select-card__meta">Using DevRev's skill taxonomy · BambooHR connected</div>
-            </div>
+          <div style="text-align:center;margin-top:16px">
+            <input type="text" class="freestyle-input-inline" placeholder="Or just tell me what you need..." id="freestyle-input" onkeydown="if(event.key==='Enter')handleFreestyle()">
           </div>
-        </div>
-
-        <div class="glass freestyle-card">
-          <textarea placeholder="Or describe what you need..." rows="3" id="freestyle-input"></textarea>
         </div>
       </div>
 
-      <div class="new-task-right" id="agent-workspace">
-        <div class="workspace-placeholder">
-          <div class="workspace-placeholder__icon">✦</div>
-          <div>Select an agent or describe your task to get started</div>
-        </div>
-      </div>
+      <!-- Subsequent steps injected dynamically -->
+      <div id="task-flow-steps"></div>
     </div>
   </div>
 
@@ -3441,6 +4053,7 @@ function switchView(viewId, context) {
   if (viewId === 'skills') renderSkills();
   if (viewId === 'jobs') renderJobs();
   if (viewId === 'analyzing') runConversationalFlow();
+  if (viewId === 'agent-settings') showAgentSettingsView(context);
 }
 
 // ========== CONVERSATIONAL AGENT FLOW ==========
@@ -3469,10 +4082,10 @@ function runConversationalFlow() {
         <div class="convo-plan-step"><span class="convo-plan-num">4</span> Rank and flag top candidates across France, Belgium, UK, Germany</div>
       </div>
       <div class="convo-context-tag">✦ Running against DevRev's company context · Last synced 2h ago</div>
-      <p style="margin-top:14px;color:var(--gray-600)">This should take about 30 seconds. Want me to proceed?</p>
+      <p style="margin-top:14px;color:var(--gray-600)">This should take about 30 seconds. You can stay and watch, or walk away — I'll notify you when it's ready.</p>
       <div class="convo-actions" id="approve-actions">
-        <button class="convo-btn convo-btn--primary" onclick="approveAndContinue()">Yes, go ahead</button>
-        <button class="convo-btn convo-btn--secondary" onclick="this.parentElement.innerHTML='<span style=color:var(--gray-400)>Okay, let me know when you\\'re ready.</span>'">Not yet</button>
+        <button class="convo-btn convo-btn--primary" onclick="approveAndContinue()">Go ahead, I'll watch</button>
+        <button class="convo-btn convo-btn--secondary" onclick="approveAndContinue(); showToast('Running in background', 'I\\'ll notify you when screening is complete. Go grab a coffee ☕', 'purple', 10000)">Run it, I'll come back</button>
       </div>
     `);
     scrollToBottom(container);
@@ -3597,6 +4210,346 @@ function toggleAgentGroup(id) {
 }
 
 // ========== NEW TASK: AGENT SELECTION ==========
+function toggleAgentSettings() {
+  switchView('agent-settings', currentAgentType || 'screening');
+}
+
+function showAgentSettingsView(type) {
+  var isScreening = type === 'screening';
+  var mainContent = document.getElementById('main-content');
+
+  // Hide all views
+  document.querySelectorAll('.view').forEach(function(v) { v.classList.add('hidden'); });
+
+  // Create or get settings view
+  var settingsView = document.getElementById('view-agent-settings');
+  if (!settingsView) {
+    settingsView = document.createElement('div');
+    settingsView.id = 'view-agent-settings';
+    settingsView.className = 'view';
+    mainContent.appendChild(settingsView);
+  }
+  settingsView.classList.remove('hidden');
+
+  settingsView.innerHTML = `
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:32px">
+      <button onclick="switchView('agent-detail','${type}')" style="background:var(--white);border:1px solid var(--gray-200);border-radius:10px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gray-600)" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </button>
+      <div>
+        <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:800;margin:0">${isScreening ? 'Screening' : 'Staffing'} agent settings</h2>
+        <p style="margin:2px 0 0;color:var(--gray-500);font-size:13px">Configuration, flow, and context</p>
+      </div>
+    </div>
+
+    <!-- Configuration -->
+    <div class="glass" style="padding:24px;margin-bottom:20px">
+      <div style="font-weight:700;font-size:15px;color:var(--gray-800);margin-bottom:16px">Configuration</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+        <div class="glass" style="padding:16px;background:var(--gray-50)">
+          <div style="font-size:11px;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px">Taxonomy</div>
+          <div style="font-weight:600;font-size:14px;color:var(--gray-800)">DevRev skill taxonomy v2.4</div>
+          <div style="font-size:12px;color:var(--purple-600);margin-top:4px">156 skills mapped</div>
+        </div>
+        <div class="glass" style="padding:16px;background:var(--gray-50)">
+          <div style="font-size:11px;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px">Primary source</div>
+          <div style="font-weight:600;font-size:14px;color:var(--gray-800)">${isScreening ? 'Greenhouse' : 'BambooHR'}</div>
+          <div style="font-size:12px;color:var(--green-600);margin-top:4px">● Connected</div>
+        </div>
+        <div class="glass" style="padding:16px;background:var(--gray-50)">
+          <div style="font-size:11px;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px">Auto-run</div>
+          <div style="font-weight:600;font-size:14px;color:var(--gray-800)">${isScreening ? 'On new candidates' : 'On team changes'}</div>
+          <div style="font-size:12px;color:var(--gray-500);margin-top:4px">${isScreening ? 'Watching Greenhouse' : 'Watching BambooHR'}</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:16px">
+        <div class="glass" style="padding:16px;background:var(--gray-50)">
+          <div style="font-size:11px;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px">Context documents</div>
+          <div style="font-weight:600;font-size:14px;color:var(--gray-800)">DevRev company data</div>
+          <div style="font-size:12px;color:var(--gray-500);margin-top:2px">EMEA mindset document</div>
+        </div>
+        <div class="glass" style="padding:16px;background:var(--gray-50)">
+          <div style="font-size:11px;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px">Output</div>
+          <div style="font-weight:600;font-size:14px;color:var(--gray-800)">${isScreening ? 'Spreadsheet + Greenhouse' : 'Notion + Slack'}</div>
+          <div style="font-size:12px;color:var(--gray-500);margin-top:2px">Results pushed automatically</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Agent Flow with animations -->
+    <div class="glass" style="padding:28px;overflow:hidden">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
+        <div style="font-weight:700;font-size:15px;color:var(--gray-800)">How your agent works</div>
+        <button class="results-action-btn" style="font-size:12px">Edit flow</button>
+      </div>
+      <div class="agent-flow-live">
+        <div class="agent-flow-step agent-flow-step--trigger" style="animation-delay:0.1s">
+          <div class="agent-flow-step__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <div class="agent-flow-step__info">
+            <div class="agent-flow-step__name">Trigger</div>
+            <div class="agent-flow-step__desc">${isScreening ? 'New candidate arrives in Greenhouse' : 'Availability change detected in BambooHR'}</div>
+          </div>
+        </div>
+        <div class="agent-flow-connector"><div class="agent-flow-connector__line"><div class="agent-flow-connector__dot"></div></div></div>
+        <div class="agent-flow-step agent-flow-step--everday" style="animation-delay:0.2s">
+          <div class="agent-flow-step__icon agent-flow-step__icon--purple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4m0 14v4m-9-9h4m14 0h4"/></svg>
+          </div>
+          <div class="agent-flow-step__info">
+            <div class="agent-flow-step__name">Enrich profile</div>
+            <div class="agent-flow-step__desc">Pull data from LinkedIn, GitHub, and connected sources to build a complete picture</div>
+          </div>
+          <div class="agent-flow-step__badge">Everday intelligence</div>
+        </div>
+        <div class="agent-flow-connector"><div class="agent-flow-connector__line agent-flow-connector__line--purple"><div class="agent-flow-connector__dot agent-flow-connector__dot--purple"></div></div></div>
+        <div class="agent-flow-step agent-flow-step--core" style="animation-delay:0.35s">
+          <div class="agent-flow-step__icon agent-flow-step__icon--purple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="agent-flow-step__info">
+            <div class="agent-flow-step__name">Skill extraction & matching</div>
+            <div class="agent-flow-step__desc">Specialized AI extracts structured skills from messy data — not generic AI, purpose-built for workforce intelligence</div>
+            <div style="margin-top:8px"><span class="convo-context-badge" style="font-size:11px">Using DevRev skill taxonomy v2.4 · 156 skills</span></div>
+          </div>
+          <div class="agent-flow-step__badge agent-flow-step__badge--core">Core engine</div>
+        </div>
+        <div class="agent-flow-connector"><div class="agent-flow-connector__line agent-flow-connector__line--purple"><div class="agent-flow-connector__dot agent-flow-connector__dot--purple"></div></div></div>
+        <div class="agent-flow-step agent-flow-step--everday" style="animation-delay:0.5s">
+          <div class="agent-flow-step__icon agent-flow-step__icon--purple">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="agent-flow-step__info">
+            <div class="agent-flow-step__name">Score & rank</div>
+            <div class="agent-flow-step__desc">${isScreening ? 'Match candidates against role requirements, cultural context, and seniority' : 'Match team members to project needs based on skills, availability, and capacity'}</div>
+          </div>
+          <div class="agent-flow-step__badge">Everday intelligence</div>
+        </div>
+        <div class="agent-flow-connector"><div class="agent-flow-connector__line"><div class="agent-flow-connector__dot"></div></div></div>
+        <div class="agent-flow-step agent-flow-step--output" style="animation-delay:0.65s">
+          <div class="agent-flow-step__icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </div>
+          <div class="agent-flow-step__info">
+            <div class="agent-flow-step__name">Deliver results</div>
+            <div class="agent-flow-step__desc">${isScreening ? 'Push ranked shortlist to Greenhouse + update your spreadsheet + notify you' : 'Update project in Notion + post to Slack + notify you'}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function pickAgent(type) {
+  selectedAgent = type;
+  const isScreening = type === 'screening';
+
+  // Mark selected
+  document.querySelectorAll('.agent-pick').forEach(c => c.classList.remove('selected--screening', 'selected--staffing'));
+  document.querySelector(`.agent-pick--${type}`).classList.add(`selected--${type}`);
+
+  // Clear old steps
+  const stepsContainer = document.getElementById('task-flow-steps');
+  stepsContainer.innerHTML = '';
+
+  // Step 2: Agent responds with context + asks for data
+  setTimeout(function() {
+    var step = document.createElement('div');
+    step.className = 'task-flow__step';
+    step.innerHTML = `
+      <div class="glass convo-bubble" style="max-width:680px; border-left: 3px solid var(--${isScreening ? 'purple' : 'blue'});">
+        <p style="margin-bottom:12px">${isScreening
+          ? "I'll use your <strong>Screening agent</strong>. I'll match candidates against <strong>DevRev's skill taxonomy</strong> (156 skills mapped) and score using your connected context."
+          : "I'll use your <strong>Staffing agent</strong>. I'll find the best team from <strong>DevRev's employee data</strong> (BambooHR connected, 50 profiles) and match skills to your project requirements."
+        }</p>
+        <p style="color:var(--gray-500);margin-bottom:16px">${isScreening ? 'Pass me the candidate data — CVs, spreadsheets, or job descriptions.' : 'Pass me the project brief or requirements doc.'}</p>
+        <div class="drop-zone" style="padding:24px;text-align:center;border:1.5px dashed var(--gray-300);border-radius:12px;cursor:pointer;margin-bottom:12px;background:var(--gray-50,#F9FAFB)">
+          <div style="color:var(--gray-400);font-size:14px">Drop files here or click to browse</div>
+          <div style="color:var(--gray-300);font-size:12px;margin-top:4px">${isScreening ? 'Excel, CSV, PDF, Word' : 'Project briefs, requirements docs'}</div>
+        </div>
+        <div class="file-chips" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">
+          ${isScreening
+            ? '<div class="file-chip">DevRev_AE_Candidates_EMEA.xlsx</div><div class="file-chip">Account_Executive_JD.pdf</div><div class="file-chip">EMEA_Mindset_Document.pdf</div>'
+            : '<div class="file-chip">Platform_Migration_Brief.pdf</div><div class="file-chip">Team_Skills_Matrix.xlsx</div>'
+          }
+        </div>
+        <div style="color:var(--gray-400);font-size:12px;margin-bottom:10px">or import from</div>
+        <div style="display:flex;gap:8px;margin-bottom:16px">
+          ${isScreening
+            ? '<span class="source-btn-mini">Greenhouse</span><span class="source-btn-mini">Google Drive</span><span class="source-btn-mini">Notion</span>'
+            : '<span class="source-btn-mini">Google Drive</span><span class="source-btn-mini">Notion</span><span class="source-btn-mini">BambooHR</span>'
+          }
+        </div>
+        <button class="convo-btn convo-btn--primary" onclick="runTaskFlow('${type}')">
+          ${isScreening ? '✦ Analyze candidates' : '✦ Find optimal team'}
+        </button>
+      </div>
+    `;
+    stepsContainer.appendChild(step);
+    scrollTaskFlow();
+  }, 300);
+}
+
+function runTaskFlow(type) {
+  var isScreening = type === 'screening';
+  var stepsContainer = document.getElementById('task-flow-steps');
+
+  // Step 3: Agent reads files
+  var step3 = document.createElement('div');
+  step3.className = 'task-flow__step';
+  step3.innerHTML = `
+    <div class="glass convo-bubble" style="max-width:680px">
+      <p style="margin-bottom:12px">Hey Patrick, I'm reading through your files...</p>
+      <div class="convo-check"><span class="convo-check-icon done">✓</span> <strong>${isScreening ? 'DevRev_AE_Candidates_EMEA.xlsx' : 'Platform_Migration_Brief.pdf'}</strong> — ${isScreening ? 'found 47 candidate profiles' : 'extracted project requirements'}</div>
+      <div class="convo-check"><span class="convo-check-icon done">✓</span> <strong>${isScreening ? 'Account_Executive_JD.pdf' : 'Team_Skills_Matrix.xlsx'}</strong> — ${isScreening ? 'extracted role requirements' : 'loaded 8 team member profiles'}</div>
+      ${isScreening ? '<div class="convo-check"><span class="convo-check-icon done">✓</span> <strong>EMEA_Mindset_Document.pdf</strong> — loaded as cultural context</div>' : ''}
+    </div>
+  `;
+  stepsContainer.appendChild(step3);
+  scrollTaskFlow();
+
+  // Step 4: Agent shows plan + waits
+  setTimeout(function() {
+    var step4 = document.createElement('div');
+    step4.className = 'task-flow__step';
+    step4.innerHTML = `
+      <div class="glass convo-bubble" style="max-width:680px">
+        <p style="margin-bottom:12px">Got it. Here's what I'll do:</p>
+        <div class="convo-plan">
+          ${isScreening ? `
+            <div class="convo-plan-step"><span class="convo-plan-num">1</span> Extract skills from all 47 profiles using <strong>DevRev's skill taxonomy</strong> <span class="convo-context-badge">156 skills mapped</span></div>
+            <div class="convo-plan-step"><span class="convo-plan-num">2</span> Match each candidate against the 23 key skills from the AE job description</div>
+            <div class="convo-plan-step"><span class="convo-plan-num">3</span> Score cultural alignment using the EMEA mindset document</div>
+            <div class="convo-plan-step"><span class="convo-plan-num">4</span> Rank and flag top candidates across France, Belgium, UK, Germany</div>
+          ` : `
+            <div class="convo-plan-step"><span class="convo-plan-num">1</span> Analyze project requirements from brief using <strong>DevRev's skill taxonomy</strong></div>
+            <div class="convo-plan-step"><span class="convo-plan-num">2</span> Scan all 8 team members for skill fit and availability</div>
+            <div class="convo-plan-step"><span class="convo-plan-num">3</span> Match skills to project roles and identify gaps</div>
+            <div class="convo-plan-step"><span class="convo-plan-num">4</span> Recommend optimal team composition</div>
+          `}
+        </div>
+        <div class="convo-context-tag">✦ Running against DevRev's company context · Last synced 2h ago</div>
+        <p style="margin-top:14px;color:var(--gray-500)">This should take about 30 seconds. You can stay and watch, or walk away — I'll notify you when it's ready.</p>
+        <div class="convo-actions" id="task-approve-actions">
+          <button class="convo-btn convo-btn--primary" onclick="executeTaskFlow('${type}')">Go ahead, I'll watch</button>
+          <button class="convo-btn convo-btn--secondary" onclick="executeTaskFlow('${type}'); showToast('Running in background', 'I\\'ll notify you when it\\'s complete. Go grab a coffee ☕', '${type === 'screening' ? 'purple' : 'blue'}', 10000)">Run it, I'll come back</button>
+        </div>
+      </div>
+    `;
+    stepsContainer.appendChild(step4);
+    scrollTaskFlow();
+  }, 1800);
+}
+
+function executeTaskFlow(type) {
+  var isScreening = type === 'screening';
+  var stepsContainer = document.getElementById('task-flow-steps');
+  document.getElementById('task-approve-actions').innerHTML = '<span style="color:var(--green);font-weight:600">✓ Running now...</span>';
+
+  // Step 5: Progress
+  setTimeout(function() {
+    var step5 = document.createElement('div');
+    step5.className = 'task-flow__step';
+    step5.innerHTML = `
+      <div class="glass convo-bubble" style="max-width:680px">
+        <div class="convo-progress"><div class="convo-progress-bar" id="task-progress-fill"></div></div>
+        <div id="task-live-updates" style="margin-top:10px"></div>
+      </div>
+    `;
+    stepsContainer.appendChild(step5);
+    scrollTaskFlow();
+
+    var fill = document.getElementById('task-progress-fill');
+    var updates = document.getElementById('task-live-updates');
+    fill.style.width = '20%';
+
+    setTimeout(function() {
+      updates.innerHTML += '<div class="convo-live-line">' + (isScreening ? 'Extracting skills from candidate profiles...' : 'Analyzing project skill requirements...') + '</div>';
+      fill.style.width = '45%'; scrollTaskFlow();
+    }, 1000);
+
+    setTimeout(function() {
+      updates.innerHTML += '<div class="convo-live-line">' + (isScreening ? 'Matching against role requirements...' : 'Scanning employee profiles for fit...') + '</div>';
+      fill.style.width = '70%'; scrollTaskFlow();
+    }, 2200);
+
+    setTimeout(function() {
+      updates.innerHTML += '<div class="convo-live-line">' + (isScreening ? 'Ranking by skill fit + cultural alignment...' : 'Building optimal team composition...') + '</div>';
+      fill.style.width = '100%'; scrollTaskFlow();
+    }, 3200);
+
+    // Step 6: Done + output options
+    setTimeout(function() {
+      var step6 = document.createElement('div');
+      step6.className = 'task-flow__step';
+      step6.innerHTML = `
+        <div class="glass convo-bubble" style="max-width:680px">
+          <p><strong style="color:var(--green)">✓ Done!</strong> ${isScreening
+            ? 'Found <strong>12 strong matches</strong> out of 47 candidates.'
+            : 'Found <strong>4 recommended team members</strong> with 2 skill gaps identified.'
+          }</p>
+          <p style="margin-top:8px;color:var(--gray-500)">${isScreening
+            ? 'Top candidate: <strong>Emilio Turco</strong> — 98% match. B2B Sales, SaaS Sales, French market. Really strong fit.'
+            : 'Best fit: <strong>Sarah Kim</strong> — covers 4 of 5 required skills. Only gap: Terraform (trainable in 2 weeks).'
+          }</p>
+          <p style="margin-top:16px;font-weight:600">How do you want the results?</p>
+          <div class="convo-output-options" style="margin-top:10px">
+            <div class="convo-output-option selected" onclick="toggleOutput(this)"><span class="convo-output-check">✓</span> Dashboard</div>
+            <div class="convo-output-option selected" onclick="toggleOutput(this)"><span class="convo-output-check">✓</span> Spreadsheet</div>
+            <div class="convo-output-option" onclick="toggleOutput(this)"><span class="convo-output-check">✓</span> ${isScreening ? 'Push to Greenhouse' : 'Update Notion'}</div>
+            <div class="convo-output-option" onclick="toggleOutput(this)"><span class="convo-output-check">✓</span> ${isScreening ? 'Update Drive' : 'Export to Drive'}</div>
+          </div>
+          <div class="convo-actions" style="margin-top:16px">
+            <button class="convo-btn convo-btn--primary" onclick="switchView('${isScreening ? 'screening-results' : 'staffing-results'}')">Show me the results</button>
+            <button class="convo-btn convo-btn--secondary" onclick="offerAutomation('${type}')">Run this automatically next time</button>
+          </div>
+        </div>
+      `;
+      stepsContainer.appendChild(step6);
+      scrollTaskFlow();
+    }, 4200);
+  }, 400);
+}
+
+function offerAutomation(type) {
+  var isScreening = type === 'screening';
+  var stepsContainer = document.getElementById('task-flow-steps');
+  var step = document.createElement('div');
+  step.className = 'task-flow__step';
+  step.innerHTML = `
+    <div class="glass convo-bubble" style="max-width:680px;border-left:3px solid var(--green)">
+      <p>I'll set up an <strong>automated agent</strong> that ${isScreening
+        ? 'watches Greenhouse for new AE candidates and screens them automatically.'
+        : 'monitors team availability and re-runs matching when things change.'
+      }</p>
+      <p style="margin-top:8px;color:var(--gray-500)">You can manage it anytime from your sidebar. Now let me show you the results.</p>
+      <div class="convo-actions" style="margin-top:12px">
+        <button class="convo-btn convo-btn--primary" onclick="switchView('${isScreening ? 'screening-results' : 'staffing-results'}')">View results →</button>
+      </div>
+    </div>
+  `;
+  stepsContainer.appendChild(step);
+  scrollTaskFlow();
+}
+
+function scrollTaskFlow() {
+  var main = document.getElementById('main-content');
+  setTimeout(function() { main.scrollTo({ top: main.scrollHeight, behavior: 'smooth' }); }, 150);
+  setTimeout(function() { main.scrollTo({ top: main.scrollHeight, behavior: 'smooth' }); }, 400);
+}
+
+function handleFreestyle() {
+  var input = document.getElementById('freestyle-input').value.toLowerCase();
+  if (input.includes('screen') || input.includes('candidate') || input.includes('hire') || input.includes('recruit')) {
+    pickAgent('screening');
+  } else if (input.includes('staff') || input.includes('team') || input.includes('project')) {
+    pickAgent('staffing');
+  } else {
+    pickAgent('screening'); // default
+  }
+}
+
 function selectAgent(type) {
   selectedAgent = type;
 
@@ -3789,7 +4742,9 @@ function renderStaffingResults() {
 }
 
 // ========== AGENT DETAIL ==========
+var currentAgentType = 'screening';
 function renderAgentDetail(type) {
+  currentAgentType = type || 'screening';
   const container = document.getElementById('agent-detail-content');
   if (!container) return;
 
@@ -3801,92 +4756,196 @@ function renderAgentDetail(type) {
   const totalScreened = agents.reduce((sum, a) => sum + a.screened, 0);
   const totalMatched = agents.reduce((sum, a) => sum + a.matched, 0);
 
+  const activeCount = agents.filter(a => a.active).length;
+  const color = isScreening ? 'purple' : 'blue';
+
   container.innerHTML = `
     <div class="results-top-bar">
-      <button class="back-btn" onclick="switchView('home')">←</button>
-      <div class="results-top-bar__title"></div>
-    </div>
-
-    <div class="agent-detail-header">
-      <div class="agent-detail-header__icon agent-detail-header__icon--${isScreening ? 'purple' : 'blue'}">${isScreening ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>' : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>'}</div>
-      <div class="agent-detail-header__info">
-        <div class="agent-detail-header__name">${isScreening ? 'Screening agent' : 'Staffing agent'}</div>
-        <div class="agent-detail-header__type">${isScreening ? 'Candidate screening and matching' : 'Internal team staffing and gap analysis'}</div>
-      </div>
-      <div class="status-card__status">
-        <span class="status-card__status-dot"></span> Active
+      <div class="results-top-bar__title">${isScreening ? 'Screening agent' : 'Staffing agent'}</div>
+      <div class="results-actions">
+        <button class="results-action-btn" onclick="toggleAgentSettings()">Settings</button>
+        <button class="results-action-btn results-action-btn--primary" onclick="switchView('new-task')">+ New task</button>
       </div>
     </div>
 
-    <div class="glass detail-card" style="margin-bottom: 20px;">
-      <div class="card-title">Configuration</div>
-      <div class="config-list">
-        <div class="config-item"><span class="config-item__label">Taxonomy</span><span class="config-item__value">DevRev skill taxonomy v2.4</span></div>
-        <div class="config-item"><span class="config-item__label">Skills mapped</span><span class="config-item__value">156</span></div>
-        <div class="config-item"><span class="config-item__label">Primary source</span><span class="config-item__value">${isScreening ? 'Greenhouse' : 'BambooHR'}</span></div>
-        <div class="config-item"><span class="config-item__label">Trigger</span><span class="config-item__value">${isScreening ? 'New candidate arrives' : 'Availability change'}</span></div>
-        <div class="config-item"><span class="config-item__label">Active tasks</span><span class="config-item__value">${agents.filter(a => a.active).length}</span></div>
-        <div class="config-item"><span class="config-item__label">Auto-run</span><span class="config-item__value">${isScreening ? 'On new candidates' : 'On team changes'}</span></div>
-      </div>
-    </div>
-
-    <div style="margin-bottom: 20px;">
-      <div class="glass detail-card">
-        <div class="card-title">How your agent works</div>
-        <div class="flow-visual-expanded">
-          <div class="flow-step-card flow-step-card--trigger">
-            <div class="flow-step-tag">Trigger</div>
-            <div class="flow-step-title">${isScreening ? 'New candidate arrives' : 'Availability change'}</div>
-            <div class="flow-step-desc">${isScreening ? 'Watching Greenhouse for new applications' : 'Monitoring BambooHR for team changes'}</div>
-          </div>
-          <div class="flow-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-4-4l4 4-4 4" stroke="var(--gray-300)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="flow-step-card flow-step-card--everday">
-            <div class="flow-step-tag flow-step-tag--everday">Everday intelligence</div>
-            <div class="flow-step-title">Profile enrichment</div>
-            <div class="flow-step-desc">Pull data from LinkedIn, GitHub, and connected sources to build a complete picture</div>
-          </div>
-          <div class="flow-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-4-4l4 4-4 4" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="flow-step-card flow-step-card--core">
-            <div class="flow-step-tag flow-step-tag--core">Skill engine</div>
-            <div class="flow-step-title">Skill extraction & matching</div>
-            <div class="flow-step-desc">Specialized AI extracts structured skills — not generic AI, purpose-built for workforce intelligence</div>
-            <div class="flow-step-context">Using DevRev skill taxonomy v2.4</div>
-          </div>
-          <div class="flow-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-4-4l4 4-4 4" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="flow-step-card flow-step-card--everday">
-            <div class="flow-step-tag flow-step-tag--everday">Scoring</div>
-            <div class="flow-step-title">Match & rank</div>
-            <div class="flow-step-desc">${isScreening ? 'Score candidates against role requirements and cultural context' : 'Match team members against project needs, availability, and capacity'}</div>
-          </div>
-          <div class="flow-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-4-4l4 4-4 4" stroke="var(--gray-300)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="flow-step-card flow-step-card--output">
-            <div class="flow-step-tag">Destination</div>
-            <div class="flow-step-title">${isScreening ? 'Push to Greenhouse' : 'Update Notion + Slack'}</div>
-            <div class="flow-step-desc">Results delivered where you already work</div>
-          </div>
+    <!-- Hero: What this agent has been doing -->
+    <div class="glass" style="padding:20px 24px; margin-bottom:20px; border-left: 3px solid var(--${color});">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <div>
+          <span style="font-size:13px;font-weight:600;color:var(--${color})">${isScreening ? 'Screening' : 'Staffing'} · ${activeCount} active tasks</span>
+          <span style="font-size:12px;color:var(--gray-400);margin-left:8px">Using DevRev's skill taxonomy (156 skills)</span>
         </div>
+        <div class="status-card__status"><span class="status-card__status-dot"></span> Active</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+        <div><div style="font-family:var(--font-heading);font-size:28px;font-weight:800;color:var(--${color})">${totalScreened}</div><div style="font-size:12px;color:var(--gray-400)">Total processed</div></div>
+        <div><div style="font-family:var(--font-heading);font-size:28px;font-weight:800;color:var(--green)">${totalMatched}</div><div style="font-size:12px;color:var(--gray-400)">${isScreening ? 'Matches found' : 'Recommended'}</div></div>
+        <div><div style="font-family:var(--font-heading);font-size:28px;font-weight:800;color:var(--gray-800)">${Math.round(totalMatched / totalScreened * 100)}%</div><div style="font-size:12px;color:var(--gray-400)">Match rate</div></div>
+        <div><div style="font-family:var(--font-heading);font-size:28px;font-weight:800;color:var(--gray-800)">~${agents.reduce((s, a) => s + parseInt(a.saved.replace(/[^0-9]/g, '') || '0'), 0)}h</div><div style="font-size:12px;color:var(--gray-400)">Time saved</div></div>
       </div>
     </div>
 
-    <div class="agent-detail-grid">
-      <div class="glass detail-card">
-        <div class="card-title">Performance</div>
-        <div class="perf-stats">
-          <div class="perf-stat"><div class="perf-stat__value">${totalScreened}</div><div class="perf-stat__label">Total processed</div></div>
-          <div class="perf-stat"><div class="perf-stat__value">${totalMatched}</div><div class="perf-stat__label">Matches found</div></div>
-          <div class="perf-stat"><div class="perf-stat__value">${Math.round(totalMatched / totalScreened * 100)}%</div><div class="perf-stat__label">Match rate</div></div>
-          <div class="perf-stat"><div class="perf-stat__value">~${agents.reduce((s, a) => s + parseInt(a.saved), 0)}h</div><div class="perf-stat__label">Time saved</div></div>
+    <!-- Activity feed: what the agent did (THE HERO) -->
+    <div style="margin-bottom:24px">
+      <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--gray-400);margin-bottom:12px;display:flex;align-items:center;gap:8px">
+        <span class="feed-pulse feed-pulse--green"></span> Agent activity
+      </div>
+
+      <div class="glass feed-card" style="animation-delay:0.05s">
+        <div class="feed-card__left">
+          <div class="feed-card__title"><strong>New strong match found</strong> — Emilio Turco (98%)</div>
+          <div class="feed-card__body">AE France task · B2B Sales, SaaS Sales, French market. Matches 22 of 23 required skills. Pushed to Greenhouse.</div>
+        </div>
+        <div class="feed-card__right">
+          <button class="feed-card__btn feed-card__btn--outline" onclick="switchView('screening-results')">View</button>
+          <span class="feed-card__time">2h ago</span>
         </div>
       </div>
 
-      <div class="glass detail-card">
-        <div class="card-title">Recent activity</div>
-        <div class="activity-log">
-          <div class="log-item"><span class="log-item__time">2h ago</span><span class="log-item__text">Found strong match: Emilio Turco (98%)</span></div>
-          <div class="log-item"><span class="log-item__time">5h ago</span><span class="log-item__text">Taxonomy updated with 4 new skills</span></div>
-          <div class="log-item"><span class="log-item__time">1d ago</span><span class="log-item__text">Completed batch: 32 candidates processed</span></div>
-          <div class="log-item"><span class="log-item__time">2d ago</span><span class="log-item__text">New task created: SE Germany</span></div>
-          <div class="log-item"><span class="log-item__time">3d ago</span><span class="log-item__text">AE Belgium paused: source disconnected</span></div>
+      <div class="glass feed-card" style="animation-delay:0.1s">
+        <div class="feed-card__left">
+          <div class="feed-card__title">${isScreening ? 'SE Germany screening complete' : 'Platform Migration team updated'}</div>
+          <div class="feed-card__body">${isScreening ? 'Screened 32 candidates. Found 8 strong matches. Results pushed to spreadsheet.' : 'Sarah K. became available. Re-ran matching — she covers the Terraform gap (87% fit).'}</div>
+          <div class="feed-card__stats">
+            <span class="feed-stat"><strong>${isScreening ? '32' : '8'}</strong> ${isScreening ? 'screened' : 'scanned'}</span>
+            <span class="feed-stat"><strong>${isScreening ? '8' : '4'}</strong> ${isScreening ? 'strong' : 'matched'}</span>
+            <span class="feed-stat"><strong>~${isScreening ? '3' : '1.5'}h</strong> saved</span>
+          </div>
+        </div>
+        <div class="feed-card__right">
+          <button class="feed-card__btn feed-card__btn--outline">View results</button>
+          <span class="feed-card__time">${isScreening ? '3 days ago' : 'yesterday'}</span>
+        </div>
+      </div>
+
+      <div class="glass feed-card" style="animation-delay:0.15s">
+        <div class="feed-card__left">
+          <div class="feed-card__title">Skill taxonomy auto-updated</div>
+          <div class="feed-card__body">Detected 4 new skills from LinkedIn sync. Added to taxonomy (now 156 total).</div>
+        </div>
+        <div class="feed-card__right">
+          <span class="feed-card__time">5h ago</span>
+        </div>
+      </div>
+
+      <div class="glass feed-card" style="animation-delay:0.2s">
+        <div class="feed-card__left">
+          <div class="feed-card__title">${isScreening ? 'AE Belgium task created' : 'AI Chatbot MVP task created'}</div>
+          <div class="feed-card__body">${isScreening ? 'Manual task from Patrick. Screened 15 candidates from Lever, found 5 strong matches.' : 'Manual task. Scanned 6 team members, found 3 recommended.'}</div>
+        </div>
+        <div class="feed-card__right">
+          <button class="feed-card__btn feed-card__btn--outline">View results</button>
+          <span class="feed-card__time">${isScreening ? '4 days ago' : '3 days ago'}</span>
+        </div>
+      </div>
+
+      ${isScreening ? `
+      <div class="glass feed-card feed-card--alert" style="animation-delay:0.25s">
+        <div class="feed-card__left">
+          <div class="feed-card__title">AE Belgium paused — Lever connection expired</div>
+          <div class="feed-card__body">Can't pull new candidates until reconnected.</div>
+        </div>
+        <div class="feed-card__right">
+          <button class="feed-card__btn feed-card__btn--outline">Reconnect</button>
+          <span class="feed-card__time">5 days ago</span>
+        </div>
+      </div>
+      ` : ''}
+    </div>
+
+    <!-- Tasks running under this agent -->
+    <div style="margin-bottom:24px">
+      <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--gray-400);margin-bottom:12px">Tasks</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px">
+        ${agents.map(a => `
+          <div class="glass glass--hover" style="padding:16px 20px;cursor:pointer" onclick="switchView('${isScreening ? 'screening-results' : 'staffing-results'}')">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+              <span style="font-weight:600;font-size:14px;color:var(--gray-800)">${a.name}</span>
+              <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:${a.active ? 'var(--green)' : 'var(--gray-400)'}">
+                <span style="width:6px;height:6px;border-radius:50%;background:${a.active ? 'var(--green)' : 'var(--gray-300)'}"></span>
+                ${a.active ? (a.frequency || 'Active') : 'Done'}
+              </span>
+            </div>
+            <div style="font-size:12px;color:var(--gray-500)">${a.source} · ${a.screened} processed · ${a.matched} matched</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    <!-- Settings panel (collapsible) -->
+    <div class="agent-config-section hidden" id="agent-settings-panel">
+      <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--gray-400);margin-bottom:16px">Settings & flow</div>
+
+      <!-- Config -->
+      <div class="glass" style="padding:20px 24px;margin-bottom:16px">
+        <div style="font-weight:600;font-size:14px;color:var(--gray-800);margin-bottom:12px">Configuration</div>
+        <div class="config-list">
+          <div class="config-item"><span class="config-item__label">Taxonomy</span><span class="config-item__value">DevRev skill taxonomy v2.4</span></div>
+          <div class="config-item"><span class="config-item__label">Skills mapped</span><span class="config-item__value">156</span></div>
+          <div class="config-item"><span class="config-item__label">Primary source</span><span class="config-item__value">${isScreening ? 'Greenhouse' : 'BambooHR'}</span></div>
+          <div class="config-item"><span class="config-item__label">Trigger</span><span class="config-item__value">${isScreening ? 'New candidate arrives' : 'Availability change'}</span></div>
+          <div class="config-item"><span class="config-item__label">Auto-run</span><span class="config-item__value">${isScreening ? 'On new candidates' : 'On team changes'}</span></div>
+          <div class="config-item"><span class="config-item__label">Context</span><span class="config-item__value">DevRev company data · EMEA mindset doc</span></div>
+        </div>
+      </div>
+
+      <!-- Animated flow -->
+      <div class="glass" style="padding:24px;margin-bottom:16px;overflow:hidden">
+        <div style="font-weight:600;font-size:14px;color:var(--gray-800);margin-bottom:20px">How your agent works</div>
+        <div class="agent-flow-live">
+          <div class="agent-flow-step agent-flow-step--trigger" style="animation-delay:0.1s">
+            <div class="agent-flow-step__icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <div class="agent-flow-step__info">
+              <div class="agent-flow-step__name">Trigger</div>
+              <div class="agent-flow-step__desc">${isScreening ? 'New candidate in Greenhouse' : 'Availability change in BambooHR'}</div>
+            </div>
+          </div>
+          <div class="agent-flow-connector"><div class="agent-flow-connector__line"><div class="agent-flow-connector__dot"></div></div></div>
+          <div class="agent-flow-step agent-flow-step--everday" style="animation-delay:0.2s">
+            <div class="agent-flow-step__icon agent-flow-step__icon--purple">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4m0 14v4m-9-9h4m14 0h4"/></svg>
+            </div>
+            <div class="agent-flow-step__info">
+              <div class="agent-flow-step__name">Enrich profile</div>
+              <div class="agent-flow-step__desc">LinkedIn + GitHub + connected sources</div>
+            </div>
+            <div class="agent-flow-step__badge">Everday AI</div>
+          </div>
+          <div class="agent-flow-connector"><div class="agent-flow-connector__line agent-flow-connector__line--purple"><div class="agent-flow-connector__dot agent-flow-connector__dot--purple"></div></div></div>
+          <div class="agent-flow-step agent-flow-step--core" style="animation-delay:0.3s">
+            <div class="agent-flow-step__icon agent-flow-step__icon--purple">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div class="agent-flow-step__info">
+              <div class="agent-flow-step__name">Skill extraction & matching</div>
+              <div class="agent-flow-step__desc">Specialized AI — not generic, purpose-built for workforce intelligence</div>
+              <div style="margin-top:6px"><span class="convo-context-badge" style="font-size:11px">DevRev taxonomy v2.4 · 156 skills</span></div>
+            </div>
+            <div class="agent-flow-step__badge agent-flow-step__badge--core">Core engine</div>
+          </div>
+          <div class="agent-flow-connector"><div class="agent-flow-connector__line agent-flow-connector__line--purple"><div class="agent-flow-connector__dot agent-flow-connector__dot--purple"></div></div></div>
+          <div class="agent-flow-step agent-flow-step--everday" style="animation-delay:0.4s">
+            <div class="agent-flow-step__icon agent-flow-step__icon--purple">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div class="agent-flow-step__info">
+              <div class="agent-flow-step__name">Score & rank</div>
+              <div class="agent-flow-step__desc">${isScreening ? 'Match against role requirements + cultural context' : 'Match to project needs + availability + capacity'}</div>
+            </div>
+            <div class="agent-flow-step__badge">Everday AI</div>
+          </div>
+          <div class="agent-flow-connector"><div class="agent-flow-connector__line"><div class="agent-flow-connector__dot"></div></div></div>
+          <div class="agent-flow-step agent-flow-step--output" style="animation-delay:0.5s">
+            <div class="agent-flow-step__icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            </div>
+            <div class="agent-flow-step__info">
+              <div class="agent-flow-step__name">Deliver results</div>
+              <div class="agent-flow-step__desc">${isScreening ? 'Push to Greenhouse + update spreadsheet' : 'Update Notion + notify on Slack'}</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -4122,6 +5181,113 @@ setTimeout(positionOrbitChips, 100);
 // TODO: API integration — connect to BambooHR for employee data
 // TODO: API integration — real-time WebSocket for agent status updates
 // TODO: API integration — push results to ATS/Drive/Sheets
+
+// ========== TOAST NOTIFICATION SYSTEM ==========
+function showToast(title, body, type, duration) {
+  type = type || 'purple';
+  duration = duration || 6000;
+
+  var container = document.getElementById('toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'toast-container';
+    container.className = 'toast-container';
+    document.body.appendChild(container);
+  }
+
+  var iconColor = type === 'blue' ? '#3b82f6' : type === 'green' ? '#22c55e' : '#7c3aed';
+  var iconSvg = type === 'blue'
+    ? '<svg viewBox="0 0 24 24" fill="none" stroke="' + iconColor + '" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/></svg>'
+    : type === 'green'
+    ? '<svg viewBox="0 0 24 24" fill="none" stroke="' + iconColor + '" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>'
+    : '<svg viewBox="0 0 24 24" fill="none" stroke="' + iconColor + '" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
+
+  var toast = document.createElement('div');
+  toast.className = 'toast' + (type !== 'purple' ? ' toast--' + type : '');
+  toast.innerHTML =
+    '<div class="toast__icon' + (type !== 'purple' ? ' toast__icon--' + type : '') + '">' + iconSvg + '</div>' +
+    '<div class="toast__content">' +
+      '<div class="toast__title">' + title + '</div>' +
+      '<div class="toast__body">' + body + '</div>' +
+    '</div>' +
+    '<button class="toast__close" onclick="dismissToast(this)">&times;</button>';
+
+  container.appendChild(toast);
+
+  // Auto-dismiss
+  setTimeout(function() {
+    dismissToast(toast.querySelector('.toast__close'));
+  }, duration);
+}
+
+function dismissToast(el) {
+  var toast = el.closest ? el.closest('.toast') : el.parentElement;
+  if (!toast) return;
+  toast.style.animation = 'toastOut 0.3s ease forwards';
+  setTimeout(function() { toast.remove(); }, 300);
+}
+
+// Add notification badges to sidebar agents
+function updateAgentBadges() {
+  // Screening agent badge
+  var screeningHeader = document.querySelector('#screening-group .agent-group__header');
+  if (screeningHeader && !screeningHeader.querySelector('.agent-badge-count')) {
+    var badge = document.createElement('span');
+    badge.className = 'agent-badge-count';
+    badge.textContent = '3';
+    badge.title = '3 items need attention';
+    screeningHeader.appendChild(badge);
+  }
+
+  // Staffing agent badge
+  var staffingHeader = document.querySelector('#staffing-group .agent-group__header');
+  if (staffingHeader && !staffingHeader.querySelector('.agent-badge-count')) {
+    var badge2 = document.createElement('span');
+    badge2.className = 'agent-badge-count agent-badge-count--blue';
+    badge2.textContent = '2';
+    badge2.title = '2 items need attention';
+    staffingHeader.appendChild(badge2);
+  }
+}
+
+// Simulate live notifications — fire toasts on a delay to show the system feels alive
+function simulateLiveNotifications() {
+  // First toast after 8 seconds
+  setTimeout(function() {
+    showToast(
+      'Screening agent',
+      'New candidate uploaded to Greenhouse for AE France. Analyzing now...',
+      'purple',
+      8000
+    );
+  }, 8000);
+
+  // Second toast after 20 seconds
+  setTimeout(function() {
+    showToast(
+      'Screening complete',
+      'AE France: 1 new strong match found — Camille Bertrand (94%). Review ready.',
+      'green',
+      10000
+    );
+  }, 20000);
+
+  // Third toast after 35 seconds
+  setTimeout(function() {
+    showToast(
+      'Staffing agent',
+      'Platform Migration: Sarah K. confirmed availability. Team gap reduced to 1.',
+      'blue',
+      8000
+    );
+  }, 35000);
+}
+
+// Initialize on page load
+setTimeout(function() {
+  updateAgentBadges();
+  simulateLiveNotifications();
+}, 1000);
 </script>
 </body>
 </html>
