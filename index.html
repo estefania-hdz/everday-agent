@@ -2696,17 +2696,17 @@ body {
       <div class="agent-child" onclick="switchView('screening-results', 'ae-france')">
         <span class="agent-child__dot agent-child__dot--green"></span>
         AE France
-        <span class="agent-child__meta">12 matches</span>
+        <span class="agent-child__meta"><span style="font-size:11px">↻</span> daily</span>
       </div>
       <div class="agent-child" onclick="switchView('screening-results', 'se-germany')">
         <span class="agent-child__dot agent-child__dot--green"></span>
         SE Germany
-        <span class="agent-child__meta">8 matches</span>
+        <span class="agent-child__meta"><span style="font-size:11px">↻</span> daily</span>
       </div>
       <div class="agent-child" onclick="switchView('screening-results', 'ae-belgium')">
         <span class="agent-child__dot agent-child__dot--gray"></span>
         AE Belgium
-        <span class="agent-child__meta">paused</span>
+        <span class="agent-child__meta">✓ done</span>
       </div>
     </div>
   </div>
@@ -2723,12 +2723,12 @@ body {
       <div class="agent-child" onclick="switchView('staffing-results')">
         <span class="agent-child__dot agent-child__dot--green"></span>
         Platform Migration
-        <span class="agent-child__meta">4 recommended</span>
+        <span class="agent-child__meta"><span style="font-size:11px">↻</span> watching</span>
       </div>
       <div class="agent-child">
         <span class="agent-child__dot agent-child__dot--gray"></span>
         AI Chatbot MVP
-        <span class="agent-child__meta">paused</span>
+        <span class="agent-child__meta">✓ done</span>
       </div>
     </div>
   </div>
@@ -2974,6 +2974,15 @@ body {
         </div>
       </div>
 
+      <!-- Automation banner - top -->
+      <div class="glass automation-banner">
+        <div class="automation-banner__icon">✦</div>
+        <div class="automation-banner__text">
+          <strong>Automate this screening</strong> — Run this every time new candidates are added to Greenhouse. Get notified of strong matches instantly.
+        </div>
+        <button class="automation-banner__btn" onclick="switchView('agent-detail', 'screening')">Set up automation</button>
+      </div>
+
       <!-- Summary -->
       <div class="glass results-summary">
         <div class="results-summary__stat">
@@ -3039,14 +3048,6 @@ body {
       <div class="section-title">More candidates</div>
       <div class="candidates-table" id="candidates-table"></div>
 
-      <!-- Automation banner -->
-      <div class="glass automation-banner">
-        <div class="automation-banner__icon">✦</div>
-        <div class="automation-banner__text">
-          <strong>Automate this screening</strong> — Set up the AE France screener to run every time new candidates are added to Greenhouse. Get notified of strong matches instantly.
-        </div>
-        <button class="automation-banner__btn">Set up automation</button>
-      </div>
     </div>
   </div>
 
@@ -3060,6 +3061,15 @@ body {
           <button class="results-action-btn">Download</button>
           <button class="results-action-btn results-action-btn--primary">Push to BambooHR</button>
         </div>
+      </div>
+
+      <!-- Automation banner - top -->
+      <div class="glass automation-banner">
+        <div class="automation-banner__icon" style="background: var(--blue-light);">✦</div>
+        <div class="automation-banner__text">
+          <strong>Automate this staffing</strong> — Monitor team availability and re-run matching when projects or people change. Stay ahead of gaps.
+        </div>
+        <button class="automation-banner__btn" style="border-color: var(--blue); color: var(--blue);" onclick="switchView('agent-detail', 'staffing')">Enable monitoring</button>
       </div>
 
       <!-- Summary -->
@@ -3093,13 +3103,6 @@ body {
         <div id="gaps-list"></div>
       </div>
 
-      <div class="glass automation-banner">
-        <div class="automation-banner__icon" style="background: var(--blue-light);">✦</div>
-        <div class="automation-banner__text">
-          <strong>Keep this team updated</strong> — The staffing agent can monitor availability changes and suggest replacements when team members become unavailable.
-        </div>
-        <button class="automation-banner__btn" style="border-color: var(--blue); color: var(--blue);">Enable monitoring</button>
-      </div>
     </div>
   </div>
 
