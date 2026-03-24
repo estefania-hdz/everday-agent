@@ -2397,6 +2397,263 @@ body {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-8px); }
 }
+
+/* ========== DATA VIEWS ========== */
+.nav-item__count {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gray-400);
+  margin-left: auto;
+}
+
+.sidebar-section-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 16px 0 8px 0;
+}
+
+.data-stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.data-stat-card {
+  padding: 20px;
+  text-align: center;
+}
+
+.data-stat__value {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.data-stat__label {
+  font-size: 12px;
+  color: var(--gray-500);
+  margin-top: 4px;
+}
+
+.data-source-tag {
+  font-size: 13px;
+  color: var(--gray-600);
+  padding: 10px 16px;
+  background: rgba(124,58,237,0.04);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.data-table-card {
+  padding: 20px;
+}
+
+.data-table-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.data-search {
+  padding: 8px 14px;
+  border: 1px solid var(--gray-200);
+  border-radius: 10px;
+  font-size: 13px;
+  width: 240px;
+  background: #fff;
+  outline: none;
+  font-family: inherit;
+}
+
+.data-search:focus {
+  border-color: var(--purple);
+  box-shadow: 0 0 0 3px rgba(124,58,237,0.1);
+}
+
+.data-filters {
+  display: flex;
+  gap: 6px;
+}
+
+.data-filter-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid var(--gray-200);
+  background: #fff;
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.data-filter-btn.active,
+.data-filter-btn:hover {
+  background: var(--purple);
+  color: white;
+  border-color: var(--purple);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.data-table th {
+  text-align: left;
+  padding: 10px 12px;
+  font-weight: 600;
+  color: var(--gray-500);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.data-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--gray-100);
+  color: var(--gray-700);
+}
+
+.data-table tr:hover td {
+  background: rgba(124,58,237,0.02);
+}
+
+.data-table .person-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.data-table .person-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.data-table .person-name {
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.data-table .skill-chip {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  background: var(--purple-light);
+  color: var(--purple);
+  margin: 1px 2px;
+}
+
+.data-table .match-badge {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.data-table .status-analyzed {
+  color: var(--green);
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.data-table .status-pending {
+  color: var(--gray-400);
+  font-size: 12px;
+}
+
+/* Skills grid */
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-taxonomy-chip {
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.skill-taxonomy-chip:hover {
+  border-color: var(--purple);
+  background: var(--purple-light);
+}
+
+.skill-taxonomy-chip .skill-count {
+  font-size: 10px;
+  background: var(--gray-100);
+  color: var(--gray-500);
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+/* Jobs grid */
+.jobs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.job-card {
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px solid var(--gray-200);
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.job-card:hover {
+  border-color: var(--purple);
+  box-shadow: 0 4px 12px rgba(124,58,237,0.08);
+}
+
+.job-card__title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--gray-900);
+  margin-bottom: 4px;
+}
+
+.job-card__dept {
+  font-size: 12px;
+  color: var(--gray-500);
+  margin-bottom: 8px;
+}
+
+.job-card__meta {
+  display: flex;
+  gap: 12px;
+  font-size: 11px;
+  color: var(--gray-400);
+}
+
+.job-card__meta strong {
+  color: var(--gray-700);
+}
 </style>
 </head>
 <body>
@@ -2428,7 +2685,7 @@ body {
   <div class="sidebar-section-label">Your agents</div>
 
   <!-- Screening agent -->
-  <div class="agent-group expanded" id="screening-group">
+  <div class="agent-group" id="screening-group">
     <div class="agent-group__header" onclick="toggleAgentGroup('screening-group')">
       <span class="agent-group__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
       <span onclick="event.stopPropagation(); switchView('agent-detail', 'screening')">Screening agent</span>
@@ -2455,7 +2712,7 @@ body {
   </div>
 
   <!-- Staffing agent -->
-  <div class="agent-group expanded" id="staffing-group">
+  <div class="agent-group" id="staffing-group">
     <div class="agent-group__header" onclick="toggleAgentGroup('staffing-group')">
       <span class="agent-group__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></span>
       <span onclick="event.stopPropagation(); switchView('agent-detail', 'staffing')">Staffing agent</span>
@@ -2476,10 +2733,32 @@ body {
     </div>
   </div>
 
+  <div class="sidebar-section-label">Your data</div>
+
+  <div class="nav-item" data-view="people" onclick="switchView('people')">
+    <span class="nav-item__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4-4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+    People <span class="nav-item__count">50</span>
+  </div>
+
+  <div class="nav-item" data-view="candidates" onclick="switchView('candidates')">
+    <span class="nav-item__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg></span>
+    Candidates <span class="nav-item__count">234</span>
+  </div>
+
+  <div class="nav-item" data-view="skills" onclick="switchView('skills')">
+    <span class="nav-item__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4m0 14v4m-9-9h4m14 0h4m-3.3-6.7l-2.8 2.8m-8.5 8.5l-2.8 2.8m0-14.1l2.8 2.8m8.5 8.5l2.8 2.8"/></svg></span>
+    Skills <span class="nav-item__count">156</span>
+  </div>
+
+  <div class="nav-item" data-view="jobs" onclick="switchView('jobs')">
+    <span class="nav-item__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></span>
+    Jobs & roles <span class="nav-item__count">12</span>
+  </div>
+
   <div class="sidebar-spacer"></div>
 
   <div class="sidebar-bottom-item" onclick="switchView('intelligence')">
-    <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2a7 7 0 017 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 01-2 2h-4a2 2 0 01-2-2v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 017-7z"/><path d="M10 21h4"/></svg></span> Manage intelligence
+    <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2a7 7 0 017 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 01-2 2h-4a2 2 0 01-2-2v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 017-7z"/><path d="M10 21h4"/></svg></span> Settings & sources
   </div>
 
   <div class="sidebar-user">
@@ -2842,12 +3121,214 @@ body {
     </div>
   </div>
 
+  <!-- ===== PEOPLE VIEW ===== -->
+  <div id="view-people" class="hidden">
+    <div class="results-view">
+      <div class="results-top-bar">
+        <button class="back-btn" onclick="switchView('home')">←</button>
+        <div class="results-top-bar__title">People</div>
+        <div class="results-top-bar__subtitle">50 employees from BambooHR</div>
+      </div>
+
+      <div class="data-stats-row">
+        <div class="glass data-stat-card">
+          <div class="data-stat__value" style="color:var(--purple)">50</div>
+          <div class="data-stat__label">Total employees</div>
+        </div>
+        <div class="glass data-stat-card">
+          <div class="data-stat__value" style="color:var(--green)">42</div>
+          <div class="data-stat__label">Skills analyzed</div>
+        </div>
+        <div class="glass data-stat-card">
+          <div class="data-stat__value" style="color:var(--blue)">8</div>
+          <div class="data-stat__label">Pending analysis</div>
+        </div>
+        <div class="glass data-stat-card">
+          <div class="data-stat__value" style="color:var(--gray-500)">2h ago</div>
+          <div class="data-stat__label">Last sync</div>
+        </div>
+      </div>
+
+      <div class="data-source-tag">
+        <span>🌿</span> Synced from <strong>BambooHR</strong> · Last updated 2 hours ago · <a href="#" style="color:var(--purple)">Manage connection</a>
+      </div>
+
+      <div class="glass data-table-card">
+        <div class="data-table-header">
+          <input type="text" class="data-search" placeholder="Search people...">
+          <div class="data-filters">
+            <button class="data-filter-btn active">All</button>
+            <button class="data-filter-btn">Engineering</button>
+            <button class="data-filter-btn">Sales</button>
+            <button class="data-filter-btn">Design</button>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Team</th>
+              <th>Skills</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="people-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CANDIDATES VIEW ===== -->
+  <div id="view-candidates" class="hidden">
+    <div class="results-view">
+      <div class="results-top-bar">
+        <button class="back-btn" onclick="switchView('home')">←</button>
+        <div class="results-top-bar__title">Candidates</div>
+        <div class="results-top-bar__subtitle">234 candidates processed across all screenings</div>
+      </div>
+
+      <div class="data-stats-row">
+        <div class="glass data-stat-card">
+          <div class="data-stat__value" style="color:var(--purple)">234</div>
+          <div class="data-stat__label">Total candidates</div>
+        </div>
+        <div class="glass data-stat-card">
+          <div class="data-stat__value" style="color:var(--green)">38</div>
+          <div class="data-stat__label">Strong matches</div>
+        </div>
+        <div class="glass data-stat-card">
+          <div class="data-stat__value" style="color:var(--yellow)">86</div>
+          <div class="data-stat__label">Reviewed</div>
+        </div>
+        <div class="glass data-stat-card">
+          <div class="data-stat__value" style="color:var(--gray-500)">3</div>
+          <div class="data-stat__label">Active screenings</div>
+        </div>
+      </div>
+
+      <div class="data-source-tag">
+        <span>📋</span> From <strong>Greenhouse ATS</strong> + uploaded spreadsheets · <a href="#" style="color:var(--purple)">View sources</a>
+      </div>
+
+      <div class="glass data-table-card">
+        <div class="data-table-header">
+          <input type="text" class="data-search" placeholder="Search candidates...">
+          <div class="data-filters">
+            <button class="data-filter-btn active">All</button>
+            <button class="data-filter-btn">Strong match</button>
+            <button class="data-filter-btn">France</button>
+            <button class="data-filter-btn">Belgium</button>
+            <button class="data-filter-btn">Germany</button>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Match</th>
+              <th>Top skills</th>
+              <th>Source</th>
+            </tr>
+          </thead>
+          <tbody id="candidates-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SKILLS VIEW ===== -->
+  <div id="view-skills" class="hidden">
+    <div class="results-view">
+      <div class="results-top-bar">
+        <button class="back-btn" onclick="switchView('home')">←</button>
+        <div class="results-top-bar__title">Skill taxonomy</div>
+        <div class="results-top-bar__subtitle">DevRev skill taxonomy v2.4 · 156 skills mapped</div>
+      </div>
+
+      <div class="data-stats-row">
+        <div class="glass data-stat-card">
+          <div class="data-stat__value" style="color:var(--purple)">156</div>
+          <div class="data-stat__label">Total skills</div>
+        </div>
+        <div class="glass data-stat-card">
+          <div class="data-stat__value" style="color:var(--green)">23</div>
+          <div class="data-stat__label">Used in active agents</div>
+        </div>
+        <div class="glass data-stat-card">
+          <div class="data-stat__value" style="color:var(--blue)">4</div>
+          <div class="data-stat__label">Recently added</div>
+        </div>
+        <div class="glass data-stat-card">
+          <div class="data-stat__value" style="color:var(--gray-500)">5h ago</div>
+          <div class="data-stat__label">Last updated</div>
+        </div>
+      </div>
+
+      <div class="data-source-tag">
+        <span>✦</span> This taxonomy powers all your agents. Skills are auto-detected from <strong>LinkedIn</strong>, <strong>Greenhouse</strong>, and uploaded documents. <a href="#" style="color:var(--purple)">Add skill manually</a>
+      </div>
+
+      <div class="glass data-table-card">
+        <div class="data-table-header">
+          <input type="text" class="data-search" placeholder="Search skills...">
+          <div class="data-filters">
+            <button class="data-filter-btn active">All</button>
+            <button class="data-filter-btn">Technical</button>
+            <button class="data-filter-btn">Sales</button>
+            <button class="data-filter-btn">Languages</button>
+            <button class="data-filter-btn">Soft skills</button>
+          </div>
+        </div>
+        <div class="skills-grid" id="skills-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== JOBS VIEW ===== -->
+  <div id="view-jobs" class="hidden">
+    <div class="results-view">
+      <div class="results-top-bar">
+        <button class="back-btn" onclick="switchView('home')">←</button>
+        <div class="results-top-bar__title">Jobs & roles</div>
+        <div class="results-top-bar__subtitle">12 active roles across your organization</div>
+      </div>
+
+      <div class="data-stats-row">
+        <div class="glass data-stat-card">
+          <div class="data-stat__value" style="color:var(--purple)">12</div>
+          <div class="data-stat__label">Active roles</div>
+        </div>
+        <div class="glass data-stat-card">
+          <div class="data-stat__value" style="color:var(--green)">5</div>
+          <div class="data-stat__label">With active screening</div>
+        </div>
+        <div class="glass data-stat-card">
+          <div class="data-stat__value" style="color:var(--blue)">3</div>
+          <div class="data-stat__label">New this month</div>
+        </div>
+        <div class="glass data-stat-card">
+          <div class="data-stat__value" style="color:var(--gray-500)">7</div>
+          <div class="data-stat__label">Avg skills per role</div>
+        </div>
+      </div>
+
+      <div class="glass data-table-card">
+        <div class="data-table-header">
+          <input type="text" class="data-search" placeholder="Search roles...">
+        </div>
+        <div class="jobs-grid" id="jobs-grid"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- ===== INTELLIGENCE VIEW ===== -->
   <div id="view-intelligence" class="hidden">
     <div class="results-view">
       <div class="results-top-bar" style="margin-bottom:8px;">
         <button class="back-btn" onclick="switchView('home')">←</button>
-        <div class="results-top-bar__title">Manage intelligence</div>
+        <div class="results-top-bar__title">Settings & sources</div>
       </div>
 
       <div class="intel-tabs">
@@ -2952,6 +3433,10 @@ function switchView(viewId, context) {
   if (viewId === 'agent-detail') renderAgentDetail(context);
   if (viewId === 'agents-overview') renderAgentsOverview();
   if (viewId === 'intelligence') renderIntelligence();
+  if (viewId === 'people') renderPeople();
+  if (viewId === 'candidates') renderCandidates();
+  if (viewId === 'skills') renderSkills();
+  if (viewId === 'jobs') renderJobs();
   if (viewId === 'analyzing') runConversationalFlow();
 }
 
@@ -3477,6 +3962,124 @@ function switchIntelTab(tab, el) {
 
   document.getElementById('intel-sources').classList.toggle('hidden', tab !== 'sources');
   document.getElementById('intel-context').classList.toggle('hidden', tab !== 'context');
+}
+
+// ========== DATA VIEWS ==========
+function renderPeople() {
+  const tbody = document.getElementById('people-table-body');
+  if (!tbody) return;
+
+  const people = [
+    { name: 'Sarah Chen', role: 'Senior Backend Engineer', team: 'Engineering', skills: ['Python', 'AWS', 'PostgreSQL'], status: 'analyzed', avatar: 'https://randomuser.me/api/portraits/women/75.jpg' },
+    { name: 'Marcus Weber', role: 'DevOps Engineer', team: 'Engineering', skills: ['Kubernetes', 'Docker', 'CI/CD'], status: 'analyzed', avatar: 'https://randomuser.me/api/portraits/men/36.jpg' },
+    { name: 'Priya Sharma', role: 'Full Stack Developer', team: 'Engineering', skills: ['React', 'Node.js', 'PostgreSQL'], status: 'analyzed', avatar: 'https://randomuser.me/api/portraits/women/47.jpg' },
+    { name: 'James Liu', role: 'Data Engineer', team: 'Engineering', skills: ['Python', 'ETL', 'AWS'], status: 'analyzed', avatar: 'https://randomuser.me/api/portraits/men/57.jpg' },
+    { name: 'Ana Martinez', role: 'Product Manager', team: 'Product', skills: ['Strategy', 'Analytics', 'Roadmapping'], status: 'analyzed', avatar: 'https://randomuser.me/api/portraits/women/32.jpg' },
+    { name: 'Thomas Becker', role: 'Sales Director', team: 'Sales', skills: ['B2B Sales', 'Enterprise', 'Leadership'], status: 'analyzed', avatar: 'https://randomuser.me/api/portraits/men/62.jpg' },
+    { name: 'Camille Laurent', role: 'UX Designer', team: 'Design', skills: ['Figma', 'User Research', 'Prototyping'], status: 'analyzed', avatar: 'https://randomuser.me/api/portraits/women/31.jpg' },
+    { name: 'Patrick van de Werken', role: 'Head of EMEA', team: 'Sales', skills: ['GTM Strategy', 'Enterprise Sales', 'Team Building'], status: 'analyzed', avatar: 'https://randomuser.me/api/portraits/men/52.jpg' },
+    { name: 'Elena De Smet', role: 'Account Manager', team: 'Sales', skills: ['CRM', 'Negotiation', 'Dutch'], status: 'pending', avatar: 'https://randomuser.me/api/portraits/women/17.jpg' },
+    { name: 'Klaus Richter', role: 'Sales Manager', team: 'Sales', skills: ['B2B Sales', 'German', 'CRM'], status: 'pending', avatar: 'https://randomuser.me/api/portraits/men/52.jpg' },
+  ];
+
+  tbody.innerHTML = people.map(p => `
+    <tr>
+      <td><div class="person-cell"><img class="person-avatar" src="${p.avatar}"><span class="person-name">${p.name}</span></div></td>
+      <td>${p.role}</td>
+      <td>${p.team}</td>
+      <td>${p.skills.map(s => '<span class="skill-chip">' + s + '</span>').join(' ')}</td>
+      <td><span class="${p.status === 'analyzed' ? 'status-analyzed' : 'status-pending'}">${p.status === 'analyzed' ? '✓ Analyzed' : '◌ Pending'}</span></td>
+    </tr>
+  `).join('');
+}
+
+function renderCandidates() {
+  const tbody = document.getElementById('candidates-table-body');
+  if (!tbody) return;
+
+  tbody.innerHTML = mockCandidates.map(c => `
+    <tr>
+      <td><div class="person-cell"><img class="person-avatar" src="${c.avatar}"><span class="person-name">${c.name}</span></div></td>
+      <td>${c.role} @ ${c.company}</td>
+      <td><span class="match-badge" style="color: ${c.match >= 85 ? 'var(--green)' : c.match >= 70 ? 'var(--yellow)' : 'var(--gray-500)'}">${c.match}%</span></td>
+      <td>${c.matchSkills.slice(0,3).map(s => '<span class="skill-chip">' + s + '</span>').join(' ')}</td>
+      <td>${c.flag} ${c.location}</td>
+    </tr>
+  `).join('');
+}
+
+function renderSkills() {
+  const grid = document.getElementById('skills-grid');
+  if (!grid) return;
+
+  const skills = [
+    { name: 'B2B Sales', count: 34, cat: 'sales' },
+    { name: 'SaaS Sales', count: 28, cat: 'sales' },
+    { name: 'Enterprise Sales', count: 22, cat: 'sales' },
+    { name: 'French', count: 31, cat: 'language' },
+    { name: 'German', count: 18, cat: 'language' },
+    { name: 'Dutch', count: 12, cat: 'language' },
+    { name: 'English', count: 45, cat: 'language' },
+    { name: 'Python', count: 15, cat: 'technical' },
+    { name: 'AWS', count: 12, cat: 'technical' },
+    { name: 'PostgreSQL', count: 10, cat: 'technical' },
+    { name: 'Kubernetes', count: 8, cat: 'technical' },
+    { name: 'Docker', count: 9, cat: 'technical' },
+    { name: 'React', count: 7, cat: 'technical' },
+    { name: 'Node.js', count: 6, cat: 'technical' },
+    { name: 'CRM', count: 24, cat: 'sales' },
+    { name: 'Negotiation', count: 20, cat: 'soft' },
+    { name: 'Lead Generation', count: 18, cat: 'sales' },
+    { name: 'Market Penetration', count: 14, cat: 'sales' },
+    { name: 'Presentation', count: 16, cat: 'soft' },
+    { name: 'Pipeline Management', count: 15, cat: 'sales' },
+    { name: 'Solution Selling', count: 11, cat: 'sales' },
+    { name: 'Team Management', count: 9, cat: 'soft' },
+    { name: 'CI/CD', count: 7, cat: 'technical' },
+    { name: 'Terraform', count: 4, cat: 'technical' },
+    { name: 'ETL', count: 3, cat: 'technical' },
+    { name: 'Figma', count: 5, cat: 'technical' },
+    { name: 'User Research', count: 4, cat: 'soft' },
+    { name: 'GTM Strategy', count: 6, cat: 'sales' },
+    { name: 'Stakeholder Management', count: 8, cat: 'soft' },
+    { name: 'Cold Outreach', count: 12, cat: 'sales' },
+  ];
+
+  grid.innerHTML = skills.map(s => `
+    <div class="skill-taxonomy-chip">${s.name} <span class="skill-count">${s.count}</span></div>
+  `).join('');
+}
+
+function renderJobs() {
+  const grid = document.getElementById('jobs-grid');
+  if (!grid) return;
+
+  const jobs = [
+    { title: 'Account Executive — France', dept: 'Sales · EMEA', skills: 7, candidates: 47, screening: true },
+    { title: 'Solution Engineer — Germany', dept: 'Pre-sales · EMEA', skills: 9, candidates: 32, screening: true },
+    { title: 'Account Executive — Belgium', dept: 'Sales · EMEA', skills: 7, candidates: 15, screening: false },
+    { title: 'Account Executive — UK', dept: 'Sales · EMEA', skills: 8, candidates: 0, screening: false },
+    { title: 'Senior Backend Engineer', dept: 'Engineering', skills: 6, candidates: 0, screening: false },
+    { title: 'DevOps Engineer', dept: 'Engineering', skills: 8, candidates: 0, screening: false },
+    { title: 'Product Manager', dept: 'Product', skills: 5, candidates: 0, screening: false },
+    { title: 'UX Designer', dept: 'Design', skills: 6, candidates: 0, screening: false },
+    { title: 'Data Engineer', dept: 'Engineering', skills: 7, candidates: 0, screening: false },
+    { title: 'Sales Director — EMEA', dept: 'Sales · Leadership', skills: 9, candidates: 12, screening: true },
+    { title: 'Customer Success Manager', dept: 'Customer Success', skills: 6, candidates: 0, screening: false },
+    { title: 'Marketing Manager', dept: 'Marketing', skills: 5, candidates: 0, screening: false },
+  ];
+
+  grid.innerHTML = jobs.map(j => `
+    <div class="job-card">
+      <div class="job-card__title">${j.title}</div>
+      <div class="job-card__dept">${j.dept}</div>
+      <div class="job-card__meta">
+        <span><strong>${j.skills}</strong> skills</span>
+        <span><strong>${j.candidates}</strong> candidates</span>
+        ${j.screening ? '<span style="color:var(--green)">● Screening active</span>' : ''}
+      </div>
+    </div>
+  `).join('');
 }
 
 // ========== ORBIT CHIP POSITIONING ==========
