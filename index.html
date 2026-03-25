@@ -1596,6 +1596,34 @@ body {
   margin-left: 4px;
 }
 
+.convo-skill-tag {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  cursor: default;
+}
+.convo-skill-tag--required {
+  background: rgba(124,58,237,0.1);
+  color: var(--purple);
+  border: 1.5px solid rgba(124,58,237,0.2);
+}
+.convo-skill-tag--required:hover {
+  background: rgba(124,58,237,0.18);
+  border-color: rgba(124,58,237,0.35);
+}
+.convo-skill-tag--preferred {
+  background: var(--gray-50);
+  color: var(--gray-600);
+  border: 1.5px solid var(--gray-200);
+}
+.convo-skill-tag--preferred:hover {
+  background: var(--gray-100);
+  border-color: var(--gray-300);
+}
+
 .convo-context-tag {
   margin-top: 12px;
   font-size: 12px;
@@ -4071,15 +4099,63 @@ function runConversationalFlow() {
     `);
   }, 400);
 
-  // Step 2: Plan (auto after 2.5s, then WAIT for approval)
+  // Step 2: Skill validation (auto after 2.5s, WAIT for approval)
   setTimeout(function() {
     addBubble(container, `
-      <p style="margin-bottom:10px">Got it. Here's what I'll do:</p>
+      <p style="margin-bottom:12px">I extracted <strong>23 skills</strong> from the job description. Before I match, let's confirm what matters most:</p>
+      <div style="margin-bottom:14px">
+        <p style="font-weight:700;font-size:13px;color:var(--purple);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px">Required — must have day 1</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px">
+          <span class="convo-skill-tag convo-skill-tag--required">B2B Sales</span>
+          <span class="convo-skill-tag convo-skill-tag--required">SaaS Sales</span>
+          <span class="convo-skill-tag convo-skill-tag--required">French</span>
+          <span class="convo-skill-tag convo-skill-tag--required">Enterprise Sales</span>
+          <span class="convo-skill-tag convo-skill-tag--required">CRM</span>
+          <span class="convo-skill-tag convo-skill-tag--required">Presentation</span>
+          <span class="convo-skill-tag convo-skill-tag--required">B2B SaaS Industry Knowledge</span>
+          <span class="convo-skill-tag convo-skill-tag--required">Customer Success Management</span>
+        </div>
+        <p style="font-size:11px;color:var(--gray-400);margin-top:4px">Candidates missing any of these won't pass the screening</p>
+      </div>
+      <div style="margin-bottom:14px">
+        <p style="font-weight:700;font-size:13px;color:var(--gray-500);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px">Preferred — nice to have, trainable</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span class="convo-skill-tag convo-skill-tag--preferred">Market Penetration</span>
+          <span class="convo-skill-tag convo-skill-tag--preferred">Competitive Analysis</span>
+          <span class="convo-skill-tag convo-skill-tag--preferred">Warm Calling</span>
+          <span class="convo-skill-tag convo-skill-tag--preferred">Growth Marketing</span>
+          <span class="convo-skill-tag convo-skill-tag--preferred">Technology Sector</span>
+          <span class="convo-skill-tag convo-skill-tag--preferred">Helpdesk/CRM</span>
+          <span class="convo-skill-tag convo-skill-tag--preferred">Sales Forecasting</span>
+          <span class="convo-skill-tag convo-skill-tag--preferred">Negotiation</span>
+          <span class="convo-skill-tag convo-skill-tag--preferred">Solution Selling</span>
+        </div>
+        <p style="font-size:11px;color:var(--gray-400);margin-top:4px">Used as tiebreakers between strong matches</p>
+      </div>
+      <p style="color:var(--gray-600);font-size:13px">Based on <strong>DevRev's skill taxonomy</strong> and your Account Executive JD. Want to adjust?</p>
+      <div class="convo-actions" id="skill-approve-actions">
+        <button class="convo-btn convo-btn--primary" onclick="approveSkillsAndShowPlan()">Looks good, proceed</button>
+        <button class="convo-btn convo-btn--secondary" onclick="document.getElementById('skill-approve-actions').innerHTML='<span style=color:var(--gray-400)>Editing mode coming soon — for now, proceed with these.</span><br><button class=\\'convo-btn convo-btn--primary\\' onclick=\\'approveSkillsAndShowPlan()\\' style=\\'margin-top:8px\\'>Proceed</button>'">Let me adjust</button>
+      </div>
+    `);
+    scrollToBottom(container);
+  }, 2800);
+}
+
+function approveSkillsAndShowPlan() {
+  var container = document.getElementById('analyzing-conversation');
+  document.getElementById('skill-approve-actions').innerHTML = '<span style="color:var(--green);font-weight:600">✓ Skills confirmed</span>';
+
+  // Step 3: Plan (after skills confirmed, WAIT for run approval)
+  setTimeout(function() {
+    addBubble(container, `
+      <p style="margin-bottom:10px">Perfect. Here's my plan:</p>
       <div class="convo-plan">
         <div class="convo-plan-step"><span class="convo-plan-num">1</span> Extract skills from all 47 profiles using <strong>DevRev's skill taxonomy</strong> <span class="convo-context-badge">156 skills mapped</span></div>
-        <div class="convo-plan-step"><span class="convo-plan-num">2</span> Match each candidate against the 23 key skills from the AE job description</div>
-        <div class="convo-plan-step"><span class="convo-plan-num">3</span> Score cultural alignment using the EMEA mindset document</div>
-        <div class="convo-plan-step"><span class="convo-plan-num">4</span> Rank and flag top candidates across France, Belgium, UK, Germany</div>
+        <div class="convo-plan-step"><span class="convo-plan-num">2</span> Filter first by <strong>8 required skills</strong> — binary pass/fail</div>
+        <div class="convo-plan-step"><span class="convo-plan-num">3</span> Score remaining candidates on <strong>9 preferred skills</strong> as tiebreaker</div>
+        <div class="convo-plan-step"><span class="convo-plan-num">4</span> Score cultural alignment using the EMEA mindset document</div>
+        <div class="convo-plan-step"><span class="convo-plan-num">5</span> Rank and flag top candidates across France, Belgium, UK, Germany</div>
       </div>
       <div class="convo-context-tag">✦ Running against DevRev's company context · Last synced 2h ago</div>
       <p style="margin-top:14px;color:var(--gray-600)">This should take about 30 seconds. You can stay and watch, or walk away — I'll notify you when it's ready.</p>
@@ -4089,7 +4165,7 @@ function runConversationalFlow() {
       </div>
     `);
     scrollToBottom(container);
-  }, 2800);
+  }, 800);
 }
 
 function approveAndContinue() {
@@ -4409,24 +4485,70 @@ function runTaskFlow(type) {
   stepsContainer.appendChild(step3);
   scrollTaskFlow();
 
+  // Step 3.5: Skill validation (WAIT for approval)
+  setTimeout(function() {
+    var stepSkills = document.createElement('div');
+    stepSkills.className = 'task-flow__step';
+    stepSkills.innerHTML = `
+      <div class="glass convo-bubble" style="max-width:680px">
+        <p style="margin-bottom:12px">I extracted <strong>${isScreening ? '23 skills' : '8 skill requirements'}</strong> from ${isScreening ? 'the job description' : 'the project brief'}. Before I match, let's confirm what matters most:</p>
+        <div style="margin-bottom:14px">
+          <p style="font-weight:700;font-size:13px;color:${isScreening ? 'var(--purple)' : 'var(--blue)'};margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px">Required — must have day 1</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px">
+            ${isScreening
+              ? ['B2B Sales','SaaS Sales','French','Enterprise Sales','CRM','Presentation','B2B SaaS Industry Knowledge','Customer Success Management'].map(s => '<span class="convo-skill-tag convo-skill-tag--required">' + s + '</span>').join('')
+              : ['Kubernetes','Docker','AWS','PostgreSQL','CI/CD'].map(s => '<span class="convo-skill-tag convo-skill-tag--required" style="border-color:rgba(59,130,246,0.2);background:rgba(59,130,246,0.1);color:var(--blue)">' + s + '</span>').join('')
+            }
+          </div>
+          <p style="font-size:11px;color:var(--gray-400);margin-top:4px">${isScreening ? "Candidates missing any of these won't pass the screening" : "Team members must have these to be considered"}</p>
+        </div>
+        <div style="margin-bottom:14px">
+          <p style="font-weight:700;font-size:13px;color:var(--gray-500);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px">Preferred — nice to have, trainable</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            ${isScreening
+              ? ['Market Penetration','Competitive Analysis','Warm Calling','Growth Marketing','Technology Sector','Helpdesk/CRM','Sales Forecasting','Negotiation','Solution Selling'].map(s => '<span class="convo-skill-tag convo-skill-tag--preferred">' + s + '</span>').join('')
+              : ['Terraform','Testing','Monitoring','Agile'].map(s => '<span class="convo-skill-tag convo-skill-tag--preferred">' + s + '</span>').join('')
+            }
+          </div>
+          <p style="font-size:11px;color:var(--gray-400);margin-top:4px">Used as tiebreakers between strong matches</p>
+        </div>
+        <p style="color:var(--gray-600);font-size:13px">Based on <strong>DevRev's skill taxonomy</strong> and your ${isScreening ? 'Account Executive JD' : 'project brief'}. Want to adjust?</p>
+        <div class="convo-actions" id="task-skill-approve">
+          <button class="convo-btn convo-btn--primary" onclick="showTaskPlan('${type}')">Looks good, proceed</button>
+          <button class="convo-btn convo-btn--secondary" onclick="this.parentElement.innerHTML='<span style=color:var(--gray-400)>Editing mode coming soon.</span> <button class=convo-btn\\ convo-btn--primary onclick=showTaskPlan(\\x27${type}\\x27) style=margin-top:8px>Proceed anyway</button>'">Let me adjust</button>
+        </div>
+      </div>
+    `;
+    stepsContainer.appendChild(stepSkills);
+    scrollTaskFlow();
+  }, 1800);
+}
+
+function showTaskPlan(type) {
+  var isScreening = type === 'screening';
+  var stepsContainer = document.getElementById('task-flow-steps');
+  document.getElementById('task-skill-approve').innerHTML = '<span style="color:var(--green);font-weight:600">✓ Skills confirmed</span>';
+
   // Step 4: Agent shows plan + waits
   setTimeout(function() {
     var step4 = document.createElement('div');
     step4.className = 'task-flow__step';
     step4.innerHTML = `
       <div class="glass convo-bubble" style="max-width:680px">
-        <p style="margin-bottom:12px">Got it. Here's what I'll do:</p>
+        <p style="margin-bottom:12px">Perfect. Here's my plan:</p>
         <div class="convo-plan">
           ${isScreening ? `
             <div class="convo-plan-step"><span class="convo-plan-num">1</span> Extract skills from all 47 profiles using <strong>DevRev's skill taxonomy</strong> <span class="convo-context-badge">156 skills mapped</span></div>
-            <div class="convo-plan-step"><span class="convo-plan-num">2</span> Match each candidate against the 23 key skills from the AE job description</div>
-            <div class="convo-plan-step"><span class="convo-plan-num">3</span> Score cultural alignment using the EMEA mindset document</div>
-            <div class="convo-plan-step"><span class="convo-plan-num">4</span> Rank and flag top candidates across France, Belgium, UK, Germany</div>
+            <div class="convo-plan-step"><span class="convo-plan-num">2</span> Filter first by <strong>8 required skills</strong> — binary pass/fail</div>
+            <div class="convo-plan-step"><span class="convo-plan-num">3</span> Score remaining on <strong>9 preferred skills</strong> as tiebreaker</div>
+            <div class="convo-plan-step"><span class="convo-plan-num">4</span> Score cultural alignment using the EMEA mindset document</div>
+            <div class="convo-plan-step"><span class="convo-plan-num">5</span> Rank and flag top candidates across France, Belgium, UK, Germany</div>
           ` : `
-            <div class="convo-plan-step"><span class="convo-plan-num">1</span> Analyze project requirements from brief using <strong>DevRev's skill taxonomy</strong></div>
-            <div class="convo-plan-step"><span class="convo-plan-num">2</span> Scan all 8 team members for skill fit and availability</div>
-            <div class="convo-plan-step"><span class="convo-plan-num">3</span> Match skills to project roles and identify gaps</div>
-            <div class="convo-plan-step"><span class="convo-plan-num">4</span> Recommend optimal team composition</div>
+            <div class="convo-plan-step"><span class="convo-plan-num">1</span> Analyze project requirements using <strong>DevRev's skill taxonomy</strong></div>
+            <div class="convo-plan-step"><span class="convo-plan-num">2</span> Filter by <strong>5 required skills</strong> — must-have for project</div>
+            <div class="convo-plan-step"><span class="convo-plan-num">3</span> Scan all 8 team members for skill fit and availability</div>
+            <div class="convo-plan-step"><span class="convo-plan-num">4</span> Match skills to project roles and identify gaps</div>
+            <div class="convo-plan-step"><span class="convo-plan-num">5</span> Recommend optimal team composition</div>
           `}
         </div>
         <div class="convo-context-tag">✦ Running against DevRev's company context · Last synced 2h ago</div>
@@ -4439,7 +4561,7 @@ function runTaskFlow(type) {
     `;
     stepsContainer.appendChild(step4);
     scrollTaskFlow();
-  }, 1800);
+  }, 800);
 }
 
 function executeTaskFlow(type) {
