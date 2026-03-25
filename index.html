@@ -1976,6 +1976,12 @@ body {
   color: var(--gray-900);
   flex: 1;
 }
+.results-top-bar__subtitle {
+  font-size: 13px;
+  color: var(--gray-400);
+  font-weight: 400;
+  margin-top: 2px;
+}
 
 .results-actions {
   display: flex;
@@ -2082,7 +2088,7 @@ body {
 }
 
 .criteria-card.expanded .criteria-body {
-  max-height: 300px;
+  max-height: 800px;
 }
 
 .criteria-chips {
@@ -2154,49 +2160,74 @@ body {
 }
 
 .top-picks-row {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  padding-bottom: 8px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
   margin-bottom: 28px;
 }
 
 .top-pick-card {
-  min-width: 220px;
-  padding: 20px;
-  flex-shrink: 0;
+  padding: 14px;
+  text-align: center;
+  position: relative;
 }
 
+.top-pick-card__rank {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: white;
+  background: var(--gray-300);
+}
+.top-pick-card__rank--top { background: var(--purple); }
+
 .top-pick-card__avatar {
-  width: 48px; height: 48px;
+  width: 44px; height: 44px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 12px;
+  margin: 0 auto 8px;
+  display: block;
 }
 
 .top-pick-card__name {
   font-family: var(--font-heading);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--gray-800);
   margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .top-pick-card__role {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--gray-500);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+  display: none;
 }
 
 .top-pick-card__match {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 3px 10px;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 700;
-  margin-bottom: 12px;
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--green);
+  margin-bottom: 8px;
+  line-height: 1;
+}
+.top-pick-card__flag {
+  font-size: 11px;
+  color: var(--gray-400);
+  margin-bottom: 6px;
 }
 
 .match--high {
@@ -2248,18 +2279,55 @@ body {
   margin-bottom: 24px;
 }
 
+/* Unified candidate list */
+.candidates-list__header {
+  display: grid;
+  grid-template-columns: 36px 36px 1.5fr 0.8fr 0.6fr 1.5fr 0.5fr;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 16px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--gray-200);
+  margin-bottom: 4px;
+}
+
 .candidate-row {
   display: grid;
-  grid-template-columns: 40px 1.2fr 0.8fr 0.6fr 0.5fr 1.2fr 0.6fr;
-  gap: 12px;
+  grid-template-columns: 36px 36px 1.5fr 0.8fr 0.6fr 1.5fr 0.5fr;
+  gap: 10px;
   align-items: center;
-  padding: 12px 16px;
-  border-radius: 12px;
-  transition: background 0.2s var(--ease);
+  padding: 10px 16px;
+  border-radius: 10px;
+  transition: all 0.2s var(--ease);
+  cursor: pointer;
 }
 
 .candidate-row:hover {
   background: rgba(124,58,237,0.04);
+}
+
+.candidate-row--top3 {
+  background: rgba(124,58,237,0.03);
+}
+
+.candidate-row__rank {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: white;
+  background: var(--gray-300);
+}
+.candidate-row__rank--top {
+  background: var(--purple);
 }
 
 .candidate-row__avatar {
@@ -2282,6 +2350,7 @@ body {
 .candidate-row__seniority {
   font-size: 12px;
   color: var(--gray-500);
+  display: none;
 }
 
 .candidate-row__location {
@@ -2291,9 +2360,12 @@ body {
 
 .candidate-row__match {
   font-family: var(--font-heading);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
 }
+.candidate-row__match--high { color: var(--green); }
+.candidate-row__match--mid { color: #f59e0b; }
+.candidate-row__match--low { color: var(--gray-400); }
 
 .candidate-row__skills {
   display: flex;
@@ -3393,7 +3465,7 @@ body {
     <span class="nav-item__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span> Home
   </div>
   <div class="nav-item" data-view="new-task" onclick="switchView('new-task')">
-    <span class="nav-item__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span> New task
+    <span class="nav-item__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span> New session
   </div>
 
   <div class="sidebar-section-label">Your agents</div>
@@ -3407,6 +3479,7 @@ body {
       <span class="agent-group__chevron">▶</span>
     </div>
     <div class="agent-group__children">
+      <div style="font-size:10px;font-weight:600;color:var(--gray-400);letter-spacing:0.3px;padding:4px 0 4px 24px">Sessions</div>
       <div class="agent-child" onclick="switchView('screening-results', 'ae-france')">
         <span class="agent-child__dot agent-child__dot--green"></span>
         AE France
@@ -3434,6 +3507,7 @@ body {
       <span class="agent-group__chevron">▶</span>
     </div>
     <div class="agent-group__children">
+      <div style="font-size:10px;font-weight:600;color:var(--gray-400);letter-spacing:0.3px;padding:4px 0 4px 24px">Sessions</div>
       <div class="agent-child" onclick="switchView('staffing-results')">
         <span class="agent-child__dot agent-child__dot--green"></span>
         Platform Migration
@@ -3472,7 +3546,7 @@ body {
   <div class="sidebar-spacer"></div>
 
   <div class="sidebar-bottom-item" onclick="switchView('intelligence')">
-    <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2a7 7 0 017 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 01-2 2h-4a2 2 0 01-2-2v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 017-7z"/><path d="M10 21h4"/></svg></span> Settings & sources
+    <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2a7 7 0 017 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 01-2 2h-4a2 2 0 01-2-2v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 017-7z"/><path d="M10 21h4"/></svg></span> Integrations & context
   </div>
 
   <div class="sidebar-user">
@@ -3494,39 +3568,36 @@ body {
     <div style="margin-bottom:20px">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px">
         <h1 style="font-family:var(--font-heading);font-size:28px;font-weight:800;color:var(--gray-800)">Hey Patrick <span class="wave-emoji">👋</span></h1>
-        <button class="btn-new-task" onclick="switchView('new-task')">+ New task</button>
+        <button class="btn-new-task" onclick="switchView('new-task')">+ New session</button>
       </div>
       <p style="font-size:15px;color:var(--gray-600);margin-bottom:6px">Here's what happened while you were away</p>
       <p style="font-size:13px;color:var(--gray-400)">Screened <strong style="color:var(--purple)">47 candidates</strong> · Found <strong style="color:var(--green)">3 matches</strong> · Resolved <strong style="color:var(--blue)">1 gap</strong> · Detected <strong style="color:var(--gray-600)">4 new skills</strong></p>
     </div>
 
-    <!-- DATA STRIP (moved above columns) -->
+    <!-- WORK DONE STRIP -->
     <div class="glass" style="padding:14px 20px;border-radius:14px;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
-      <div style="display:flex;gap:28px">
-        <div onclick="switchView('people')" style="cursor:pointer;display:flex;align-items:center;gap:6px">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gray-400)" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4-4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <span style="font-weight:700;font-size:13px;color:var(--gray-800)">50</span>
-          <span style="font-size:11px;color:var(--gray-400)">people</span>
-        </div>
-        <div onclick="switchView('candidates')" style="cursor:pointer;display:flex;align-items:center;gap:6px">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gray-400)" stroke-width="2"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>
-          <span style="font-weight:700;font-size:13px;color:var(--gray-800)">234</span>
-          <span style="font-size:11px;color:var(--gray-400)">candidates</span>
-        </div>
-        <div onclick="switchView('skills')" style="cursor:pointer;display:flex;align-items:center;gap:6px">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gray-400)" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <span style="font-weight:700;font-size:13px;color:var(--gray-800)">156</span>
-          <span style="font-size:11px;color:var(--gray-400)">skills</span>
+      <div style="display:flex;gap:24px;align-items:center">
+        <span style="font-size:12px;font-weight:600;color:var(--gray-500)">Work done</span>
+        <div style="display:flex;align-items:center;gap:6px">
+          <span style="font-weight:800;font-size:14px;color:var(--purple)">265</span>
+          <span style="font-size:11px;color:var(--gray-400)">candidates screened</span>
         </div>
         <div style="display:flex;align-items:center;gap:6px">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gray-400)" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a4 4 0 00-8 0v2"/></svg>
-          <span style="font-weight:700;font-size:13px;color:var(--gray-800)">12</span>
-          <span style="font-size:11px;color:var(--gray-400)">roles</span>
+          <span style="font-weight:800;font-size:14px;color:var(--green)">68</span>
+          <span style="font-size:11px;color:var(--gray-400)">top matches</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <span style="font-weight:800;font-size:14px;color:var(--blue)">5</span>
+          <span style="font-size:11px;color:var(--gray-400)">projects staffed</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <span style="font-weight:800;font-size:14px;color:var(--gray-700)">~45h</span>
+          <span style="font-size:11px;color:var(--gray-400)">saved</span>
         </div>
       </div>
       <div style="display:flex;align-items:center;gap:6px">
         <span class="feed-pulse feed-pulse--green" style="width:6px;height:6px"></span>
-        <span style="font-size:11px;color:var(--gray-400)">Synced 2h ago</span>
+        <span style="font-size:11px;color:var(--gray-400)">Synced 2h ago · Greenhouse + Notion</span>
       </div>
     </div>
 
@@ -3567,6 +3638,11 @@ body {
           </div>
           <button style="padding:6px 12px;border-radius:8px;border:1px solid var(--gray-200);background:white;font-size:12px;font-weight:600;cursor:pointer;color:var(--gray-600)">Reconnect</button>
         </div>
+        <!-- Intelligence update (moved from right) -->
+        <div class="glass" style="padding:14px 18px;border-radius:14px;border-left:3px solid var(--green);margin-top:10px">
+          <p style="font-weight:600;font-size:13px;margin-bottom:4px;color:var(--gray-800)">4 new skills detected</p>
+          <p style="font-size:11px;color:var(--gray-500)">From LinkedIn sync — added to DevRev's taxonomy (now 156) · 5h ago</p>
+        </div>
       </div>
 
       <!-- RIGHT: Your agents -->
@@ -3596,7 +3672,7 @@ body {
             <div><span style="font-weight:800;font-size:18px;color:var(--green)">68</span><br><span style="font-size:10px;color:var(--gray-400)">matched</span></div>
             <div><span style="font-weight:800;font-size:18px;color:var(--gray-600)">~33h</span><br><span style="font-size:10px;color:var(--gray-400)">saved</span></div>
           </div>
-          <p style="font-size:11px;color:var(--gray-400);margin-top:8px">3 active tasks: AE France, SE Germany, AE Belgium</p>
+          <p style="font-size:11px;color:var(--gray-400);margin-top:8px">3 active sessions: AE France, SE Germany, AE Belgium</p>
         </div>
 
         <!-- Staffing agent card -->
@@ -3623,11 +3699,6 @@ body {
           <p style="font-size:11px;color:var(--gray-400);margin-top:8px">2 active: Platform Migration, AI Chatbot MVP</p>
         </div>
 
-        <!-- Intelligence update -->
-        <div class="glass" style="padding:14px 18px;border-radius:14px;border-left:3px solid var(--green)">
-          <p style="font-weight:600;font-size:13px;margin-bottom:4px;color:var(--gray-800)">4 new skills detected</p>
-          <p style="font-size:11px;color:var(--gray-500)">From LinkedIn sync — added to DevRev's taxonomy (now 156) · 5h ago</p>
-        </div>
       </div>
     </div>
 
@@ -3638,14 +3709,26 @@ body {
   <div id="view-new-task" class="hidden">
     <div style="display:grid;grid-template-columns:1fr 1fr;height:calc(100vh - 32px);gap:0;overflow:hidden">
 
-      <!-- LEFT: Single centered agent message -->
-      <div style="display:flex;align-items:center;justify-content:center;padding:32px 28px;border-right:1px solid var(--gray-100);background:rgba(255,255,255,0.4)" id="task-left">
-        <div id="task-conversation" style="max-width:480px;width:100%">
-          <div class="glass convo-bubble" style="border-left:3px solid var(--purple);animation:none;opacity:1;text-align:center;padding:32px">
-            <p style="font-size:20px;font-weight:700;margin-bottom:8px">Hey Patrick 👋</p>
-            <p style="color:var(--gray-500);font-size:14px">What do you need help with today?</p>
+      <!-- LEFT: Agent conversation + steering input -->
+      <div style="display:flex;flex-direction:column;border-right:1px solid var(--gray-100);background:linear-gradient(180deg, rgba(124,58,237,0.03) 0%, rgba(255,255,255,0.6) 100%);height:100%" id="task-left">
+        <div style="flex:1;overflow-y:auto;display:flex;align-items:center;justify-content:center;padding:40px 32px">
+          <div id="task-conversation" style="max-width:440px;width:100%">
+            <!-- Initial greeting with agent identity -->
+            <div style="text-align:center;margin-bottom:24px">
+              <div class="agent-bot-face" style="width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,var(--purple),#A78BFA);display:inline-flex;align-items:center;justify-content:center;margin-bottom:12px">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                  <rect x="4" y="6" width="20" height="16" rx="4" fill="white" opacity="0.9"/>
+                  <circle cx="10" cy="13" r="2" fill="#7C3AED" class="bot-eye bot-eye--left"/>
+                  <circle cx="18" cy="13" r="2" fill="#7C3AED" class="bot-eye bot-eye--right"/>
+                  <path d="M10 18 Q14 21 18 18" stroke="#7C3AED" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <h2 style="font-family:var(--font-heading);font-size:22px;font-weight:800;margin-bottom:6px">Hey Patrick</h2>
+              <p style="color:var(--gray-400);font-size:14px">What do you need help with today?</p>
+            </div>
           </div>
         </div>
+        <!-- Steering input is injected inline into task-conversation by JS -->
       </div>
 
       <!-- RIGHT: Action area (changes per step) -->
@@ -3690,7 +3773,7 @@ body {
                   <div style="font-size:12px;color:var(--blue);font-weight:600">Active · 50 profiles indexed</div>
                 </div>
               </div>
-              <p style="font-size:13px;color:var(--gray-500);line-height:1.5">I find the best team for your project from DevRev's employee data. Share the brief and I'll match skills to roles.</p>
+              <p style="font-size:13px;color:var(--gray-500);line-height:1.5">I match your project needs against Acme's people, skills, and career paths from Notion. Share the brief and I'll build your team.</p>
             </div>
 
             <div style="text-align:center;margin-top:4px;position:relative">
@@ -3714,7 +3797,7 @@ body {
   <div id="view-screening-results" class="hidden">
     <div class="results-view">
       <div class="results-top-bar">
-        <button class="back-btn" onclick="switchView('home')">←</button>
+        <!-- back btn removed -->
         <div class="results-top-bar__title">AE France — Screening results</div>
         <div class="results-actions">
           <button class="results-action-btn">Download</button>
@@ -3760,14 +3843,81 @@ body {
         </div>
       </div>
 
-      <!-- Matching criteria -->
-      <div class="glass criteria-card" onclick="this.classList.toggle('expanded')">
-        <div class="criteria-header">
-          <div class="criteria-header__title">Matching criteria (23 skills)</div>
-          <span class="criteria-header__chevron">▼</span>
+      <!-- Matching context — documents, skills, taxonomy -->
+      <div class="glass criteria-card" onclick="this.classList.toggle('expanded')" style="cursor:pointer">
+        <div class="criteria-header" style="display:flex;align-items:center;justify-content:space-between">
+          <div style="display:flex;align-items:center;gap:10px">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span style="font-weight:600;font-size:14px;color:var(--gray-800)">Matching context</span>
+            <span style="font-size:12px;color:var(--gray-400);font-weight:400">8 required · 9 preferred · 3 docs · DevRev taxonomy</span>
+          </div>
+          <span class="criteria-header__chevron" style="color:var(--gray-400);font-size:12px">▼</span>
         </div>
-        <div class="criteria-body">
-          <div class="criteria-chips" id="criteria-chips"></div>
+        <div class="criteria-body" style="padding-top:20px">
+          <!-- Documents used -->
+          <div style="margin-bottom:20px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+              <p style="font-size:12px;font-weight:600;color:var(--gray-500);margin:0">Documents analyzed</p>
+              <button style="font-size:11px;color:var(--purple);background:none;border:none;cursor:pointer;font-weight:600">+ Add document</button>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--gray-50);border-radius:8px">
+                <div style="display:flex;align-items:center;gap:8px;font-size:13px"><span style="color:var(--green)">✓</span> <strong>DevRev_AE_Candidates_EMEA.xlsx</strong> <span style="color:var(--gray-400)">— 47 profiles</span></div>
+                <button style="font-size:11px;color:var(--gray-400);background:none;border:none;cursor:pointer" title="Remove">✕</button>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--gray-50);border-radius:8px">
+                <div style="display:flex;align-items:center;gap:8px;font-size:13px"><span style="color:var(--green)">✓</span> <strong>Account_Executive_JD.pdf</strong> <span style="color:var(--gray-400)">— role requirements</span></div>
+                <button style="font-size:11px;color:var(--gray-400);background:none;border:none;cursor:pointer" title="Remove">✕</button>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--gray-50);border-radius:8px">
+                <div style="display:flex;align-items:center;gap:8px;font-size:13px"><span style="color:var(--green)">✓</span> <strong>EMEA_Mindset_Document.pdf</strong> <span style="color:var(--gray-400)">— cultural context</span></div>
+                <button style="font-size:11px;color:var(--gray-400);background:none;border:none;cursor:pointer" title="Remove">✕</button>
+              </div>
+            </div>
+          </div>
+          <!-- Taxonomy -->
+          <div style="margin-bottom:20px">
+            <p style="font-size:12px;font-weight:600;color:var(--gray-500);margin-bottom:8px">Taxonomy</p>
+            <div style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(124,58,237,0.06);border-radius:8px;font-size:12px;color:var(--purple)">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              DevRev's skill taxonomy v2.4 · 156 skills mapped
+            </div>
+          </div>
+          <!-- Required skills -->
+          <div style="margin-bottom:16px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+              <p style="font-size:12px;font-weight:600;color:var(--purple);margin:0">Required — must have (8)</p>
+              <button style="font-size:11px;color:var(--purple);background:none;border:none;cursor:pointer;font-weight:600">+ Add skill</button>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px">
+              <span class="convo-skill-tag convo-skill-tag--required" style="font-size:11px;cursor:pointer" title="Click to remove">B2B Sales ✕</span>
+              <span class="convo-skill-tag convo-skill-tag--required" style="font-size:11px;cursor:pointer" title="Click to remove">SaaS Sales ✕</span>
+              <span class="convo-skill-tag convo-skill-tag--required" style="font-size:11px;cursor:pointer" title="Click to remove">French ✕</span>
+              <span class="convo-skill-tag convo-skill-tag--required" style="font-size:11px;cursor:pointer" title="Click to remove">Enterprise Sales ✕</span>
+              <span class="convo-skill-tag convo-skill-tag--required" style="font-size:11px;cursor:pointer" title="Click to remove">CRM ✕</span>
+              <span class="convo-skill-tag convo-skill-tag--required" style="font-size:11px;cursor:pointer" title="Click to remove">Presentation ✕</span>
+              <span class="convo-skill-tag convo-skill-tag--required" style="font-size:11px;cursor:pointer" title="Click to remove">B2B SaaS Industry ✕</span>
+              <span class="convo-skill-tag convo-skill-tag--required" style="font-size:11px;cursor:pointer" title="Click to remove">Customer Success ✕</span>
+            </div>
+          </div>
+          <!-- Preferred skills -->
+          <div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+              <p style="font-size:12px;font-weight:600;color:var(--gray-400);margin:0">Preferred — trainable (9)</p>
+              <button style="font-size:11px;color:var(--gray-400);background:none;border:none;cursor:pointer;font-weight:600">+ Add skill</button>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px">
+              <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer" title="Click to remove">Market Penetration ✕</span>
+              <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer" title="Click to remove">Competitive Analysis ✕</span>
+              <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer" title="Click to remove">Warm Calling ✕</span>
+              <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer" title="Click to remove">Growth Marketing ✕</span>
+              <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer" title="Click to remove">Technology Sector ✕</span>
+              <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer" title="Click to remove">Helpdesk/CRM ✕</span>
+              <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer" title="Click to remove">Sales Forecasting ✕</span>
+              <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer" title="Click to remove">Negotiation ✕</span>
+              <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer" title="Click to remove">Solution Selling ✕</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -3789,13 +3939,19 @@ body {
         </div>
       </div>
 
-      <!-- Top picks -->
-      <div class="section-title">Top picks</div>
-      <div class="top-picks-row" id="top-picks-row"></div>
+      <!-- All candidates as unified list -->
+      <div class="candidates-list" id="candidates-list"></div>
 
-      <!-- More candidates -->
-      <div class="section-title">More candidates</div>
-      <div class="candidates-table" id="candidates-table"></div>
+      <!-- Refine input — steer results conversationally -->
+      <div style="position:sticky;bottom:0;padding:16px 0;background:linear-gradient(to top, var(--gray-50) 60%, transparent);margin-top:20px">
+        <div style="display:flex;align-items:center;gap:10px;max-width:700px;margin:0 auto">
+          <div style="flex:1;position:relative">
+            <input type="text" id="refine-input-field" placeholder="Refine results — e.g. 'remove Emilio', 'only France', 'top 5 only'..." style="width:100%;padding:12px 16px;border:1.5px solid var(--gray-200);border-radius:14px;font-size:13px;outline:none;font-family:var(--font-body);transition:border-color 0.2s;background:white;box-shadow:0 2px 12px rgba(0,0,0,0.06)" onfocus="this.style.borderColor='var(--purple)'" onblur="this.style.borderColor='var(--gray-200)'" onkeydown="if(event.key==='Enter')handleRefineInput()">
+          </div>
+          <button onclick="handleRefineInput()" style="padding:12px 20px;background:var(--purple);color:white;border:none;border-radius:14px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;transition:transform 0.2s;box-shadow:0 2px 8px rgba(124,58,237,0.3)" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">Refine</button>
+        </div>
+        <div id="refine-response" style="display:none;text-align:center;margin-top:8px;transition:opacity 0.3s"></div>
+      </div>
 
     </div>
   </div>
@@ -3804,11 +3960,11 @@ body {
   <div id="view-staffing-results" class="hidden">
     <div class="results-view">
       <div class="results-top-bar">
-        <button class="back-btn" onclick="switchView('home')">←</button>
+        <!-- back btn removed -->
         <div class="results-top-bar__title">Platform Migration — Staffing results</div>
         <div class="results-actions">
           <button class="results-action-btn">Download</button>
-          <button class="results-action-btn results-action-btn--primary">Push to BambooHR</button>
+          <button class="results-action-btn results-action-btn--primary">Push to Notion</button>
         </div>
       </div>
 
@@ -3844,12 +4000,59 @@ body {
         </div>
       </div>
 
-      <div class="section-title">Recommended team</div>
-      <div class="team-cards-grid" id="team-cards-grid"></div>
+      <!-- Matching context for staffing -->
+      <div class="glass criteria-card" onclick="this.classList.toggle('expanded')" style="cursor:pointer">
+        <div class="criteria-header" style="display:flex;align-items:center;justify-content:space-between">
+          <div style="display:flex;align-items:center;gap:10px">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span style="font-weight:600;font-size:14px;color:var(--gray-800)">Matching context</span>
+            <span style="font-size:12px;color:var(--gray-400);font-weight:400">5 required skills · 3 preferred · Acme's Notion · career paths loaded</span>
+          </div>
+          <span class="criteria-header__chevron" style="color:var(--gray-400);font-size:12px">▼</span>
+        </div>
+        <div class="criteria-body" style="padding-top:20px">
+          <div style="margin-bottom:16px">
+            <p style="font-size:12px;font-weight:600;color:var(--gray-500);margin-bottom:8px">Context loaded from Notion</p>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="display:flex;align-items:center;gap:8px;font-size:13px;padding:8px 12px;background:var(--gray-50);border-radius:8px"><span style="color:var(--green)">✓</span> <strong>Company strategy & vision</strong> <span style="color:var(--gray-400)">— goals, priorities</span></div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:13px;padding:8px 12px;background:var(--gray-50);border-radius:8px"><span style="color:var(--green)">✓</span> <strong>Career paths & levels</strong> <span style="color:var(--gray-400)">— role definitions</span></div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:13px;padding:8px 12px;background:var(--gray-50);border-radius:8px"><span style="color:var(--green)">✓</span> <strong>People evaluations</strong> <span style="color:var(--gray-400)">— 100 profiles indexed</span></div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:13px;padding:8px 12px;background:var(--gray-50);border-radius:8px"><span style="color:var(--green)">✓</span> <strong>Platform_Migration_Brief.pdf</strong> <span style="color:var(--gray-400)">— project requirements</span></div>
+            </div>
+          </div>
+          <div style="margin-bottom:12px">
+            <p style="font-size:12px;font-weight:600;color:var(--blue);margin:0 0 8px">Required skills (5)</p>
+            <div style="display:flex;flex-wrap:wrap;gap:6px">
+              <span style="padding:4px 10px;border-radius:6px;font-size:11px;border:1px solid rgba(59,130,246,0.3);background:rgba(59,130,246,0.08);color:var(--blue)">Kubernetes</span>
+              <span style="padding:4px 10px;border-radius:6px;font-size:11px;border:1px solid rgba(59,130,246,0.3);background:rgba(59,130,246,0.08);color:var(--blue)">Docker</span>
+              <span style="padding:4px 10px;border-radius:6px;font-size:11px;border:1px solid rgba(59,130,246,0.3);background:rgba(59,130,246,0.08);color:var(--blue)">AWS</span>
+              <span style="padding:4px 10px;border-radius:6px;font-size:11px;border:1px solid rgba(59,130,246,0.3);background:rgba(59,130,246,0.08);color:var(--blue)">PostgreSQL</span>
+              <span style="padding:4px 10px;border-radius:6px;font-size:11px;border:1px solid rgba(59,130,246,0.3);background:rgba(59,130,246,0.08);color:var(--blue)">CI/CD</span>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:12px;font-weight:600;color:var(--gray-400);margin:0 0 8px">Preferred skills (3)</p>
+            <div style="display:flex;flex-wrap:wrap;gap:6px">
+              <span style="padding:4px 10px;border-radius:6px;font-size:11px;border:1px solid var(--gray-200);color:var(--gray-500)">Terraform</span>
+              <span style="padding:4px 10px;border-radius:6px;font-size:11px;border:1px solid var(--gray-200);color:var(--gray-500)">Testing</span>
+              <span style="padding:4px 10px;border-radius:6px;font-size:11px;border:1px solid var(--gray-200);color:var(--gray-500)">Monitoring</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <div class="glass gaps-section">
-        <div class="card-title">Skill gaps to address</div>
-        <div id="gaps-list"></div>
+      <div class="section-title">Recommended team</div>
+      <div id="team-cards-grid"></div>
+
+      <div class="section-title" style="margin-top:24px">Skill gaps to address</div>
+      <div id="gaps-list"></div>
+
+      <!-- Refine input for staffing -->
+      <div style="position:sticky;bottom:0;padding:16px 0;background:linear-gradient(to top, var(--gray-50) 60%, transparent);margin-top:20px">
+        <div style="display:flex;align-items:center;gap:10px;max-width:700px;margin:0 auto">
+          <input type="text" placeholder="Refine — e.g. 'exclude Sarah', 'only available people', 'add Terraform as required'..." style="flex:1;padding:12px 16px;border:1.5px solid var(--gray-200);border-radius:14px;font-size:13px;outline:none;font-family:var(--font-body);background:white;box-shadow:0 2px 12px rgba(0,0,0,0.06)" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--gray-200)'">
+          <button style="padding:12px 20px;background:var(--blue);color:white;border:none;border-radius:14px;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 2px 8px rgba(59,130,246,0.3)">Refine</button>
+        </div>
       </div>
 
     </div>
@@ -3867,7 +4070,7 @@ body {
     <div class="results-view">
       <div class="agents-overview-header">
         <div class="agents-overview-header__title">All agents</div>
-        <button class="results-action-btn results-action-btn--primary" onclick="switchView('new-task')">+ New agent task</button>
+        <button class="results-action-btn results-action-btn--primary" onclick="switchView('new-task')">+ New agent session</button>
       </div>
       <div class="agents-grid" id="agents-grid"></div>
     </div>
@@ -3877,32 +4080,13 @@ body {
   <div id="view-people" class="hidden">
     <div class="results-view">
       <div class="results-top-bar">
-        <button class="back-btn" onclick="switchView('home')">←</button>
+        <!-- back btn removed -->
         <div class="results-top-bar__title">People</div>
-        <div class="results-top-bar__subtitle">50 employees from BambooHR</div>
-      </div>
-
-      <div class="data-stats-row">
-        <div class="glass data-stat-card">
-          <div class="data-stat__value" style="color:var(--purple)">50</div>
-          <div class="data-stat__label">Total employees</div>
-        </div>
-        <div class="glass data-stat-card">
-          <div class="data-stat__value" style="color:var(--green)">42</div>
-          <div class="data-stat__label">Skills analyzed</div>
-        </div>
-        <div class="glass data-stat-card">
-          <div class="data-stat__value" style="color:var(--blue)">8</div>
-          <div class="data-stat__label">Pending analysis</div>
-        </div>
-        <div class="glass data-stat-card">
-          <div class="data-stat__value" style="color:var(--gray-500)">2h ago</div>
-          <div class="data-stat__label">Last sync</div>
-        </div>
+        <div class="results-top-bar__subtitle">50 employees from Notion</div>
       </div>
 
       <div class="data-source-tag">
-        <span>🌿</span> Synced from <strong>BambooHR</strong> · Last updated 2 hours ago · <a href="#" style="color:var(--purple)">Manage connection</a>
+        Synced from <strong>Notion</strong> · 50 employees · 6 teams · Last updated 2h ago · <a href="#" style="color:var(--purple)">Manage connection</a>
       </div>
 
       <div class="glass data-table-card">
@@ -3935,32 +4119,13 @@ body {
   <div id="view-candidates" class="hidden">
     <div class="results-view">
       <div class="results-top-bar">
-        <button class="back-btn" onclick="switchView('home')">←</button>
+        <!-- back btn removed -->
         <div class="results-top-bar__title">Candidates</div>
         <div class="results-top-bar__subtitle">234 candidates processed across all screenings</div>
       </div>
 
-      <div class="data-stats-row">
-        <div class="glass data-stat-card">
-          <div class="data-stat__value" style="color:var(--purple)">234</div>
-          <div class="data-stat__label">Total candidates</div>
-        </div>
-        <div class="glass data-stat-card">
-          <div class="data-stat__value" style="color:var(--green)">38</div>
-          <div class="data-stat__label">Strong matches</div>
-        </div>
-        <div class="glass data-stat-card">
-          <div class="data-stat__value" style="color:var(--yellow)">86</div>
-          <div class="data-stat__label">Reviewed</div>
-        </div>
-        <div class="glass data-stat-card">
-          <div class="data-stat__value" style="color:var(--gray-500)">3</div>
-          <div class="data-stat__label">Active screenings</div>
-        </div>
-      </div>
-
       <div class="data-source-tag">
-        <span>📋</span> From <strong>Greenhouse ATS</strong> + uploaded spreadsheets · <a href="#" style="color:var(--purple)">View sources</a>
+        From <strong>Greenhouse ATS</strong> + uploaded spreadsheets · 234 candidates · 3 active screenings · <a href="#" style="color:var(--purple)">View sources</a>
       </div>
 
       <div class="glass data-table-card">
@@ -3994,32 +4159,13 @@ body {
   <div id="view-skills" class="hidden">
     <div class="results-view">
       <div class="results-top-bar">
-        <button class="back-btn" onclick="switchView('home')">←</button>
+        <!-- back btn removed -->
         <div class="results-top-bar__title">Skill taxonomy</div>
         <div class="results-top-bar__subtitle">DevRev skill taxonomy v2.4 · 156 skills mapped</div>
       </div>
 
-      <div class="data-stats-row">
-        <div class="glass data-stat-card">
-          <div class="data-stat__value" style="color:var(--purple)">156</div>
-          <div class="data-stat__label">Total skills</div>
-        </div>
-        <div class="glass data-stat-card">
-          <div class="data-stat__value" style="color:var(--green)">23</div>
-          <div class="data-stat__label">Used in active agents</div>
-        </div>
-        <div class="glass data-stat-card">
-          <div class="data-stat__value" style="color:var(--blue)">4</div>
-          <div class="data-stat__label">Recently added</div>
-        </div>
-        <div class="glass data-stat-card">
-          <div class="data-stat__value" style="color:var(--gray-500)">5h ago</div>
-          <div class="data-stat__label">Last updated</div>
-        </div>
-      </div>
-
       <div class="data-source-tag">
-        <span>✦</span> This taxonomy powers all your agents. Skills are auto-detected from <strong>LinkedIn</strong>, <strong>Greenhouse</strong>, and uploaded documents. <a href="#" style="color:var(--purple)">Add skill manually</a>
+        156 skills · 23 used in active agents · Auto-detected from <strong>LinkedIn</strong>, <strong>Greenhouse</strong>, and uploads · Last updated 5h ago · <a href="#" style="color:var(--purple)">Add skill manually</a>
       </div>
 
       <div class="glass data-table-card">
@@ -4042,28 +4188,13 @@ body {
   <div id="view-jobs" class="hidden">
     <div class="results-view">
       <div class="results-top-bar">
-        <button class="back-btn" onclick="switchView('home')">←</button>
+        <!-- back btn removed -->
         <div class="results-top-bar__title">Jobs & roles</div>
         <div class="results-top-bar__subtitle">12 active roles across your organization</div>
       </div>
 
-      <div class="data-stats-row">
-        <div class="glass data-stat-card">
-          <div class="data-stat__value" style="color:var(--purple)">12</div>
-          <div class="data-stat__label">Active roles</div>
-        </div>
-        <div class="glass data-stat-card">
-          <div class="data-stat__value" style="color:var(--green)">5</div>
-          <div class="data-stat__label">With active screening</div>
-        </div>
-        <div class="glass data-stat-card">
-          <div class="data-stat__value" style="color:var(--blue)">3</div>
-          <div class="data-stat__label">New this month</div>
-        </div>
-        <div class="glass data-stat-card">
-          <div class="data-stat__value" style="color:var(--gray-500)">7</div>
-          <div class="data-stat__label">Avg skills per role</div>
-        </div>
+      <div class="data-source-tag">
+        12 active roles · 5 with active screening · From <strong>Greenhouse</strong> + manual entries · <a href="#" style="color:var(--purple)">Add role</a>
       </div>
 
       <div class="glass data-table-card">
@@ -4079,8 +4210,8 @@ body {
   <div id="view-intelligence" class="hidden">
     <div class="results-view">
       <div class="results-top-bar" style="margin-bottom:8px;">
-        <button class="back-btn" onclick="switchView('home')">←</button>
-        <div class="results-top-bar__title">Settings & sources</div>
+        <!-- back btn removed -->
+        <div class="results-top-bar__title">Integrations & context</div>
       </div>
 
       <div class="intel-tabs">
@@ -4133,8 +4264,8 @@ const agentsData = [
   { id:'ae-france', name:'AE France screener', type:'screening', source:'Greenhouse', active:true, screened:142, matched:38, saved:'~18h' },
   { id:'se-germany', name:'SE Germany screener', type:'screening', source:'Greenhouse', active:true, screened:89, matched:22, saved:'~11h' },
   { id:'ae-belgium', name:'AE Belgium screener', type:'screening', source:'Lever', active:false, screened:34, matched:8, saved:'~4h' },
-  { id:'platform-migration', name:'Platform migration', type:'staffing', source:'BambooHR', active:true, screened:24, matched:12, saved:'~6h' },
-  { id:'ai-chatbot', name:'AI chatbot MVP', type:'staffing', source:'BambooHR', active:false, screened:16, matched:6, saved:'~3h' }
+  { id:'platform-migration', name:'Platform migration', type:'staffing', source:'Notion', active:true, screened:24, matched:12, saved:'~6h' },
+  { id:'ai-chatbot', name:'AI chatbot MVP', type:'staffing', source:'Notion', active:false, screened:16, matched:6, saved:'~3h' }
 ];
 
 const matchingSkills = ['B2B Sales','SaaS Sales','Enterprise Sales','French','German','Dutch','CRM','Negotiation','Lead Gen','Market Penetration','Account Management','Pipeline Management','Forecasting','Cold Outreach','Presentation','Stakeholder Management','Contract Negotiation','Customer Success','Team Management','Strategic Planning','Revenue Growth','Cross-selling','Upselling'];
@@ -4142,7 +4273,7 @@ const matchingSkills = ['B2B Sales','SaaS Sales','Enterprise Sales','French','Ge
 const intelSources = [
   { name:'Greenhouse', icon:'📋', status:'connected', lastSync:'2h ago', records:'234 candidates' },
   { name:'LinkedIn', icon:'💼', status:'connected', lastSync:'5h ago', records:'89 profiles' },
-  { name:'BambooHR', icon:'🌿', status:'connected', lastSync:'1d ago', records:'156 employees' },
+  { name:'Notion', icon:'🌿', status:'connected', lastSync:'1d ago', records:'156 employees' },
   { name:'Google Drive', icon:'📁', status:'connected', lastSync:'3h ago', records:'12 documents' },
   { name:'Lever', icon:'📌', status:'disconnected', lastSync:'3d ago', records:'34 candidates' },
   { name:'Notion', icon:'📓', status:'connected', lastSync:'6h ago', records:'8 pages' }
@@ -4198,7 +4329,7 @@ function runConversationalFlow() {
   const container = document.getElementById('analyzing-conversation');
   container.innerHTML = '';
 
-  // Step 1: Reading documents (auto, appears immediately)
+  // Step 1: Reading documents (auto, appears after 1s)
   setTimeout(function() {
     addBubble(container, `
       <p style="margin-bottom:10px">Hey Patrick, I'm reading through your files...</p>
@@ -4206,9 +4337,9 @@ function runConversationalFlow() {
       <div class="convo-check"><span class="convo-check-icon done">✓</span> <strong>Account_Executive_JD.pdf</strong> — extracted role requirements</div>
       <div class="convo-check"><span class="convo-check-icon done">✓</span> <strong>EMEA_Mindset_Document.pdf</strong> — loaded as cultural context</div>
     `);
-  }, 400);
+  }, 1000);
 
-  // Step 2: Skill validation (auto after 2.5s, WAIT for approval)
+  // Step 2: Skill validation (auto after 5s, WAIT for approval)
   setTimeout(function() {
     addBubble(container, `
       <p style="margin-bottom:12px">I extracted <strong>23 skills</strong> from the job description. Before I match, let's confirm what matters most:</p>
@@ -4248,14 +4379,14 @@ function runConversationalFlow() {
       </div>
     `);
     scrollToBottom(container);
-  }, 2800);
+  }, 5500);
 }
 
 function approveSkillsAndShowPlan() {
   var container = document.getElementById('analyzing-conversation');
   document.getElementById('skill-approve-actions').innerHTML = '<span style="color:var(--green);font-weight:600">✓ Skills confirmed</span>';
 
-  // Step 3: Plan (after skills confirmed, WAIT for run approval)
+  // Step 3: Plan (after skills confirmed, WAIT for run approval — give time to read)
   setTimeout(function() {
     addBubble(container, `
       <p style="margin-bottom:10px">Perfect. Here's my plan:</p>
@@ -4274,7 +4405,7 @@ function approveSkillsAndShowPlan() {
       </div>
     `);
     scrollToBottom(container);
-  }, 800);
+  }, 1500);
 }
 
 function approveAndContinue() {
@@ -4302,19 +4433,19 @@ function approveAndContinue() {
       updates.innerHTML += '<div class="convo-live-line">Extracting skills from candidate profiles...</div>';
       fill.style.width = '50%';
       scrollToBottom(container);
-    }, 800);
+    }, 1800);
 
     setTimeout(function() {
       updates.innerHTML += '<div class="convo-live-line">Matching against role requirements...</div>';
       fill.style.width = '75%';
       scrollToBottom(container);
-    }, 1600);
+    }, 3600);
 
     setTimeout(function() {
       updates.innerHTML += '<div class="convo-live-line">Ranking by skill fit + cultural alignment...</div>';
       fill.style.width = '100%';
       scrollToBottom(container);
-    }, 2400);
+    }, 5400);
 
     // Step 4: Done + ask output format (WAIT for input)
     setTimeout(function() {
@@ -4346,8 +4477,8 @@ function approveAndContinue() {
         </div>
       `);
       scrollToBottom(container);
-    }, 3600);
-  }, 600);
+    }, 7200);
+  }, 1000);
 }
 
 function showResultsFromFlow() {
@@ -4438,13 +4569,13 @@ function showAgentSettingsView(type) {
         </div>
         <div class="glass" style="padding:16px;background:var(--gray-50)">
           <div style="font-size:11px;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px">Primary source</div>
-          <div style="font-weight:600;font-size:14px;color:var(--gray-800)">${isScreening ? 'Greenhouse' : 'BambooHR'}</div>
+          <div style="font-weight:600;font-size:14px;color:var(--gray-800)">${isScreening ? 'Greenhouse' : 'Notion'}</div>
           <div style="font-size:12px;color:var(--green-600);margin-top:4px">● Connected</div>
         </div>
         <div class="glass" style="padding:16px;background:var(--gray-50)">
           <div style="font-size:11px;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px">Auto-run</div>
           <div style="font-weight:600;font-size:14px;color:var(--gray-800)">${isScreening ? 'On new candidates' : 'On team changes'}</div>
-          <div style="font-size:12px;color:var(--gray-500);margin-top:4px">${isScreening ? 'Watching Greenhouse' : 'Watching BambooHR'}</div>
+          <div style="font-size:12px;color:var(--gray-500);margin-top:4px">${isScreening ? 'Watching Greenhouse' : 'Watching Notion'}</div>
         </div>
       </div>
       <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:16px">
@@ -4474,7 +4605,7 @@ function showAgentSettingsView(type) {
           </div>
           <div class="agent-flow-step__info">
             <div class="agent-flow-step__name">Trigger</div>
-            <div class="agent-flow-step__desc">${isScreening ? 'New candidate arrives in Greenhouse' : 'Availability change detected in BambooHR'}</div>
+            <div class="agent-flow-step__desc">${isScreening ? 'New candidate arrives in Greenhouse' : 'Availability change detected in Notion'}</div>
           </div>
         </div>
         <div class="agent-flow-connector"><div class="agent-flow-connector__line"><div class="agent-flow-connector__dot"></div></div></div>
@@ -4534,12 +4665,14 @@ function pickAgentV2(type) {
   var conv = document.getElementById('task-conversation');
   var actionArea = document.getElementById('task-action-area');
 
+  // Steering input is now inline within conversation bubbles
+
   // Add agent response on LEFT
   setTimeout(function() {
     addTaskBubble(conv, `
       <p style="margin-bottom:8px">${isScreening
         ? "I'll use your <strong>Screening agent</strong>. I'll match candidates against <strong>DevRev's skill taxonomy</strong> (156 skills mapped)."
-        : "I'll use your <strong>Staffing agent</strong>. I'll find the best team from <strong>DevRev's employee data</strong> (50 profiles in BambooHR)."
+        : "I'll use your <strong>Staffing agent</strong>. I'll match against <strong>Acme's team data</strong> from Notion — career paths, skills, and strategy context (100 people indexed)."
       }</p>
       <p style="color:var(--gray-500);font-size:13px">${isScreening ? 'Pass me the candidate data and job description.' : 'Pass me the project brief or requirements.'}</p>
     `, color);
@@ -4567,7 +4700,7 @@ function pickAgentV2(type) {
         <div style="display:flex;gap:8px;margin-bottom:24px;justify-content:center">
           ${isScreening
             ? '<span class="source-btn-mini">Greenhouse</span><span class="source-btn-mini">Google Drive</span><span class="source-btn-mini">Notion</span>'
-            : '<span class="source-btn-mini">Google Drive</span><span class="source-btn-mini">Notion</span><span class="source-btn-mini">BambooHR</span>'
+            : '<span class="source-btn-mini">Google Drive</span><span class="source-btn-mini">Notion</span><span class="source-btn-mini">Notion</span>'
           }
         </div>
         <button class="convo-btn convo-btn--primary" style="width:100%;padding:14px;font-size:15px;border-radius:14px;background:var(--${color})" onclick="runTaskV2('${type}')">
@@ -4629,7 +4762,7 @@ function runTaskV2(type) {
         </div>
       </div>
     `;
-  }, 1200);
+  }, 2500);
 }
 
 function confirmSkillsV2(type) {
@@ -4657,10 +4790,10 @@ function confirmSkillsV2(type) {
   // Animate progress
   var fill = document.getElementById('v2-progress');
   var updates = document.getElementById('v2-live-updates');
-  setTimeout(function() { fill.style.width = '25%'; updates.innerHTML += '<div class="convo-live-line">' + (isScreening ? 'Extracting skills from profiles...' : 'Analyzing project requirements...') + '</div>'; }, 500);
-  setTimeout(function() { fill.style.width = '50%'; updates.innerHTML += '<div class="convo-live-line">' + (isScreening ? 'Matching against required skills...' : 'Scanning employee profiles...') + '</div>'; }, 1500);
-  setTimeout(function() { fill.style.width = '75%'; updates.innerHTML += '<div class="convo-live-line">' + (isScreening ? 'Scoring cultural alignment...' : 'Identifying skill gaps...') + '</div>'; }, 2500);
-  setTimeout(function() { fill.style.width = '100%'; updates.innerHTML += '<div class="convo-live-line">' + (isScreening ? 'Ranking candidates...' : 'Generating team recommendation...') + '</div>'; }, 3500);
+  setTimeout(function() { fill.style.width = '25%'; updates.innerHTML += '<div class="convo-live-line">' + (isScreening ? 'Extracting skills from profiles...' : 'Analyzing project requirements...') + '</div>'; }, 1500);
+  setTimeout(function() { fill.style.width = '50%'; updates.innerHTML += '<div class="convo-live-line">' + (isScreening ? 'Matching against required skills...' : 'Scanning employee profiles...') + '</div>'; }, 3500);
+  setTimeout(function() { fill.style.width = '75%'; updates.innerHTML += '<div class="convo-live-line">' + (isScreening ? 'Scoring cultural alignment...' : 'Identifying skill gaps...') + '</div>'; }, 5500);
+  setTimeout(function() { fill.style.width = '100%'; updates.innerHTML += '<div class="convo-live-line">' + (isScreening ? 'Ranking candidates...' : 'Generating team recommendation...') + '</div>'; }, 7500);
 
   // Done!
   setTimeout(function() {
@@ -4697,28 +4830,130 @@ function confirmSkillsV2(type) {
         <button class="convo-btn convo-btn--secondary" style="width:100%;padding:12px;font-size:13px;border-radius:14px;margin-top:8px" onclick="offerAutomation('${type}')">Automate this — run it every time</button>
       </div>
     `;
-  }, 4500);
+  }, 9500);
+}
+
+// ========== STEERING INPUT (during flow) ==========
+function handleSteeringInput() {
+  var input = document.getElementById('steering-input-field');
+  var val = input.value.trim();
+  if (!val) return;
+  input.value = '';
+
+  var conv = document.getElementById('task-conversation');
+  var color = selectedAgent === 'staffing' ? 'blue' : 'purple';
+
+  // Show user's instruction as a right-aligned bubble
+  var userBubble = document.createElement('div');
+  userBubble.style.cssText = 'padding:10px 16px;background:var(--gray-100);border-radius:12px;font-size:13px;color:var(--gray-700);margin:12px 0;text-align:right;max-width:80%;margin-left:auto;opacity:0;transform:translateY(8px);transition:all 0.3s ease';
+  userBubble.textContent = val;
+  conv.appendChild(userBubble);
+  requestAnimationFrame(function() { userBubble.style.opacity = '1'; userBubble.style.transform = 'translateY(0)'; });
+
+  // Agent acknowledges after a short delay
+  setTimeout(function() {
+    var ackBubble = document.createElement('div');
+    ackBubble.style.cssText = 'padding:10px 16px;border-left:3px solid var(--' + color + ');background:white;border-radius:12px;font-size:13px;color:var(--gray-600);margin:8px 0;opacity:0;transform:translateY(8px);transition:all 0.3s ease';
+
+    // Smart responses based on input
+    var lower = val.toLowerCase();
+    if (lower.includes('remove') || lower.includes('exclude') || lower.includes('skip')) {
+      ackBubble.innerHTML = '✓ Got it — I\'ll exclude that from the analysis. Continuing...';
+    } else if (lower.includes('only') || lower.includes('filter') || lower.includes('just')) {
+      ackBubble.innerHTML = '✓ Noted — I\'ll narrow the focus. Adjusting criteria...';
+    } else if (lower.includes('add') || lower.includes('include') || lower.includes('also')) {
+      ackBubble.innerHTML = '✓ Added to the analysis. I\'ll factor that in...';
+    } else if (lower.includes('pause') || lower.includes('stop') || lower.includes('wait')) {
+      ackBubble.innerHTML = '⏸ Paused. Let me know when you\'re ready to continue.';
+    } else {
+      ackBubble.innerHTML = '✓ Understood — I\'ll incorporate that. Continuing...';
+    }
+
+    conv.appendChild(ackBubble);
+    requestAnimationFrame(function() { ackBubble.style.opacity = '1'; ackBubble.style.transform = 'translateY(0)'; });
+  }, 800);
+}
+
+// ========== REFINE INPUT (on results view) ==========
+function handleRefineInput() {
+  var input = document.getElementById('refine-input-field');
+  var val = input.value.trim();
+  if (!val) return;
+  input.value = '';
+
+  var responseArea = document.getElementById('refine-response');
+  var lower = val.toLowerCase();
+
+  // Show thinking state
+  responseArea.innerHTML = '<span style="color:var(--purple);font-size:13px">Adjusting results...</span>';
+  responseArea.style.display = 'block';
+
+  setTimeout(function() {
+    if (lower.includes('remove') || lower.includes('emilio') || lower.includes('exclude')) {
+      responseArea.innerHTML = '<span style="color:var(--green);font-size:13px">✓ Removed from results. 11 candidates remaining. List updated.</span>';
+      // Simulate removing first candidate
+      var firstRow = document.querySelector('.candidate-row');
+      if (firstRow) {
+        firstRow.style.transition = 'all 0.3s ease';
+        firstRow.style.opacity = '0';
+        firstRow.style.height = '0';
+        firstRow.style.padding = '0';
+        firstRow.style.margin = '0';
+        firstRow.style.overflow = 'hidden';
+      }
+    } else if (lower.includes('only france') || lower.includes('france only')) {
+      responseArea.innerHTML = '<span style="color:var(--green);font-size:13px">✓ Filtered to France only. 8 candidates shown.</span>';
+      // Trigger country filter
+      var francePill = document.querySelector('.filter-pill[onclick*="France"]');
+      if (francePill) francePill.click();
+    } else if (lower.includes('top 5') || lower.includes('top five')) {
+      responseArea.innerHTML = '<span style="color:var(--green);font-size:13px">✓ Showing top 5 only.</span>';
+    } else if (lower.includes('save') || lower.includes('export') || lower.includes('spreadsheet')) {
+      responseArea.innerHTML = '<span style="color:var(--green);font-size:13px">✓ Exporting results to spreadsheet. Download will start shortly.</span>';
+    } else {
+      responseArea.innerHTML = '<span style="color:var(--green);font-size:13px">✓ Got it — updating results based on your input.</span>';
+    }
+
+    // Auto-hide response after 5s
+    setTimeout(function() { responseArea.style.opacity = '0.5'; }, 5000);
+  }, 1200);
 }
 
 function addTaskBubble(container, html, color) {
   color = color || 'purple';
   // REPLACE content — only show 1 message at a time, centered
   container.innerHTML = '';
+
+  // Agent identity header (small, subtle)
+  var header = document.createElement('div');
+  header.style.cssText = 'display:flex;align-items:center;gap:8px;margin-bottom:14px';
+  var agentDot = color === 'blue' ? '#3b82f6' : '#7c3aed';
+  header.innerHTML = '<div style="width:8px;height:8px;border-radius:50%;background:' + agentDot + ';animation:pulse 2s ease-in-out infinite"></div><span style="font-size:12px;font-weight:600;color:var(--gray-400)">' + (color === 'blue' ? 'Staffing agent' : 'Screening agent') + '</span>';
+  container.appendChild(header);
+
   var bubble = document.createElement('div');
-  bubble.className = 'glass convo-bubble';
-  bubble.style.borderLeft = '3px solid var(--' + color + ')';
-  bubble.style.padding = '28px 32px';
-  bubble.style.background = 'white';
-  bubble.style.boxShadow = '0 4px 24px rgba(0,0,0,0.08)';
-  bubble.style.opacity = '0';
-  bubble.style.transform = 'translateY(12px)';
+  bubble.style.cssText = 'padding:24px 28px;background:white;border-radius:16px;border:1px solid var(--gray-100);box-shadow:0 4px 24px rgba(0,0,0,0.06);opacity:0;transform:translateY(12px);line-height:1.6;font-size:14px;color:var(--gray-700)';
   bubble.innerHTML = html;
   container.appendChild(bubble);
   requestAnimationFrame(function() {
-    bubble.style.transition = 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)';
+    bubble.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
     bubble.style.opacity = '1';
     bubble.style.transform = 'translateY(0)';
   });
+
+  // Add inline steering input below the bubble
+  var existingInput = container.querySelector('.steering-inline');
+  if (existingInput) existingInput.remove();
+  var steeringDiv = document.createElement('div');
+  steeringDiv.className = 'steering-inline';
+  steeringDiv.style.cssText = 'margin-top:16px;opacity:0;transform:translateY(8px);transition:all 0.4s ease 0.3s';
+  steeringDiv.innerHTML = '<div style="display:flex;align-items:center;gap:8px"><input type="text" id="steering-input-field" placeholder="Tell the agent something..." style="flex:1;padding:10px 14px;border:1.5px solid var(--gray-200);border-radius:12px;font-size:13px;outline:none;font-family:var(--font-body);background:rgba(255,255,255,0.8);transition:border-color 0.2s" onfocus="this.style.borderColor=\'var(--purple)\'" onblur="this.style.borderColor=\'var(--gray-200)\'" onkeydown="if(event.key===\'Enter\')handleSteeringInput()"><button onclick="handleSteeringInput()" style="padding:10px 14px;background:var(--' + color + ');color:white;border:none;border-radius:12px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap">↑</button></div>';
+  container.appendChild(steeringDiv);
+  requestAnimationFrame(function() {
+    steeringDiv.style.opacity = '1';
+    steeringDiv.style.transform = 'translateY(0)';
+  });
+
   // Scroll the parent scrollable container
   var scrollParent = document.getElementById('task-left') || container;
   setTimeout(function() { scrollParent.scrollTop = scrollParent.scrollHeight; }, 100);
@@ -4757,7 +4992,7 @@ function pickAgent(type) {
       <div class="glass convo-bubble" style="max-width:680px; border-left: 3px solid var(--${isScreening ? 'purple' : 'blue'});">
         <p style="margin-bottom:12px">${isScreening
           ? "I'll use your <strong>Screening agent</strong>. I'll match candidates against <strong>DevRev's skill taxonomy</strong> (156 skills mapped) and score using your connected context."
-          : "I'll use your <strong>Staffing agent</strong>. I'll find the best team from <strong>DevRev's employee data</strong> (BambooHR connected, 50 profiles) and match skills to your project requirements."
+          : "I'll use your <strong>Staffing agent</strong>. I'll match against <strong>Acme's team data</strong> from Notion — career paths, skills, and strategy context (100 people indexed). Share the project brief and I'll find your best team."
         }</p>
         <p style="color:var(--gray-500);margin-bottom:16px">${isScreening ? 'Pass me the candidate data — CVs, spreadsheets, or job descriptions.' : 'Pass me the project brief or requirements doc.'}</p>
         <div class="drop-zone" style="padding:24px;text-align:center;border:1.5px dashed var(--gray-300);border-radius:12px;cursor:pointer;margin-bottom:12px;background:var(--gray-50,#F9FAFB)">
@@ -4774,7 +5009,7 @@ function pickAgent(type) {
         <div style="display:flex;gap:8px;margin-bottom:16px">
           ${isScreening
             ? '<span class="source-btn-mini">Greenhouse</span><span class="source-btn-mini">Google Drive</span><span class="source-btn-mini">Notion</span>'
-            : '<span class="source-btn-mini">Google Drive</span><span class="source-btn-mini">Notion</span><span class="source-btn-mini">BambooHR</span>'
+            : '<span class="source-btn-mini">Google Drive</span><span class="source-btn-mini">Notion</span><span class="source-btn-mini">Notion</span>'
           }
         </div>
         <button class="convo-btn convo-btn--primary" onclick="runTaskFlow('${type}')">
@@ -4913,17 +5148,17 @@ function executeTaskFlow(type) {
     setTimeout(function() {
       updates.innerHTML += '<div class="convo-live-line">' + (isScreening ? 'Extracting skills from candidate profiles...' : 'Analyzing project skill requirements...') + '</div>';
       fill.style.width = '45%'; scrollTaskFlow();
-    }, 1000);
+    }, 2000);
 
     setTimeout(function() {
       updates.innerHTML += '<div class="convo-live-line">' + (isScreening ? 'Matching against role requirements...' : 'Scanning employee profiles for fit...') + '</div>';
       fill.style.width = '70%'; scrollTaskFlow();
-    }, 2200);
+    }, 4000);
 
     setTimeout(function() {
       updates.innerHTML += '<div class="convo-live-line">' + (isScreening ? 'Ranking by skill fit + cultural alignment...' : 'Building optimal team composition...') + '</div>';
       fill.style.width = '100%'; scrollTaskFlow();
-    }, 3200);
+    }, 6000);
 
     // Step 6: Done + output options
     setTimeout(function() {
@@ -4963,8 +5198,8 @@ function executeTaskFlow(type) {
       `;
       stepsContainer.appendChild(step6);
       scrollTaskFlow();
-    }, 4200);
-  }, 400);
+    }, 8000);
+  }, 800);
 }
 
 function offerAutomation(type) {
@@ -5025,7 +5260,7 @@ function selectAgent(type) {
       Got it! I'll use your <strong>${isScreening ? 'Screening' : 'Staffing'} agent</strong>. ${
         isScreening
           ? "Pass me the candidate data and I'll match against <strong>DevRev's skill taxonomy</strong> (156 skills mapped)."
-          : "Tell me about the project and I'll find the best team from <strong>DevRev's employee data</strong> (BambooHR connected)."
+          : "Tell me about the project and I'll find the best team from <strong>Acme's team data</strong> (Notion connected)."
       }
     </div>
     <div class="drop-zone">Drop files or browse — ${isScreening ? 'CVs, resumes, job descriptions' : 'Project briefs, requirements docs'}</div>
@@ -5039,7 +5274,7 @@ function selectAgent(type) {
     <div class="source-buttons">
       ${isScreening
         ? '<div class="source-btn" onclick="event.stopPropagation()">📋 Greenhouse</div><div class="source-btn" onclick="event.stopPropagation()">📁 Google Drive</div><div class="source-btn" onclick="event.stopPropagation()">📓 Notion</div>'
-        : '<div class="source-btn" onclick="event.stopPropagation()">📁 Google Drive</div><div class="source-btn" onclick="event.stopPropagation()">📓 Notion</div><div class="source-btn" onclick="event.stopPropagation()">🌿 BambooHR</div>'
+        : '<div class="source-btn" onclick="event.stopPropagation()">📁 Google Drive</div><div class="source-btn" onclick="event.stopPropagation()">📓 Notion</div><div class="source-btn" onclick="event.stopPropagation()">🌿 Notion</div>'
       }
     </div>
     <button class="action-btn action-btn--${color}" onclick="switchView('analyzing')">
@@ -5074,51 +5309,59 @@ function renderScreeningResults() {
     criteriaEl.innerHTML = matchingSkills.map(s => `<span class="criteria-chip">${s}</span>`).join('');
   }
 
-  // Top picks
-  const topPicks = mockCandidates.filter(c => c.tier === 'top');
-  const topPicksRow = document.getElementById('top-picks-row');
-  if (topPicksRow) {
-    topPicksRow.innerHTML = topPicks.map(c => `
-      <div class="glass top-pick-card glass--hover">
-        <img class="top-pick-card__avatar" src="${c.avatar}" alt="${c.name}">
-        <div class="top-pick-card__name">${c.name}</div>
-        <div class="top-pick-card__role">${c.role} · ${c.company}</div>
-        <div class="top-pick-card__match match--high">${c.flag} ${c.match}% match</div>
-        <div class="top-pick-card__skills">
-          ${c.matchSkills.map(s => `<span class="skill-mini skill-mini--match">${s}</span>`).join('')}
-          ${c.gapSkills.map(s => `<span class="skill-mini">${s}</span>`).join('')}
+  // Unified candidate list — sorted by match score
+  const sorted = [...mockCandidates].sort((a, b) => b.match - a.match);
+  const listEl = document.getElementById('candidates-list');
+  if (listEl) {
+    var headerHtml = `<div class="candidates-list__header">
+      <span>#</span><span></span><span>Candidate</span><span>Country</span><span>Match</span><span>Top skills</span><span></span>
+    </div>`;
+    var rowsHtml = sorted.map((c, i) => {
+      var matchClass = c.match >= 80 ? 'high' : c.match >= 65 ? 'mid' : 'low';
+      return `<div class="candidate-row ${i < 3 ? 'candidate-row--top3' : ''}">
+        <div class="candidate-row__rank ${i < 3 ? 'candidate-row__rank--top' : ''}">${i + 1}</div>
+        <img class="candidate-row__avatar" src="${c.avatar}" alt="${c.name}">
+        <div>
+          <div class="candidate-row__name">${c.name}</div>
+          <div class="candidate-row__subtitle">${c.role} · ${c.company}</div>
         </div>
-        <div class="top-pick-card__sources">
-          ${c.sources.map(s => `<span class="source-tag">${s}</span>`).join('')}
+        <div class="candidate-row__location">${c.flag} ${c.location}</div>
+        <div class="candidate-row__match candidate-row__match--${matchClass}">${c.match}%</div>
+        <div class="candidate-row__skills">
+          ${c.matchSkills.slice(0, 3).map(s => `<span class="skill-mini skill-mini--match">${s}</span>`).join('')}
         </div>
-      </div>
-    `).join('');
+        <div class="candidate-row__action">View →</div>
+      </div>`;
+    }).join('');
+    listEl.innerHTML = headerHtml + rowsHtml;
   }
-
-  // Candidate rows
-  renderCandidateRows(mockCandidates.filter(c => c.tier !== 'top'));
 }
 
-function renderCandidateRows(candidates) {
-  const table = document.getElementById('candidates-table');
-  if (!table) return;
-  table.innerHTML = candidates.map(c => `
-    <div class="candidate-row">
+function renderUnifiedList(candidates) {
+  const listEl = document.getElementById('candidates-list');
+  if (!listEl) return;
+  var sorted = [...candidates].sort((a, b) => b.match - a.match);
+  var headerHtml = `<div class="candidates-list__header">
+    <span>#</span><span></span><span>Candidate</span><span>Country</span><span>Match</span><span>Top skills</span><span></span>
+  </div>`;
+  var rowsHtml = sorted.map((c, i) => {
+    var matchClass = c.match >= 80 ? 'high' : c.match >= 65 ? 'mid' : 'low';
+    return `<div class="candidate-row ${i < 3 ? 'candidate-row--top3' : ''}">
+      <div class="candidate-row__rank ${i < 3 ? 'candidate-row__rank--top' : ''}">${i + 1}</div>
       <img class="candidate-row__avatar" src="${c.avatar}" alt="${c.name}">
       <div>
         <div class="candidate-row__name">${c.name}</div>
         <div class="candidate-row__subtitle">${c.role} · ${c.company}</div>
       </div>
-      <div class="candidate-row__seniority">${c.seniority}</div>
       <div class="candidate-row__location">${c.flag} ${c.location}</div>
-      <div class="candidate-row__match" style="color: ${c.match >= 80 ? 'var(--green)' : c.match >= 65 ? 'var(--yellow)' : 'var(--gray-500)'};">${c.match}%</div>
+      <div class="candidate-row__match candidate-row__match--${matchClass}">${c.match}%</div>
       <div class="candidate-row__skills">
         ${c.matchSkills.slice(0, 3).map(s => `<span class="skill-mini skill-mini--match">${s}</span>`).join('')}
-        ${c.gapSkills.slice(0, 2).map(s => `<span class="skill-mini">${s}</span>`).join('')}
       </div>
       <div class="candidate-row__action">View →</div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
+  listEl.innerHTML = headerHtml + rowsHtml;
 }
 
 // Filters
@@ -5126,73 +5369,69 @@ function filterCandidates(tier, el) {
   el.parentElement.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
   el.classList.add('active');
 
-  const filtered = tier === 'all'
-    ? mockCandidates.filter(c => c.tier !== 'top')
-    : mockCandidates.filter(c => c.tier === tier && c.tier !== 'top');
+  var filtered = tier === 'all'
+    ? mockCandidates
+    : tier === 'top'
+    ? mockCandidates.filter(c => c.match >= 85)
+    : tier === 'strong'
+    ? mockCandidates.filter(c => c.match >= 70 && c.match < 85)
+    : mockCandidates.filter(c => c.match < 70);
 
-  // Also update top picks visibility
-  const topRow = document.getElementById('top-picks-row');
-  if (topRow) topRow.style.display = (tier === 'all' || tier === 'top') ? '' : 'none';
-
-  renderCandidateRows(tier === 'all' ? mockCandidates.filter(c => c.tier !== 'top') : mockCandidates.filter(c => c.tier === tier));
+  renderUnifiedList(filtered);
 }
 
 function filterCountry(country, el) {
   el.parentElement.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
   el.classList.add('active');
 
-  const filtered = country === 'all'
-    ? mockCandidates.filter(c => c.tier !== 'top')
-    : mockCandidates.filter(c => c.location === country && c.tier !== 'top');
+  var filtered = country === 'all'
+    ? mockCandidates
+    : mockCandidates.filter(c => c.location === country);
 
-  renderCandidateRows(filtered);
+  renderUnifiedList(filtered);
 }
 
 // ========== STAFFING RESULTS ==========
 function renderStaffingResults() {
-  const grid = document.getElementById('team-cards-grid');
+  var grid = document.getElementById('team-cards-grid');
   if (grid) {
-    grid.innerHTML = mockTeamMembers.map(m => `
-      <div class="glass team-card glass--hover">
-        <div class="team-card__header">
-          <img class="team-card__avatar" src="${m.avatar}" alt="${m.name}">
-          <div>
-            <div class="team-card__name">${m.name}</div>
-            <div class="team-card__role">${m.role}</div>
-          </div>
-        </div>
-        <div class="team-card__stats">
-          <span class="team-card__stat team-card__stat--match">${m.match}% match</span>
-          <span class="team-card__stat team-card__stat--avail">${m.availability}</span>
-          <span class="team-card__stat team-card__stat--alloc">${m.allocation} allocated</span>
-        </div>
-        <div class="team-card__skills-label">Skills</div>
-        <div class="team-card__skills">
-          ${m.skills.map(s => `<span class="skill-chip skill-chip--match">${s}</span>`).join('')}
-          ${m.gaps.map(s => `<span class="skill-chip skill-chip--gap">${s}</span>`).join('')}
-        </div>
-      </div>
-    `).join('');
+    var headerHtml = '<div class="candidates-list__header" style="grid-template-columns: 36px 36px 1.5fr 0.8fr 0.7fr 0.6fr 1.2fr 0.5fr"><span>#</span><span></span><span>Team member</span><span>Availability</span><span>Allocation</span><span>Match</span><span>Skills covered</span><span></span></div>';
+    var rowsHtml = mockTeamMembers.map(function(m, i) {
+      return '<div class="candidate-row ' + (i < 2 ? 'candidate-row--top3' : '') + '" style="grid-template-columns: 36px 36px 1.5fr 0.8fr 0.7fr 0.6fr 1.2fr 0.5fr">' +
+        '<div class="candidate-row__rank ' + (i < 2 ? 'candidate-row__rank--top' : '') + '" style="' + (i < 2 ? 'background:var(--blue)' : '') + '">' + (i + 1) + '</div>' +
+        '<img class="candidate-row__avatar" src="' + m.avatar + '" alt="' + m.name + '">' +
+        '<div><div class="candidate-row__name">' + m.name + '</div><div class="candidate-row__subtitle">' + m.role + '</div></div>' +
+        '<div style="font-size:12px;color:' + (m.availability === 'Available' ? 'var(--green)' : 'var(--yellow)') + ';font-weight:600">' + m.availability + '</div>' +
+        '<div style="font-size:12px;color:var(--gray-500)">' + m.allocation + '</div>' +
+        '<div class="candidate-row__match candidate-row__match--high" style="color:var(--blue)">' + m.match + '%</div>' +
+        '<div class="candidate-row__skills">' +
+          m.skills.map(function(s) { return '<span class="skill-mini skill-mini--match">' + s + '</span>'; }).join('') +
+          m.gaps.map(function(s) { return '<span class="skill-mini" style="background:rgba(239,68,68,0.1);color:#dc2626;border-color:rgba(239,68,68,0.2)">' + s + ' ✕</span>'; }).join('') +
+        '</div>' +
+        '<div class="candidate-row__action">View →</div>' +
+      '</div>';
+    }).join('');
+    grid.innerHTML = headerHtml + rowsHtml;
   }
 
   // Gaps
-  const gapsList = document.getElementById('gaps-list');
-  const gaps = [
-    { skill: 'Terraform', coverage: 0, label: 'No team member — hire or upskill' },
-    { skill: 'Kubernetes', coverage: 25, label: '1 of 4 needed — partial coverage' },
-    { skill: 'CI/CD', coverage: 50, label: '2 of 4 needed — training planned' },
-    { skill: 'PostgreSQL', coverage: 75, label: '3 of 4 covered — 1 gap' },
-    { skill: 'Docker', coverage: 50, label: '2 of 4 needed — training available' }
+  var gapsList = document.getElementById('gaps-list');
+  var gaps = [
+    { skill: 'Terraform', coverage: 0, label: 'No team member has this — hire or upskill', action: 'Find training' },
+    { skill: 'Kubernetes', coverage: 25, label: '1 of 4 roles covered — critical gap', action: 'View candidates' },
+    { skill: 'CI/CD', coverage: 50, label: '2 of 4 roles covered — training available', action: 'Assign training' }
   ];
 
   if (gapsList) {
-    gapsList.innerHTML = gaps.map(g => `
-      <div class="gap-item">
-        <div class="gap-item__skill">${g.skill}</div>
-        <div class="gap-item__bar"><div class="gap-item__bar-fill" style="width: ${g.coverage}%; background: ${g.coverage === 0 ? 'var(--red)' : g.coverage < 50 ? 'var(--yellow)' : 'var(--green)'}"></div></div>
-        <div class="gap-item__label">${g.label}</div>
-      </div>
-    `).join('');
+    gapsList.innerHTML = '<div class="glass" style="padding:20px;border-radius:16px">' + gaps.map(function(g) {
+      var barColor = g.coverage === 0 ? '#ef4444' : g.coverage < 50 ? '#f59e0b' : '#22c55e';
+      return '<div style="display:flex;align-items:center;gap:16px;padding:12px 0;border-bottom:1px solid var(--gray-100)">' +
+        '<div style="font-weight:600;font-size:13px;color:var(--gray-800);min-width:100px">' + g.skill + '</div>' +
+        '<div style="flex:1;height:6px;background:var(--gray-100);border-radius:3px;overflow:hidden"><div style="height:100%;width:' + g.coverage + '%;background:' + barColor + ';border-radius:3px"></div></div>' +
+        '<div style="font-size:12px;color:var(--gray-500);min-width:200px">' + g.label + '</div>' +
+        '<button style="padding:4px 12px;border:1px solid var(--blue);color:var(--blue);background:none;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer">' + g.action + '</button>' +
+      '</div>';
+    }).join('') + '</div>';
   }
 }
 
@@ -5218,8 +5457,8 @@ function renderAgentDetail(type) {
     <div class="results-top-bar">
       <div class="results-top-bar__title">${isScreening ? 'Screening agent' : 'Staffing agent'}</div>
       <div class="results-actions">
-        <button class="results-action-btn" onclick="toggleAgentSettings()">Settings</button>
-        <button class="results-action-btn results-action-btn--primary" onclick="switchView('new-task')">+ New task</button>
+        <button class="results-action-btn" onclick="toggleAgentSettings()">Agent flow</button>
+        <button class="results-action-btn results-action-btn--primary" onclick="switchView('new-task')">+ New session</button>
       </div>
     </div>
 
@@ -5227,7 +5466,7 @@ function renderAgentDetail(type) {
     <div class="glass" style="padding:20px 24px; margin-bottom:20px; border-left: 3px solid var(--${color});">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
         <div>
-          <span style="font-size:13px;font-weight:600;color:var(--${color})">${isScreening ? 'Screening' : 'Staffing'} · ${activeCount} active tasks</span>
+          <span style="font-size:13px;font-weight:600;color:var(--${color})">${isScreening ? 'Screening' : 'Staffing'} · ${activeCount} active sessions</span>
           <span style="font-size:12px;color:var(--gray-400);margin-left:8px">Using DevRev's skill taxonomy (156 skills)</span>
         </div>
         <div class="status-card__status"><span class="status-card__status-dot"></span> Active</div>
@@ -5281,7 +5520,7 @@ function renderAgentDetail(type) {
       <div class="glass feed-card" style="animation-delay:0.05s">
         <div class="feed-card__left">
           <div class="feed-card__title"><strong>New strong match found</strong> — Emilio Turco (98%)</div>
-          <div class="feed-card__body">AE France task · B2B Sales, SaaS Sales, French market. Matches 22 of 23 required skills. Pushed to Greenhouse.</div>
+          <div class="feed-card__body">AE France session · B2B Sales, SaaS Sales, French market. Matches 22 of 23 required skills. Pushed to Greenhouse.</div>
         </div>
         <div class="feed-card__right">
           <button class="feed-card__btn feed-card__btn--outline" onclick="switchView('screening-results')">View</button>
@@ -5317,8 +5556,8 @@ function renderAgentDetail(type) {
 
       <div class="glass feed-card" style="animation-delay:0.2s">
         <div class="feed-card__left">
-          <div class="feed-card__title">${isScreening ? 'AE Belgium task created' : 'AI Chatbot MVP task created'}</div>
-          <div class="feed-card__body">${isScreening ? 'Manual task from Patrick. Screened 15 candidates from Lever, found 5 strong matches.' : 'Manual task. Scanned 6 team members, found 3 recommended.'}</div>
+          <div class="feed-card__title">${isScreening ? 'AE Belgium session created' : 'AI Chatbot MVP session created'}</div>
+          <div class="feed-card__body">${isScreening ? 'Manual session from Patrick. Screened 15 candidates from Lever, found 5 strong matches.' : 'Manual session. Scanned 6 team members, found 3 recommended.'}</div>
         </div>
         <div class="feed-card__right">
           <button class="feed-card__btn feed-card__btn--outline">View results</button>
@@ -5342,7 +5581,7 @@ function renderAgentDetail(type) {
 
     <!-- Tasks running under this agent -->
     <div style="margin-bottom:24px">
-      <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--gray-400);margin-bottom:12px">Tasks</div>
+      <div style="font-size:13px;font-weight:700;letter-spacing:0.02em;color:var(--gray-400);margin-bottom:12px">Sessions</div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px">
         ${agents.map(a => `
           <div class="glass glass--hover" style="padding:16px 20px;cursor:pointer" onclick="switchView('${isScreening ? 'screening-results' : 'staffing-results'}')">
@@ -5361,7 +5600,7 @@ function renderAgentDetail(type) {
 
     <!-- Settings panel (collapsible) -->
     <div class="agent-config-section hidden" id="agent-settings-panel">
-      <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--gray-400);margin-bottom:16px">Settings & flow</div>
+      <div style="font-size:13px;font-weight:700;letter-spacing:0.05em;color:var(--gray-400);margin-bottom:16px">Agent flow</div>
 
       <!-- Config -->
       <div class="glass" style="padding:20px 24px;margin-bottom:16px">
@@ -5369,7 +5608,7 @@ function renderAgentDetail(type) {
         <div class="config-list">
           <div class="config-item"><span class="config-item__label">Taxonomy</span><span class="config-item__value">DevRev skill taxonomy v2.4</span></div>
           <div class="config-item"><span class="config-item__label">Skills mapped</span><span class="config-item__value">156</span></div>
-          <div class="config-item"><span class="config-item__label">Primary source</span><span class="config-item__value">${isScreening ? 'Greenhouse' : 'BambooHR'}</span></div>
+          <div class="config-item"><span class="config-item__label">Primary source</span><span class="config-item__value">${isScreening ? 'Greenhouse' : 'Notion'}</span></div>
           <div class="config-item"><span class="config-item__label">Trigger</span><span class="config-item__value">${isScreening ? 'New candidate arrives' : 'Availability change'}</span></div>
           <div class="config-item"><span class="config-item__label">Auto-run</span><span class="config-item__value">${isScreening ? 'On new candidates' : 'On team changes'}</span></div>
           <div class="config-item"><span class="config-item__label">Context</span><span class="config-item__value">DevRev company data · EMEA mindset doc</span></div>
@@ -5386,7 +5625,7 @@ function renderAgentDetail(type) {
             </div>
             <div class="agent-flow-step__info">
               <div class="agent-flow-step__name">Trigger</div>
-              <div class="agent-flow-step__desc">${isScreening ? 'New candidate in Greenhouse' : 'Availability change in BambooHR'}</div>
+              <div class="agent-flow-step__desc">${isScreening ? 'New candidate in Greenhouse' : 'Availability change in Notion'}</div>
             </div>
           </div>
           <div class="agent-flow-connector"><div class="agent-flow-connector__line"><div class="agent-flow-connector__dot"></div></div></div>
@@ -5665,7 +5904,7 @@ setTimeout(positionOrbitChips, 100);
 // TODO: API integration — fetch real agent status
 // TODO: API integration — fetch real activity feed
 // TODO: API integration — connect to Greenhouse API for candidate data
-// TODO: API integration — connect to BambooHR for employee data
+// TODO: API integration — connect to Notion for employee data
 // TODO: API integration — real-time WebSocket for agent status updates
 // TODO: API integration — push results to ATS/Drive/Sheets
 
@@ -5773,7 +6012,7 @@ function simulateLiveNotifications() {
 // Initialize on page load
 setTimeout(function() {
   updateAgentBadges();
-  simulateLiveNotifications();
+  // simulateLiveNotifications(); // Disabled — in production these come from real agent activity
 }, 1000);
 </script>
 </body>
