@@ -625,6 +625,10 @@ body {
   from { opacity: 0; transform: translateX(60px) scale(0.95); }
   to { opacity: 1; transform: translateX(0) scale(1); }
 }
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
 @keyframes toastOut {
   from { opacity: 1; transform: translateX(0) scale(1); }
   to { opacity: 0; transform: translateX(60px) scale(0.95); }
@@ -3508,12 +3512,12 @@ body {
     </div>
     <div class="agent-group__children">
       <div style="font-size:10px;font-weight:600;color:var(--gray-400);letter-spacing:0.3px;padding:4px 0 4px 24px">Sessions</div>
-      <div class="agent-child" onclick="switchView('staffing-results')">
+      <div class="agent-child" onclick="switchView('staffing-results', 'platform-migration')">
         <span class="agent-child__dot agent-child__dot--green"></span>
         Platform Migration
         <span class="agent-child__meta"><span style="font-size:11px">↻</span> watching</span>
       </div>
-      <div class="agent-child">
+      <div class="agent-child" onclick="switchView('staffing-results', 'ai-chatbot-mvp')">
         <span class="agent-child__dot agent-child__dot--gray"></span>
         AI Chatbot MVP
         <span class="agent-child__meta">✓ done</span>
@@ -3571,7 +3575,6 @@ body {
         <button class="btn-new-task" onclick="switchView('new-task')">+ New session</button>
       </div>
       <p style="font-size:15px;color:var(--gray-600);margin-bottom:6px">Here's what happened while you were away</p>
-      <p style="font-size:13px;color:var(--gray-400)">Screened <strong style="color:var(--purple)">47 candidates</strong> · Found <strong style="color:var(--green)">3 matches</strong> · Resolved <strong style="color:var(--blue)">1 gap</strong> · Detected <strong style="color:var(--gray-600)">4 new skills</strong></p>
     </div>
 
     <!-- WORK DONE STRIP -->
@@ -3641,7 +3644,7 @@ body {
         <!-- Intelligence update (moved from right) -->
         <div class="glass" style="padding:14px 18px;border-radius:14px;border-left:3px solid var(--green);margin-top:10px">
           <p style="font-weight:600;font-size:13px;margin-bottom:4px;color:var(--gray-800)">4 new skills detected</p>
-          <p style="font-size:11px;color:var(--gray-500)">From LinkedIn sync — added to DevRev's taxonomy (now 156) · 5h ago</p>
+          <p style="font-size:11px;color:var(--gray-500)">From LinkedIn sync — added to Acme's taxonomy (now 156) · 5h ago</p>
         </div>
       </div>
 
@@ -3654,13 +3657,8 @@ body {
         <!-- Screening agent card -->
         <div class="glass" onclick="switchView('agent-detail', 'screening')" style="padding:20px;border-radius:16px;margin-bottom:10px;cursor:pointer;transition:all 0.2s ease" onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform='none'">
           <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px">
-            <div class="agent-bot-face" style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--purple),#A78BFA);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-              <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
-                <rect x="4" y="6" width="20" height="16" rx="4" fill="white" opacity="0.9"/>
-                <circle cx="10" cy="13" r="2" fill="#7C3AED" class="bot-eye bot-eye--left"/>
-                <circle cx="18" cy="13" r="2" fill="#7C3AED" class="bot-eye bot-eye--right"/>
-                <path d="M10 18 Q14 21 18 18" stroke="#7C3AED" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-              </svg>
+            <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--purple),#A78BFA);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>
             </div>
             <div style="flex:1">
               <div style="font-weight:700;font-size:15px">Screening agent</div>
@@ -3678,13 +3676,8 @@ body {
         <!-- Staffing agent card -->
         <div class="glass" onclick="switchView('agent-detail', 'staffing')" style="padding:20px;border-radius:16px;margin-bottom:10px;cursor:pointer;transition:all 0.2s ease" onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform='none'">
           <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px">
-            <div class="agent-bot-face" style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--blue),#60A5FA);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-              <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
-                <rect x="4" y="6" width="20" height="16" rx="4" fill="white" opacity="0.9"/>
-                <circle cx="10" cy="13" r="2" fill="#3B82F6" class="bot-eye bot-eye--left"/>
-                <circle cx="18" cy="13" r="2" fill="#3B82F6" class="bot-eye bot-eye--right"/>
-                <path d="M10 18 Q14 21 18 18" stroke="#3B82F6" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-              </svg>
+            <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--blue),#60A5FA);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>
             </div>
             <div style="flex:1">
               <div style="font-weight:700;font-size:15px">Staffing agent</div>
@@ -3715,13 +3708,8 @@ body {
           <div id="task-conversation" style="max-width:440px;width:100%">
             <!-- Initial greeting with agent identity -->
             <div style="text-align:center;margin-bottom:24px">
-              <div class="agent-bot-face" style="width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,var(--purple),#A78BFA);display:inline-flex;align-items:center;justify-content:center;margin-bottom:12px">
-                <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-                  <rect x="4" y="6" width="20" height="16" rx="4" fill="white" opacity="0.9"/>
-                  <circle cx="10" cy="13" r="2" fill="#7C3AED" class="bot-eye bot-eye--left"/>
-                  <circle cx="18" cy="13" r="2" fill="#7C3AED" class="bot-eye bot-eye--right"/>
-                  <path d="M10 18 Q14 21 18 18" stroke="#7C3AED" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                </svg>
+              <div style="width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,var(--purple),#A78BFA);display:inline-flex;align-items:center;justify-content:center;margin-bottom:12px">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>
               </div>
               <h2 style="font-family:var(--font-heading);font-size:22px;font-weight:800;margin-bottom:6px">Hey Patrick</h2>
               <p style="color:var(--gray-400);font-size:14px">What do you need help with today?</p>
@@ -3739,41 +3727,29 @@ body {
             <!-- Screening agent bot card -->
             <div class="glass glass--hover" onclick="pickAgentV2('screening')" style="padding:24px;border-radius:20px;cursor:pointer;transition:all 0.3s ease;border:2px solid transparent;position:relative" onmouseover="this.style.borderColor='var(--purple)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='transparent';this.style.transform='translateY(0)'">
               <div style="display:flex;align-items:center;gap:16px;margin-bottom:12px">
-                <div class="agent-bot-face" style="width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,var(--purple),#A78BFA);display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative">
-                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-                    <rect x="4" y="6" width="20" height="16" rx="4" fill="white" opacity="0.9"/>
-                    <circle cx="10" cy="13" r="2" fill="#7C3AED" class="bot-eye bot-eye--left"/>
-                    <circle cx="18" cy="13" r="2" fill="#7C3AED" class="bot-eye bot-eye--right"/>
-                    <path d="M10 18 Q14 21 18 18" stroke="#7C3AED" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                    <rect x="12" y="2" width="4" height="4" rx="2" fill="white" opacity="0.7"/>
-                  </svg>
+                <div style="width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,var(--purple),#A78BFA);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>
                 </div>
                 <div>
                   <div style="font-weight:800;font-size:16px;color:var(--gray-800)">Screening agent</div>
                   <div style="font-size:12px;color:var(--purple);font-weight:600">Active · 156 skills mapped</div>
                 </div>
               </div>
-              <p style="font-size:13px;color:var(--gray-500);line-height:1.5">I screen candidates against your role requirements using DevRev's skill taxonomy. Drop CVs and I'll find your best matches.</p>
+              <p style="font-size:13px;color:var(--gray-500);line-height:1.5">I screen candidates against your role requirements using Acme's skill taxonomy. Drop CVs and I'll find your best matches.</p>
             </div>
 
             <!-- Staffing agent bot card -->
             <div class="glass glass--hover" onclick="pickAgentV2('staffing')" style="padding:24px;border-radius:20px;cursor:pointer;transition:all 0.3s ease;border:2px solid transparent;position:relative" onmouseover="this.style.borderColor='var(--blue)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='transparent';this.style.transform='translateY(0)'">
               <div style="display:flex;align-items:center;gap:16px;margin-bottom:12px">
-                <div class="agent-bot-face" style="width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,var(--blue),#60A5FA);display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative">
-                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-                    <rect x="4" y="6" width="20" height="16" rx="4" fill="white" opacity="0.9"/>
-                    <circle cx="10" cy="13" r="2" fill="#3B82F6" class="bot-eye bot-eye--left"/>
-                    <circle cx="18" cy="13" r="2" fill="#3B82F6" class="bot-eye bot-eye--right"/>
-                    <path d="M10 18 Q14 21 18 18" stroke="#3B82F6" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                    <rect x="12" y="2" width="4" height="4" rx="2" fill="white" opacity="0.7"/>
-                  </svg>
+                <div style="width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,var(--blue),#60A5FA);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>
                 </div>
                 <div>
                   <div style="font-weight:800;font-size:16px;color:var(--gray-800)">Staffing agent</div>
                   <div style="font-size:12px;color:var(--blue);font-weight:600">Active · 50 profiles indexed</div>
                 </div>
               </div>
-              <p style="font-size:13px;color:var(--gray-500);line-height:1.5">I match your project needs against Acme's people, skills, and career paths from Notion. Share the brief and I'll build your team.</p>
+              <p style="font-size:13px;color:var(--gray-500);line-height:1.5">I match your project needs against Acme's people, skills, and career paths. Share the brief and I'll build your best team.</p>
             </div>
 
             <div style="text-align:center;margin-top:4px;position:relative">
@@ -3800,126 +3776,30 @@ body {
         <!-- back btn removed -->
         <div class="results-top-bar__title">AE France — Screening results</div>
         <div class="results-actions">
+          <button class="results-action-btn" onclick="document.getElementById('context-drawer').classList.toggle('hidden')" style="display:flex;align-items:center;gap:6px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Context
+          </button>
           <button class="results-action-btn">Download</button>
           <button class="results-action-btn">Update Drive</button>
           <button class="results-action-btn results-action-btn--primary">Push to ATS</button>
         </div>
       </div>
 
-      <!-- Automation banner - top -->
-      <div class="glass automation-banner">
-        <div class="automation-banner__icon">✦</div>
-        <div class="automation-banner__text">
-          <strong>Automate this screening</strong> — Run this every time new candidates are added to Greenhouse. Get notified of strong matches instantly.
-        </div>
-        <button class="automation-banner__btn" onclick="switchView('agent-detail', 'screening')">Set up automation</button>
-      </div>
-
-      <!-- Summary -->
-      <div class="glass results-summary">
-        <div class="results-summary__stat">
-          <span class="results-summary__number">47</span>
-          <span class="results-summary__label">screened</span>
-        </div>
-        <div class="results-summary__divider"></div>
-        <div class="results-summary__stat">
-          <span class="results-summary__number" style="color: var(--green);">12</span>
-          <span class="results-summary__label">strong matches</span>
-        </div>
-        <div class="results-summary__divider"></div>
-        <div class="results-summary__stat">
-          <span class="results-summary__number" style="color: var(--yellow);">5</span>
-          <span class="results-summary__label">top picks</span>
-        </div>
-        <div class="results-summary__divider"></div>
-        <div class="results-summary__stat">
-          <span class="results-summary__number">23</span>
-          <span class="results-summary__label">skills evaluated</span>
-        </div>
-        <div class="results-summary__divider"></div>
-        <div class="results-summary__stat">
-          <span class="results-summary__number">~4.5h</span>
-          <span class="results-summary__label">saved</span>
+      <!-- Work done bar -->
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--white);border-radius:14px;border:1px solid var(--gray-100);margin-bottom:16px;font-size:13px">
+        <div style="display:flex;align-items:center;gap:24px;color:var(--gray-600)">
+          <span style="font-weight:600;color:var(--gray-400);font-size:11px;text-transform:uppercase;letter-spacing:0.5px">Work done</span>
+          <span><strong style="color:var(--purple)">47</strong> screened</span>
+          <span><strong style="color:var(--green)">12</strong> strong matches</span>
+          <span><strong style="color:var(--yellow)">5</strong> top picks</span>
+          <span><strong>23</strong> skills evaluated</span>
+          <span><strong style="color:var(--purple)">~4.5h</strong> saved</span>
         </div>
       </div>
 
-      <!-- Matching context — documents, skills, taxonomy -->
-      <div class="glass criteria-card" onclick="this.classList.toggle('expanded')" style="cursor:pointer">
-        <div class="criteria-header" style="display:flex;align-items:center;justify-content:space-between">
-          <div style="display:flex;align-items:center;gap:10px">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <span style="font-weight:600;font-size:14px;color:var(--gray-800)">Matching context</span>
-            <span style="font-size:12px;color:var(--gray-400);font-weight:400">8 required · 9 preferred · 3 docs · DevRev taxonomy</span>
-          </div>
-          <span class="criteria-header__chevron" style="color:var(--gray-400);font-size:12px">▼</span>
-        </div>
-        <div class="criteria-body" style="padding-top:20px">
-          <!-- Documents used -->
-          <div style="margin-bottom:20px">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-              <p style="font-size:12px;font-weight:600;color:var(--gray-500);margin:0">Documents analyzed</p>
-              <button style="font-size:11px;color:var(--purple);background:none;border:none;cursor:pointer;font-weight:600">+ Add document</button>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:8px">
-              <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--gray-50);border-radius:8px">
-                <div style="display:flex;align-items:center;gap:8px;font-size:13px"><span style="color:var(--green)">✓</span> <strong>DevRev_AE_Candidates_EMEA.xlsx</strong> <span style="color:var(--gray-400)">— 47 profiles</span></div>
-                <button style="font-size:11px;color:var(--gray-400);background:none;border:none;cursor:pointer" title="Remove">✕</button>
-              </div>
-              <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--gray-50);border-radius:8px">
-                <div style="display:flex;align-items:center;gap:8px;font-size:13px"><span style="color:var(--green)">✓</span> <strong>Account_Executive_JD.pdf</strong> <span style="color:var(--gray-400)">— role requirements</span></div>
-                <button style="font-size:11px;color:var(--gray-400);background:none;border:none;cursor:pointer" title="Remove">✕</button>
-              </div>
-              <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--gray-50);border-radius:8px">
-                <div style="display:flex;align-items:center;gap:8px;font-size:13px"><span style="color:var(--green)">✓</span> <strong>EMEA_Mindset_Document.pdf</strong> <span style="color:var(--gray-400)">— cultural context</span></div>
-                <button style="font-size:11px;color:var(--gray-400);background:none;border:none;cursor:pointer" title="Remove">✕</button>
-              </div>
-            </div>
-          </div>
-          <!-- Taxonomy -->
-          <div style="margin-bottom:20px">
-            <p style="font-size:12px;font-weight:600;color:var(--gray-500);margin-bottom:8px">Taxonomy</p>
-            <div style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(124,58,237,0.06);border-radius:8px;font-size:12px;color:var(--purple)">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              DevRev's skill taxonomy v2.4 · 156 skills mapped
-            </div>
-          </div>
-          <!-- Required skills -->
-          <div style="margin-bottom:16px">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-              <p style="font-size:12px;font-weight:600;color:var(--purple);margin:0">Required — must have (8)</p>
-              <button style="font-size:11px;color:var(--purple);background:none;border:none;cursor:pointer;font-weight:600">+ Add skill</button>
-            </div>
-            <div style="display:flex;flex-wrap:wrap;gap:6px">
-              <span class="convo-skill-tag convo-skill-tag--required" style="font-size:11px;cursor:pointer" title="Click to remove">B2B Sales ✕</span>
-              <span class="convo-skill-tag convo-skill-tag--required" style="font-size:11px;cursor:pointer" title="Click to remove">SaaS Sales ✕</span>
-              <span class="convo-skill-tag convo-skill-tag--required" style="font-size:11px;cursor:pointer" title="Click to remove">French ✕</span>
-              <span class="convo-skill-tag convo-skill-tag--required" style="font-size:11px;cursor:pointer" title="Click to remove">Enterprise Sales ✕</span>
-              <span class="convo-skill-tag convo-skill-tag--required" style="font-size:11px;cursor:pointer" title="Click to remove">CRM ✕</span>
-              <span class="convo-skill-tag convo-skill-tag--required" style="font-size:11px;cursor:pointer" title="Click to remove">Presentation ✕</span>
-              <span class="convo-skill-tag convo-skill-tag--required" style="font-size:11px;cursor:pointer" title="Click to remove">B2B SaaS Industry ✕</span>
-              <span class="convo-skill-tag convo-skill-tag--required" style="font-size:11px;cursor:pointer" title="Click to remove">Customer Success ✕</span>
-            </div>
-          </div>
-          <!-- Preferred skills -->
-          <div>
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-              <p style="font-size:12px;font-weight:600;color:var(--gray-400);margin:0">Preferred — trainable (9)</p>
-              <button style="font-size:11px;color:var(--gray-400);background:none;border:none;cursor:pointer;font-weight:600">+ Add skill</button>
-            </div>
-            <div style="display:flex;flex-wrap:wrap;gap:6px">
-              <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer" title="Click to remove">Market Penetration ✕</span>
-              <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer" title="Click to remove">Competitive Analysis ✕</span>
-              <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer" title="Click to remove">Warm Calling ✕</span>
-              <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer" title="Click to remove">Growth Marketing ✕</span>
-              <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer" title="Click to remove">Technology Sector ✕</span>
-              <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer" title="Click to remove">Helpdesk/CRM ✕</span>
-              <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer" title="Click to remove">Sales Forecasting ✕</span>
-              <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer" title="Click to remove">Negotiation ✕</span>
-              <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer" title="Click to remove">Solution Selling ✕</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- Agent automation suggestion — right after work done -->
+      <div id="screening-agent-suggest" style="display:none"></div>
 
       <!-- Filters -->
       <div class="results-filters">
@@ -3953,6 +3833,80 @@ body {
         <div id="refine-response" style="display:none;text-align:center;margin-top:8px;transition:opacity 0.3s"></div>
       </div>
 
+      <!-- Context drawer — slide from right -->
+      <div id="context-drawer" class="hidden" style="position:fixed;top:0;right:0;width:420px;height:100vh;background:#ffffff;box-shadow:-8px 0 30px rgba(0,0,0,0.15);z-index:1000;overflow-y:auto;padding:32px 28px;animation:slideInRight 0.3s ease;border-left:1px solid var(--gray-100)">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
+          <h3 style="font-size:18px;font-weight:700;margin:0">Matching context</h3>
+          <button onclick="document.getElementById('context-drawer').classList.add('hidden')" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--gray-400);padding:4px">✕</button>
+        </div>
+        <!-- Documents -->
+        <div style="margin-bottom:24px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+            <p style="font-size:12px;font-weight:600;color:var(--gray-500);margin:0">Documents analyzed</p>
+            <button style="font-size:11px;color:var(--purple);background:none;border:none;cursor:pointer;font-weight:600">+ Add</button>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--gray-50);border-radius:10px;font-size:13px">
+              <span><span style="color:var(--green)">✓</span> <strong>Acme_AE_Candidates_EMEA.xlsx</strong> — 47 profiles</span>
+              <button style="font-size:11px;color:var(--gray-400);background:none;border:none;cursor:pointer">✕</button>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--gray-50);border-radius:10px;font-size:13px">
+              <span><span style="color:var(--green)">✓</span> <strong>Account_Executive_JD.pdf</strong> — role requirements</span>
+              <button style="font-size:11px;color:var(--gray-400);background:none;border:none;cursor:pointer">✕</button>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--gray-50);border-radius:10px;font-size:13px">
+              <span><span style="color:var(--green)">✓</span> <strong>EMEA_Mindset_Document.pdf</strong> — cultural context</span>
+              <button style="font-size:11px;color:var(--gray-400);background:none;border:none;cursor:pointer">✕</button>
+            </div>
+          </div>
+        </div>
+        <!-- Taxonomy -->
+        <div style="margin-bottom:24px">
+          <p style="font-size:12px;font-weight:600;color:var(--gray-500);margin-bottom:8px">Taxonomy</p>
+          <div style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:rgba(124,58,237,0.06);border-radius:10px;font-size:12px;color:var(--purple)">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Acme's skill taxonomy v2.4 · 156 skills mapped
+          </div>
+        </div>
+        <!-- Required skills -->
+        <div style="margin-bottom:20px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+            <p style="font-size:12px;font-weight:600;color:var(--purple);margin:0">Required — must have (8)</p>
+            <button style="font-size:11px;color:var(--purple);background:none;border:none;cursor:pointer;font-weight:600">+ Add skill</button>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <span class="convo-skill-tag convo-skill-tag--required" style="font-size:11px;cursor:pointer">B2B Sales ✕</span>
+            <span class="convo-skill-tag convo-skill-tag--required" style="font-size:11px;cursor:pointer">SaaS Sales ✕</span>
+            <span class="convo-skill-tag convo-skill-tag--required" style="font-size:11px;cursor:pointer">French ✕</span>
+            <span class="convo-skill-tag convo-skill-tag--required" style="font-size:11px;cursor:pointer">Enterprise Sales ✕</span>
+            <span class="convo-skill-tag convo-skill-tag--required" style="font-size:11px;cursor:pointer">CRM ✕</span>
+            <span class="convo-skill-tag convo-skill-tag--required" style="font-size:11px;cursor:pointer">Presentation ✕</span>
+            <span class="convo-skill-tag convo-skill-tag--required" style="font-size:11px;cursor:pointer">B2B SaaS Industry ✕</span>
+            <span class="convo-skill-tag convo-skill-tag--required" style="font-size:11px;cursor:pointer">Customer Success ✕</span>
+          </div>
+          <p style="font-size:11px;color:var(--gray-400);margin-top:6px">Candidates missing any won't pass</p>
+        </div>
+        <!-- Preferred skills -->
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+            <p style="font-size:12px;font-weight:600;color:var(--gray-400);margin:0">Preferred — trainable (9)</p>
+            <button style="font-size:11px;color:var(--gray-400);background:none;border:none;cursor:pointer;font-weight:600">+ Add skill</button>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer">Market Penetration ✕</span>
+            <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer">Competitive Analysis ✕</span>
+            <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer">Warm Calling ✕</span>
+            <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer">Growth Marketing ✕</span>
+            <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer">Technology Sector ✕</span>
+            <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer">Helpdesk/CRM ✕</span>
+            <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer">Sales Forecasting ✕</span>
+            <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer">Negotiation ✕</span>
+            <span class="convo-skill-tag convo-skill-tag--preferred" style="font-size:11px;cursor:pointer">Solution Selling ✕</span>
+          </div>
+          <p style="font-size:11px;color:var(--gray-400);margin-top:6px">Tiebreakers between strong matches</p>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -3960,83 +3914,90 @@ body {
   <div id="view-staffing-results" class="hidden">
     <div class="results-view">
       <div class="results-top-bar">
-        <!-- back btn removed -->
         <div class="results-top-bar__title">Platform Migration — Staffing results</div>
         <div class="results-actions">
+          <button class="results-action-btn" onclick="document.getElementById('staffing-context-drawer').classList.toggle('hidden')" style="display:flex;align-items:center;gap:6px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Context
+          </button>
           <button class="results-action-btn">Download</button>
-          <button class="results-action-btn results-action-btn--primary">Push to Notion</button>
+          <button class="results-action-btn results-action-btn--primary" style="background:var(--blue)">Push to Notion</button>
         </div>
       </div>
 
-      <!-- Automation banner - top -->
-      <div class="glass automation-banner">
-        <div class="automation-banner__icon" style="background: var(--blue-light);">✦</div>
-        <div class="automation-banner__text">
-          <strong>Automate this staffing</strong> — Monitor team availability and re-run matching when projects or people change. Stay ahead of gaps.
-        </div>
-        <button class="automation-banner__btn" style="border-color: var(--blue); color: var(--blue);" onclick="switchView('agent-detail', 'staffing')">Enable monitoring</button>
-      </div>
-
-      <!-- Summary -->
-      <div class="glass results-summary">
-        <div class="results-summary__stat">
-          <span class="results-summary__number" style="color: var(--blue);">24</span>
-          <span class="results-summary__label">employees scanned</span>
-        </div>
-        <div class="results-summary__divider"></div>
-        <div class="results-summary__stat">
-          <span class="results-summary__number" style="color: var(--green);">12</span>
-          <span class="results-summary__label">matched</span>
-        </div>
-        <div class="results-summary__divider"></div>
-        <div class="results-summary__stat">
-          <span class="results-summary__number" style="color: var(--red);">5</span>
-          <span class="results-summary__label">gaps found</span>
-        </div>
-        <div class="results-summary__divider"></div>
-        <div class="results-summary__stat">
-          <span class="results-summary__number">~6h</span>
-          <span class="results-summary__label">saved</span>
+      <!-- Work done bar -->
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--white);border-radius:14px;border:1px solid var(--gray-100);margin-bottom:16px;font-size:13px">
+        <div style="display:flex;align-items:center;gap:24px;color:var(--gray-600)">
+          <span style="font-weight:600;color:var(--gray-400);font-size:11px;text-transform:uppercase;letter-spacing:0.5px">Work done</span>
+          <span><strong style="color:var(--blue)">24</strong> employees scanned</span>
+          <span><strong style="color:var(--green)">12</strong> matched</span>
+          <span><strong style="color:#ef4444">5</strong> gaps found</span>
+          <span><strong style="color:var(--blue)">~6h</strong> saved</span>
         </div>
       </div>
 
-      <!-- Matching context for staffing -->
-      <div class="glass criteria-card" onclick="this.classList.toggle('expanded')" style="cursor:pointer">
-        <div class="criteria-header" style="display:flex;align-items:center;justify-content:space-between">
-          <div style="display:flex;align-items:center;gap:10px">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <span style="font-weight:600;font-size:14px;color:var(--gray-800)">Matching context</span>
-            <span style="font-size:12px;color:var(--gray-400);font-weight:400">5 required skills · 3 preferred · Acme's Notion · career paths loaded</span>
-          </div>
-          <span class="criteria-header__chevron" style="color:var(--gray-400);font-size:12px">▼</span>
+      <!-- Agent automation suggestion -->
+      <div id="staffing-agent-suggest" style="display:none"></div>
+
+      <!-- Staffing context drawer -->
+      <div id="staffing-context-drawer" class="hidden" style="position:fixed;top:0;right:0;width:420px;height:100vh;background:#ffffff;box-shadow:-8px 0 30px rgba(0,0,0,0.15);z-index:1000;overflow-y:auto;padding:32px 28px;animation:slideInRight 0.3s ease;border-left:1px solid var(--gray-100)">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
+          <h3 style="font-size:18px;font-weight:700;margin:0">Matching context</h3>
+          <button onclick="document.getElementById('staffing-context-drawer').classList.add('hidden')" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--gray-400);padding:4px">✕</button>
         </div>
-        <div class="criteria-body" style="padding-top:20px">
-          <div style="margin-bottom:16px">
-            <p style="font-size:12px;font-weight:600;color:var(--gray-500);margin-bottom:8px">Context loaded from Notion</p>
-            <div style="display:flex;flex-direction:column;gap:6px">
-              <div style="display:flex;align-items:center;gap:8px;font-size:13px;padding:8px 12px;background:var(--gray-50);border-radius:8px"><span style="color:var(--green)">✓</span> <strong>Company strategy & vision</strong> <span style="color:var(--gray-400)">— goals, priorities</span></div>
-              <div style="display:flex;align-items:center;gap:8px;font-size:13px;padding:8px 12px;background:var(--gray-50);border-radius:8px"><span style="color:var(--green)">✓</span> <strong>Career paths & levels</strong> <span style="color:var(--gray-400)">— role definitions</span></div>
-              <div style="display:flex;align-items:center;gap:8px;font-size:13px;padding:8px 12px;background:var(--gray-50);border-radius:8px"><span style="color:var(--green)">✓</span> <strong>People evaluations</strong> <span style="color:var(--gray-400)">— 100 profiles indexed</span></div>
-              <div style="display:flex;align-items:center;gap:8px;font-size:13px;padding:8px 12px;background:var(--gray-50);border-radius:8px"><span style="color:var(--green)">✓</span> <strong>Platform_Migration_Brief.pdf</strong> <span style="color:var(--gray-400)">— project requirements</span></div>
+        <div style="margin-bottom:24px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+            <p style="font-size:12px;font-weight:600;color:var(--gray-500);margin:0">Context from Notion</p>
+            <button style="font-size:11px;color:var(--blue);background:none;border:none;cursor:pointer;font-weight:600">+ Add</button>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--gray-50);border-radius:10px;font-size:13px">
+              <span><span style="color:var(--green)">✓</span> <strong>Company strategy & vision</strong> — goals, priorities</span>
+              <button style="font-size:11px;color:var(--gray-400);background:none;border:none;cursor:pointer">✕</button>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--gray-50);border-radius:10px;font-size:13px">
+              <span><span style="color:var(--green)">✓</span> <strong>Career paths & levels</strong> — role definitions</span>
+              <button style="font-size:11px;color:var(--gray-400);background:none;border:none;cursor:pointer">✕</button>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--gray-50);border-radius:10px;font-size:13px">
+              <span><span style="color:var(--green)">✓</span> <strong>People evaluations</strong> — 100 profiles</span>
+              <button style="font-size:11px;color:var(--gray-400);background:none;border:none;cursor:pointer">✕</button>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--gray-50);border-radius:10px;font-size:13px">
+              <span><span style="color:var(--green)">✓</span> <strong>Platform_Migration_Brief.pdf</strong> — project reqs</span>
+              <button style="font-size:11px;color:var(--gray-400);background:none;border:none;cursor:pointer">✕</button>
             </div>
           </div>
-          <div style="margin-bottom:12px">
-            <p style="font-size:12px;font-weight:600;color:var(--blue);margin:0 0 8px">Required skills (5)</p>
-            <div style="display:flex;flex-wrap:wrap;gap:6px">
-              <span style="padding:4px 10px;border-radius:6px;font-size:11px;border:1px solid rgba(59,130,246,0.3);background:rgba(59,130,246,0.08);color:var(--blue)">Kubernetes</span>
-              <span style="padding:4px 10px;border-radius:6px;font-size:11px;border:1px solid rgba(59,130,246,0.3);background:rgba(59,130,246,0.08);color:var(--blue)">Docker</span>
-              <span style="padding:4px 10px;border-radius:6px;font-size:11px;border:1px solid rgba(59,130,246,0.3);background:rgba(59,130,246,0.08);color:var(--blue)">AWS</span>
-              <span style="padding:4px 10px;border-radius:6px;font-size:11px;border:1px solid rgba(59,130,246,0.3);background:rgba(59,130,246,0.08);color:var(--blue)">PostgreSQL</span>
-              <span style="padding:4px 10px;border-radius:6px;font-size:11px;border:1px solid rgba(59,130,246,0.3);background:rgba(59,130,246,0.08);color:var(--blue)">CI/CD</span>
-            </div>
+        </div>
+        <div style="margin-bottom:24px">
+          <p style="font-size:12px;font-weight:600;color:var(--gray-500);margin-bottom:8px">Taxonomy</p>
+          <div style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:rgba(59,130,246,0.06);border-radius:10px;font-size:12px;color:var(--blue)">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Acme's skill taxonomy v2.4 · 156 skills mapped
           </div>
-          <div>
-            <p style="font-size:12px;font-weight:600;color:var(--gray-400);margin:0 0 8px">Preferred skills (3)</p>
-            <div style="display:flex;flex-wrap:wrap;gap:6px">
-              <span style="padding:4px 10px;border-radius:6px;font-size:11px;border:1px solid var(--gray-200);color:var(--gray-500)">Terraform</span>
-              <span style="padding:4px 10px;border-radius:6px;font-size:11px;border:1px solid var(--gray-200);color:var(--gray-500)">Testing</span>
-              <span style="padding:4px 10px;border-radius:6px;font-size:11px;border:1px solid var(--gray-200);color:var(--gray-500)">Monitoring</span>
-            </div>
+        </div>
+        <div style="margin-bottom:20px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+            <p style="font-size:12px;font-weight:600;color:var(--blue);margin:0">Required skills (5)</p>
+            <button style="font-size:11px;color:var(--blue);background:none;border:none;cursor:pointer;font-weight:600">+ Add skill</button>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <span style="padding:4px 10px;border-radius:6px;font-size:11px;border:1px solid rgba(59,130,246,0.3);background:rgba(59,130,246,0.08);color:var(--blue)">Kubernetes ✕</span>
+            <span style="padding:4px 10px;border-radius:6px;font-size:11px;border:1px solid rgba(59,130,246,0.3);background:rgba(59,130,246,0.08);color:var(--blue)">Docker ✕</span>
+            <span style="padding:4px 10px;border-radius:6px;font-size:11px;border:1px solid rgba(59,130,246,0.3);background:rgba(59,130,246,0.08);color:var(--blue)">AWS ✕</span>
+            <span style="padding:4px 10px;border-radius:6px;font-size:11px;border:1px solid rgba(59,130,246,0.3);background:rgba(59,130,246,0.08);color:var(--blue)">PostgreSQL ✕</span>
+            <span style="padding:4px 10px;border-radius:6px;font-size:11px;border:1px solid rgba(59,130,246,0.3);background:rgba(59,130,246,0.08);color:var(--blue)">CI/CD ✕</span>
+          </div>
+        </div>
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+            <p style="font-size:12px;font-weight:600;color:var(--gray-400);margin:0">Preferred skills (3)</p>
+            <button style="font-size:11px;color:var(--gray-400);background:none;border:none;cursor:pointer;font-weight:600">+ Add skill</button>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <span style="padding:4px 10px;border-radius:6px;font-size:11px;border:1px solid var(--gray-200);color:var(--gray-500)">Terraform ✕</span>
+            <span style="padding:4px 10px;border-radius:6px;font-size:11px;border:1px solid var(--gray-200);color:var(--gray-500)">Testing ✕</span>
+            <span style="padding:4px 10px;border-radius:6px;font-size:11px;border:1px solid var(--gray-200);color:var(--gray-500)">Monitoring ✕</span>
           </div>
         </div>
       </div>
@@ -4161,7 +4122,7 @@ body {
       <div class="results-top-bar">
         <!-- back btn removed -->
         <div class="results-top-bar__title">Skill taxonomy</div>
-        <div class="results-top-bar__subtitle">DevRev skill taxonomy v2.4 · 156 skills mapped</div>
+        <div class="results-top-bar__subtitle">Acme skill taxonomy v2.4 · 156 skills mapped</div>
       </div>
 
       <div class="data-source-tag">
@@ -4280,7 +4241,7 @@ const intelSources = [
 ];
 
 const contextItems = [
-  { title:'DevRev skill taxonomy v2.4', desc:'156 skills across engineering, sales, product, and design. Last calibrated March 2026.', tags:['156 skills','Auto-updated','v2.4'] },
+  { title:'Acme skill taxonomy v2.4', desc:'156 skills across engineering, sales, product, and design. Last calibrated March 2026.', tags:['156 skills','Auto-updated','v2.4'] },
   { title:'Account Executive JD — France', desc:'Senior AE role requirements for EMEA expansion. Includes cultural fit criteria.', tags:['23 skills','Sales','EMEA'] },
   { title:'EMEA mindset document', desc:'Culture and values framework for EMEA hiring. Defines key behavioral indicators.', tags:['Culture','Behavioral','EMEA'] },
   { title:'Platform migration brief', desc:'Technical requirements for Q2 platform migration. Lists required skills and team structure.', tags:['Engineering','Q2 2026','Critical'] },
@@ -4311,8 +4272,8 @@ function switchView(viewId, context) {
   currentView = viewId;
 
   // View-specific init
-  if (viewId === 'screening-results') renderScreeningResults();
-  if (viewId === 'staffing-results') renderStaffingResults();
+  if (viewId === 'screening-results') renderScreeningResults(context);
+  if (viewId === 'staffing-results') renderStaffingResults(context);
   if (viewId === 'agent-detail') renderAgentDetail(context);
   if (viewId === 'agents-overview') renderAgentsOverview();
   if (viewId === 'intelligence') renderIntelligence();
@@ -4333,7 +4294,7 @@ function runConversationalFlow() {
   setTimeout(function() {
     addBubble(container, `
       <p style="margin-bottom:10px">Hey Patrick, I'm reading through your files...</p>
-      <div class="convo-check"><span class="convo-check-icon done">✓</span> <strong>DevRev_AE_Candidates_EMEA.xlsx</strong> — found 47 candidate profiles</div>
+      <div class="convo-check"><span class="convo-check-icon done">✓</span> <strong>Acme_AE_Candidates_EMEA.xlsx</strong> — found 47 candidate profiles</div>
       <div class="convo-check"><span class="convo-check-icon done">✓</span> <strong>Account_Executive_JD.pdf</strong> — extracted role requirements</div>
       <div class="convo-check"><span class="convo-check-icon done">✓</span> <strong>EMEA_Mindset_Document.pdf</strong> — loaded as cultural context</div>
     `);
@@ -4372,7 +4333,7 @@ function runConversationalFlow() {
         </div>
         <p style="font-size:11px;color:var(--gray-400);margin-top:4px">Used as tiebreakers between strong matches</p>
       </div>
-      <p style="color:var(--gray-600);font-size:13px">Based on <strong>DevRev's skill taxonomy</strong> and your Account Executive JD. Want to adjust?</p>
+      <p style="color:var(--gray-600);font-size:13px">Based on <strong>Acme's skill taxonomy</strong> and your Account Executive JD. Want to adjust?</p>
       <div class="convo-actions" id="skill-approve-actions">
         <button class="convo-btn convo-btn--primary" onclick="approveSkillsAndShowPlan()">Looks good, proceed</button>
         <button class="convo-btn convo-btn--secondary" onclick="document.getElementById('skill-approve-actions').innerHTML='<span style=color:var(--gray-400)>Editing mode coming soon — for now, proceed with these.</span><br><button class=\\'convo-btn convo-btn--primary\\' onclick=\\'approveSkillsAndShowPlan()\\' style=\\'margin-top:8px\\'>Proceed</button>'">Let me adjust</button>
@@ -4391,13 +4352,13 @@ function approveSkillsAndShowPlan() {
     addBubble(container, `
       <p style="margin-bottom:10px">Perfect. Here's my plan:</p>
       <div class="convo-plan">
-        <div class="convo-plan-step"><span class="convo-plan-num">1</span> Extract skills from all 47 profiles using <strong>DevRev's skill taxonomy</strong> <span class="convo-context-badge">156 skills mapped</span></div>
+        <div class="convo-plan-step"><span class="convo-plan-num">1</span> Extract skills from all 47 profiles using <strong>Acme's skill taxonomy</strong> <span class="convo-context-badge">156 skills mapped</span></div>
         <div class="convo-plan-step"><span class="convo-plan-num">2</span> Filter first by <strong>8 required skills</strong> — binary pass/fail</div>
         <div class="convo-plan-step"><span class="convo-plan-num">3</span> Score remaining candidates on <strong>9 preferred skills</strong> as tiebreaker</div>
         <div class="convo-plan-step"><span class="convo-plan-num">4</span> Score cultural alignment using the EMEA mindset document</div>
         <div class="convo-plan-step"><span class="convo-plan-num">5</span> Rank and flag top candidates across France, Belgium, UK, Germany</div>
       </div>
-      <div class="convo-context-tag">✦ Running against DevRev's company context · Last synced 2h ago</div>
+      <div class="convo-context-tag">✦ Running against Acme's company context · Last synced 2h ago</div>
       <p style="margin-top:14px;color:var(--gray-600)">This should take about 30 seconds. You can stay and watch, or walk away — I'll notify you when it's ready.</p>
       <div class="convo-actions" id="approve-actions">
         <button class="convo-btn convo-btn--primary" onclick="approveAndContinue()">Go ahead, I'll watch</button>
@@ -4564,7 +4525,7 @@ function showAgentSettingsView(type) {
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
         <div class="glass" style="padding:16px;background:var(--gray-50)">
           <div style="font-size:11px;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px">Taxonomy</div>
-          <div style="font-weight:600;font-size:14px;color:var(--gray-800)">DevRev skill taxonomy v2.4</div>
+          <div style="font-weight:600;font-size:14px;color:var(--gray-800)">Acme skill taxonomy v2.4</div>
           <div style="font-size:12px;color:var(--purple-600);margin-top:4px">156 skills mapped</div>
         </div>
         <div class="glass" style="padding:16px;background:var(--gray-50)">
@@ -4581,7 +4542,7 @@ function showAgentSettingsView(type) {
       <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:16px">
         <div class="glass" style="padding:16px;background:var(--gray-50)">
           <div style="font-size:11px;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px">Context documents</div>
-          <div style="font-weight:600;font-size:14px;color:var(--gray-800)">DevRev company data</div>
+          <div style="font-weight:600;font-size:14px;color:var(--gray-800)">Acme company data</div>
           <div style="font-size:12px;color:var(--gray-500);margin-top:2px">EMEA mindset document</div>
         </div>
         <div class="glass" style="padding:16px;background:var(--gray-50)">
@@ -4627,7 +4588,7 @@ function showAgentSettingsView(type) {
           <div class="agent-flow-step__info">
             <div class="agent-flow-step__name">Skill extraction & matching</div>
             <div class="agent-flow-step__desc">Specialized AI extracts structured skills from messy data — not generic AI, purpose-built for workforce intelligence</div>
-            <div style="margin-top:8px"><span class="convo-context-badge" style="font-size:11px">Using DevRev skill taxonomy v2.4 · 156 skills</span></div>
+            <div style="margin-top:8px"><span class="convo-context-badge" style="font-size:11px">Using Acme skill taxonomy v2.4 · 156 skills</span></div>
           </div>
           <div class="agent-flow-step__badge agent-flow-step__badge--core">Core engine</div>
         </div>
@@ -4671,8 +4632,8 @@ function pickAgentV2(type) {
   setTimeout(function() {
     addTaskBubble(conv, `
       <p style="margin-bottom:8px">${isScreening
-        ? "I'll use your <strong>Screening agent</strong>. I'll match candidates against <strong>DevRev's skill taxonomy</strong> (156 skills mapped)."
-        : "I'll use your <strong>Staffing agent</strong>. I'll match against <strong>Acme's team data</strong> from Notion — career paths, skills, and strategy context (100 people indexed)."
+        ? "I'll use your <strong>Screening agent</strong>. I'll match candidates against <strong>Acme's skill taxonomy</strong> (156 skills mapped)."
+        : "I'll use your <strong>Staffing agent</strong>. I'll match against <strong>Acme's team data</strong> — career paths, skills, and strategy context (100 people indexed)."
       }</p>
       <p style="color:var(--gray-500);font-size:13px">${isScreening ? 'Pass me the candidate data and job description.' : 'Pass me the project brief or requirements.'}</p>
     `, color);
@@ -4688,7 +4649,7 @@ function pickAgentV2(type) {
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px">
           ${isScreening
-            ? '<div class="file-chip">DevRev_AE_Candidates_EMEA.xlsx</div><div class="file-chip">Account_Executive_JD.pdf</div><div class="file-chip">EMEA_Mindset_Document.pdf</div>'
+            ? '<div class="file-chip">Acme_AE_Candidates_EMEA.xlsx</div><div class="file-chip">Account_Executive_JD.pdf</div><div class="file-chip">EMEA_Mindset_Document.pdf</div>'
             : '<div class="file-chip">Platform_Migration_Brief.pdf</div><div class="file-chip">Team_Skills_Matrix.xlsx</div>'
           }
         </div>
@@ -4720,7 +4681,7 @@ function runTaskV2(type) {
   // Add reading bubble on LEFT
   addTaskBubble(conv, `
     <p style="margin-bottom:8px">Reading through your files...</p>
-    <div class="convo-check"><span class="convo-check-icon done">✓</span> <strong>${isScreening ? 'DevRev_AE_Candidates_EMEA.xlsx' : 'Platform_Migration_Brief.pdf'}</strong> — ${isScreening ? 'found 47 candidates' : 'extracted project requirements'}</div>
+    <div class="convo-check"><span class="convo-check-icon done">✓</span> <strong>${isScreening ? 'Acme_AE_Candidates_EMEA.xlsx' : 'Platform_Migration_Brief.pdf'}</strong> — ${isScreening ? 'found 47 candidates' : 'extracted project requirements'}</div>
     <div class="convo-check"><span class="convo-check-icon done">✓</span> <strong>${isScreening ? 'Account_Executive_JD.pdf' : 'Team_Skills_Matrix.xlsx'}</strong> — ${isScreening ? 'extracted role requirements' : 'loaded 8 team profiles'}</div>
     ${isScreening ? '<div class="convo-check"><span class="convo-check-icon done">✓</span> <strong>EMEA_Mindset_Document.pdf</strong> — loaded as cultural context</div>' : ''}
   `, color);
@@ -4753,7 +4714,7 @@ function runTaskV2(type) {
 
         <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:rgba(124,58,237,0.06);border-radius:6px;font-size:11px;color:var(--purple);margin-bottom:20px">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Skills-based methodology · DevRev's taxonomy
+          Skills-based methodology · Acme's taxonomy
         </div>
 
         <div style="display:flex;gap:10px">
@@ -4991,8 +4952,8 @@ function pickAgent(type) {
     step.innerHTML = `
       <div class="glass convo-bubble" style="max-width:680px; border-left: 3px solid var(--${isScreening ? 'purple' : 'blue'});">
         <p style="margin-bottom:12px">${isScreening
-          ? "I'll use your <strong>Screening agent</strong>. I'll match candidates against <strong>DevRev's skill taxonomy</strong> (156 skills mapped) and score using your connected context."
-          : "I'll use your <strong>Staffing agent</strong>. I'll match against <strong>Acme's team data</strong> from Notion — career paths, skills, and strategy context (100 people indexed). Share the project brief and I'll find your best team."
+          ? "I'll use your <strong>Screening agent</strong>. I'll match candidates against <strong>Acme's skill taxonomy</strong> (156 skills mapped) and score using your connected context."
+          : "I'll use your <strong>Staffing agent</strong>. I'll match against <strong>Acme's team data</strong> — career paths, skills, and strategy context (100 people indexed). Share the project brief and I'll find your best team."
         }</p>
         <p style="color:var(--gray-500);margin-bottom:16px">${isScreening ? 'Pass me the candidate data — CVs, spreadsheets, or job descriptions.' : 'Pass me the project brief or requirements doc.'}</p>
         <div class="drop-zone" style="padding:24px;text-align:center;border:1.5px dashed var(--gray-300);border-radius:12px;cursor:pointer;margin-bottom:12px;background:var(--gray-50,#F9FAFB)">
@@ -5001,7 +4962,7 @@ function pickAgent(type) {
         </div>
         <div class="file-chips" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">
           ${isScreening
-            ? '<div class="file-chip">DevRev_AE_Candidates_EMEA.xlsx</div><div class="file-chip">Account_Executive_JD.pdf</div><div class="file-chip">EMEA_Mindset_Document.pdf</div>'
+            ? '<div class="file-chip">Acme_AE_Candidates_EMEA.xlsx</div><div class="file-chip">Account_Executive_JD.pdf</div><div class="file-chip">EMEA_Mindset_Document.pdf</div>'
             : '<div class="file-chip">Platform_Migration_Brief.pdf</div><div class="file-chip">Team_Skills_Matrix.xlsx</div>'
           }
         </div>
@@ -5032,7 +4993,7 @@ function runTaskFlow(type) {
   step3.innerHTML = `
     <div class="glass convo-bubble" style="max-width:680px">
       <p style="margin-bottom:12px">Hey Patrick, I'm reading through your files...</p>
-      <div class="convo-check"><span class="convo-check-icon done">✓</span> <strong>${isScreening ? 'DevRev_AE_Candidates_EMEA.xlsx' : 'Platform_Migration_Brief.pdf'}</strong> — ${isScreening ? 'found 47 candidate profiles' : 'extracted project requirements'}</div>
+      <div class="convo-check"><span class="convo-check-icon done">✓</span> <strong>${isScreening ? 'Acme_AE_Candidates_EMEA.xlsx' : 'Platform_Migration_Brief.pdf'}</strong> — ${isScreening ? 'found 47 candidate profiles' : 'extracted project requirements'}</div>
       <div class="convo-check"><span class="convo-check-icon done">✓</span> <strong>${isScreening ? 'Account_Executive_JD.pdf' : 'Team_Skills_Matrix.xlsx'}</strong> — ${isScreening ? 'extracted role requirements' : 'loaded 8 team member profiles'}</div>
       ${isScreening ? '<div class="convo-check"><span class="convo-check-icon done">✓</span> <strong>EMEA_Mindset_Document.pdf</strong> — loaded as cultural context</div>' : ''}
     </div>
@@ -5067,7 +5028,7 @@ function runTaskFlow(type) {
           </div>
           <p style="font-size:11px;color:var(--gray-400);margin-top:4px">Used as tiebreakers between strong matches</p>
         </div>
-        <p style="color:var(--gray-600);font-size:13px">Based on <strong>DevRev's skill taxonomy</strong> and your ${isScreening ? 'Account Executive JD' : 'project brief'}. Want to adjust?</p>
+        <p style="color:var(--gray-600);font-size:13px">Based on <strong>Acme's skill taxonomy</strong> and your ${isScreening ? 'Account Executive JD' : 'project brief'}. Want to adjust?</p>
         <div style="margin-top:10px;display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:rgba(124,58,237,0.06);border-radius:6px;font-size:11px;color:var(--purple)">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           Skills-based screening methodology · Required/preferred framework
@@ -5097,20 +5058,20 @@ function showTaskPlan(type) {
         <p style="margin-bottom:12px">Perfect. Here's my plan:</p>
         <div class="convo-plan">
           ${isScreening ? `
-            <div class="convo-plan-step"><span class="convo-plan-num">1</span> Extract skills from all 47 profiles using <strong>DevRev's skill taxonomy</strong> <span class="convo-context-badge">156 skills mapped</span></div>
+            <div class="convo-plan-step"><span class="convo-plan-num">1</span> Extract skills from all 47 profiles using <strong>Acme's skill taxonomy</strong> <span class="convo-context-badge">156 skills mapped</span></div>
             <div class="convo-plan-step"><span class="convo-plan-num">2</span> Filter first by <strong>8 required skills</strong> — binary pass/fail</div>
             <div class="convo-plan-step"><span class="convo-plan-num">3</span> Score remaining on <strong>9 preferred skills</strong> as tiebreaker</div>
             <div class="convo-plan-step"><span class="convo-plan-num">4</span> Score cultural alignment using the EMEA mindset document</div>
             <div class="convo-plan-step"><span class="convo-plan-num">5</span> Rank and flag top candidates across France, Belgium, UK, Germany</div>
           ` : `
-            <div class="convo-plan-step"><span class="convo-plan-num">1</span> Analyze project requirements using <strong>DevRev's skill taxonomy</strong></div>
+            <div class="convo-plan-step"><span class="convo-plan-num">1</span> Analyze project requirements using <strong>Acme's skill taxonomy</strong></div>
             <div class="convo-plan-step"><span class="convo-plan-num">2</span> Filter by <strong>5 required skills</strong> — must-have for project</div>
             <div class="convo-plan-step"><span class="convo-plan-num">3</span> Scan all 8 team members for skill fit and availability</div>
             <div class="convo-plan-step"><span class="convo-plan-num">4</span> Match skills to project roles and identify gaps</div>
             <div class="convo-plan-step"><span class="convo-plan-num">5</span> Recommend optimal team composition</div>
           `}
         </div>
-        <div class="convo-context-tag">✦ Running against DevRev's company context · Last synced 2h ago</div>
+        <div class="convo-context-tag">✦ Running against Acme's company context · Last synced 2h ago</div>
         <p style="margin-top:14px;color:var(--gray-500)">This should take about 30 seconds. You can stay and watch, or walk away — I'll notify you when it's ready.</p>
         <div class="convo-actions" id="task-approve-actions">
           <button class="convo-btn convo-btn--primary" onclick="executeTaskFlow('${type}')">Go ahead, I'll watch</button>
@@ -5259,14 +5220,14 @@ function selectAgent(type) {
     <div class="glass agent-bubble agent-bubble--${color}">
       Got it! I'll use your <strong>${isScreening ? 'Screening' : 'Staffing'} agent</strong>. ${
         isScreening
-          ? "Pass me the candidate data and I'll match against <strong>DevRev's skill taxonomy</strong> (156 skills mapped)."
-          : "Tell me about the project and I'll find the best team from <strong>Acme's team data</strong> (Notion connected)."
+          ? "Pass me the candidate data and I'll match against <strong>Acme's skill taxonomy</strong> (156 skills mapped)."
+          : "Tell me about the project and I'll find the best team from <strong>Acme's team data</strong> (100 people indexed)."
       }
     </div>
     <div class="drop-zone">Drop files or browse — ${isScreening ? 'CVs, resumes, job descriptions' : 'Project briefs, requirements docs'}</div>
     <div class="file-chips">
       ${isScreening
-        ? '<div class="file-chip"><span class="file-chip__icon">📊</span> DevRev_AE_Candidates_EMEA.xlsx</div><div class="file-chip"><span class="file-chip__icon">📄</span> Account_Executive_JD.pdf</div><div class="file-chip"><span class="file-chip__icon">📄</span> EMEA_Mindset_Document.pdf</div>'
+        ? '<div class="file-chip"><span class="file-chip__icon">📊</span> Acme_AE_Candidates_EMEA.xlsx</div><div class="file-chip"><span class="file-chip__icon">📄</span> Account_Executive_JD.pdf</div><div class="file-chip"><span class="file-chip__icon">📄</span> EMEA_Mindset_Document.pdf</div>'
         : '<div class="file-chip"><span class="file-chip__icon">📄</span> Platform_Migration_Brief.pdf</div><div class="file-chip"><span class="file-chip__icon">📊</span> Team_Skills_Matrix.xlsx</div>'
       }
     </div>
@@ -5302,7 +5263,18 @@ function renderSparkline(containerId, data, color) {
 }
 
 // ========== SCREENING RESULTS ==========
-function renderScreeningResults() {
+function renderScreeningResults(sessionId) {
+  // Update title based on session
+  var titleMap = {
+    'ae-france': 'AE France — Screening results',
+    'se-germany': 'SE Germany — Screening results',
+    'ae-belgium': 'AE Belgium — Screening results'
+  };
+  var titleEl = document.querySelector('#view-screening-results .results-top-bar__title');
+  if (titleEl && sessionId && titleMap[sessionId]) {
+    titleEl.textContent = titleMap[sessionId];
+  }
+
   // Criteria chips
   const criteriaEl = document.getElementById('criteria-chips');
   if (criteriaEl) {
@@ -5334,6 +5306,28 @@ function renderScreeningResults() {
       </div>`;
     }).join('');
     listEl.innerHTML = headerHtml + rowsHtml;
+  }
+
+  // Show conversational automation suggestion after a delay
+  var suggestEl = document.getElementById('screening-agent-suggest');
+  if (suggestEl) {
+    suggestEl.style.display = 'none';
+    setTimeout(function() {
+      suggestEl.style.display = 'block';
+      suggestEl.innerHTML = `
+        <div style="display:flex;align-items:center;gap:14px;padding:14px 20px;background:#ffffff;border:1px solid var(--purple-200);border-radius:14px;margin-bottom:16px;box-shadow:0 1px 6px rgba(124,58,237,0.06)">
+          <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#7c3aed,#a78bfa);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>
+          </div>
+          <p style="flex:1;font-size:13px;color:var(--gray-600);margin:0;line-height:1.5">
+            Want me to <strong>automate this</strong>? I can re-screen every time new candidates arrive in Greenhouse.
+          </p>
+          <div style="display:flex;gap:8px;flex-shrink:0">
+            <button style="padding:8px 14px;background:var(--purple);color:white;border:none;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap" onclick="this.closest('div[id]').innerHTML='<div style=padding:12px 20px;text-align:center;color:var(--green);font-weight:600;font-size:13px>✓ Agent configured — watching Greenhouse</div>'">Set up agent</button>
+            <button style="padding:8px 14px;background:none;color:var(--gray-400);border:1px solid var(--gray-200);border-radius:10px;font-size:12px;cursor:pointer;white-space:nowrap" onclick="this.closest('div[id]').style.display='none'">Dismiss</button>
+          </div>
+        </div>`;
+    }, 2000);
   }
 }
 
@@ -5392,7 +5386,17 @@ function filterCountry(country, el) {
 }
 
 // ========== STAFFING RESULTS ==========
-function renderStaffingResults() {
+function renderStaffingResults(sessionId) {
+  // Update title based on session
+  var titleMap = {
+    'platform-migration': 'Platform Migration — Staffing results',
+    'ai-chatbot-mvp': 'AI Chatbot MVP — Staffing results'
+  };
+  var titleEl = document.querySelector('#view-staffing-results .results-top-bar__title');
+  if (titleEl && sessionId && titleMap[sessionId]) {
+    titleEl.textContent = titleMap[sessionId];
+  }
+
   var grid = document.getElementById('team-cards-grid');
   if (grid) {
     var headerHtml = '<div class="candidates-list__header" style="grid-template-columns: 36px 36px 1.5fr 0.8fr 0.7fr 0.6fr 1.2fr 0.5fr"><span>#</span><span></span><span>Team member</span><span>Availability</span><span>Allocation</span><span>Match</span><span>Skills covered</span><span></span></div>';
@@ -5433,6 +5437,28 @@ function renderStaffingResults() {
       '</div>';
     }).join('') + '</div>';
   }
+
+  // Show conversational automation suggestion after a delay
+  var suggestEl = document.getElementById('staffing-agent-suggest');
+  if (suggestEl) {
+    suggestEl.style.display = 'none';
+    setTimeout(function() {
+      suggestEl.style.display = 'block';
+      suggestEl.innerHTML = `
+        <div style="display:flex;align-items:center;gap:14px;padding:14px 20px;background:#ffffff;border:1px solid rgba(59,130,246,0.25);border-radius:14px;margin-bottom:16px;box-shadow:0 1px 6px rgba(59,130,246,0.06)">
+          <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--blue),#60a5fa);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>
+          </div>
+          <p style="flex:1;font-size:13px;color:var(--gray-600);margin:0;line-height:1.5">
+            Want me to <strong>keep watching</strong>? I can re-evaluate when availabilities or skills change in Notion.
+          </p>
+          <div style="display:flex;gap:8px;flex-shrink:0">
+            <button style="padding:8px 14px;background:var(--blue);color:white;border:none;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap" onclick="this.closest('div[id]').innerHTML='<div style=padding:12px 20px;text-align:center;color:var(--green);font-weight:600;font-size:13px>✓ Agent configured — watching Notion</div>'">Set up agent</button>
+            <button style="padding:8px 14px;background:none;color:var(--gray-400);border:1px solid var(--gray-200);border-radius:10px;font-size:12px;cursor:pointer;white-space:nowrap" onclick="this.closest('div[id]').style.display='none'">Dismiss</button>
+          </div>
+        </div>`;
+    }, 2000);
+  }
 }
 
 // ========== AGENT DETAIL ==========
@@ -5467,7 +5493,7 @@ function renderAgentDetail(type) {
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
         <div>
           <span style="font-size:13px;font-weight:600;color:var(--${color})">${isScreening ? 'Screening' : 'Staffing'} · ${activeCount} active sessions</span>
-          <span style="font-size:12px;color:var(--gray-400);margin-left:8px">Using DevRev's skill taxonomy (156 skills)</span>
+          <span style="font-size:12px;color:var(--gray-400);margin-left:8px">Using Acme's skill taxonomy (156 skills)</span>
         </div>
         <div class="status-card__status"><span class="status-card__status-dot"></span> Active</div>
       </div>
@@ -5606,12 +5632,12 @@ function renderAgentDetail(type) {
       <div class="glass" style="padding:20px 24px;margin-bottom:16px">
         <div style="font-weight:600;font-size:14px;color:var(--gray-800);margin-bottom:12px">Configuration</div>
         <div class="config-list">
-          <div class="config-item"><span class="config-item__label">Taxonomy</span><span class="config-item__value">DevRev skill taxonomy v2.4</span></div>
+          <div class="config-item"><span class="config-item__label">Taxonomy</span><span class="config-item__value">Acme skill taxonomy v2.4</span></div>
           <div class="config-item"><span class="config-item__label">Skills mapped</span><span class="config-item__value">156</span></div>
           <div class="config-item"><span class="config-item__label">Primary source</span><span class="config-item__value">${isScreening ? 'Greenhouse' : 'Notion'}</span></div>
           <div class="config-item"><span class="config-item__label">Trigger</span><span class="config-item__value">${isScreening ? 'New candidate arrives' : 'Availability change'}</span></div>
           <div class="config-item"><span class="config-item__label">Auto-run</span><span class="config-item__value">${isScreening ? 'On new candidates' : 'On team changes'}</span></div>
-          <div class="config-item"><span class="config-item__label">Context</span><span class="config-item__value">DevRev company data · EMEA mindset doc</span></div>
+          <div class="config-item"><span class="config-item__label">Context</span><span class="config-item__value">Acme company data · EMEA mindset doc</span></div>
         </div>
       </div>
 
@@ -5647,7 +5673,7 @@ function renderAgentDetail(type) {
             <div class="agent-flow-step__info">
               <div class="agent-flow-step__name">Skill extraction & matching</div>
               <div class="agent-flow-step__desc">Specialized AI — not generic, purpose-built for workforce intelligence</div>
-              <div style="margin-top:6px"><span class="convo-context-badge" style="font-size:11px">DevRev taxonomy v2.4 · 156 skills</span></div>
+              <div style="margin-top:6px"><span class="convo-context-badge" style="font-size:11px">Acme taxonomy v2.4 · 156 skills</span></div>
             </div>
             <div class="agent-flow-step__badge agent-flow-step__badge--core">Core engine</div>
           </div>
